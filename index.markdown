@@ -5,7 +5,3 @@ Donec consequat quam sit amet porta molestie. Maecenas efficitur, dolor sit amet
 ## The second largest heading
 
 Praesent ac metus eros. Maecenas malesuada neque magna, et pretium odio fringilla sit amet. Proin accumsan ultricies molestie. Donec ut nulla porttitor nunc molestie semper eget in urna. Nam sed nibh aliquam, imperdiet elit et, cursus ante.
-
-### The third largest heading
-
-Quisque at nisi enim. Donec finibus risus a dolor commodo hendrerit. Integer accumsan euismod sem eget consectetur. Suspendisse sodales pulvinar lacus, non pretium ipsum dapibus at. Nullam eu tellus eget eros mattis tristique in vel dolor. Vivamus tempor tempus euismod. Fusce tristique lobortis diam, et vulputate nibh tempus id.
