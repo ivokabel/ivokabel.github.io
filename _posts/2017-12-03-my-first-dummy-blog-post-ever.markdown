@@ -1,6 +1,6 @@
 ---
 layout: post
-title: BPost Title (set via the Front Matter thing)
+title: Post Title (set via the Front Matter thing)
 ---
 
 # My First (Dummy) Blog Post Ever
