@@ -1,5 +1,6 @@
 ---
 layout: home
+title: Welcome page (from Front Matter)
 ---
 
 # The largest heading in the index file
