@@ -12,3 +12,11 @@ Praesent ac metus eros. Maecenas malesuada neque magna, et pretium odio fringill
 ## Heading 2
 
 Praesent ac metus eros. Maecenas malesuada neque magna, et pretium odio fringilla sit amet. Proin accumsan ultricies molestie. Donec ut nulla porttitor nunc molestie semper eget in urna. Nam sed nibh aliquam, imperdiet elit et, cursus ante. Quisque ut sapien in lorem facilisis ultrices eu ut tortor. Proin est velit, eleifend vel sapien sagittis, fermentum dapibus ante.
+
+
+
+$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$
+
+
+
+Lorem ipsum...
