@@ -9,10 +9,12 @@ Here I will hopefully occasionally publish some posts about realistic computer g
 Posts should contain some inline math: $\int_{S^2}f_s(\omega)\cos(\theta)d\omega$ or maybe $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
 
 and block math:
+
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
-and lists
+
+and lists:
 
 * Item 1
 * Item 2
