@@ -27,7 +27,7 @@ if (isMatch){
 }
 ```
 
-proper typography: - -- --- ...
+proper typography: - -- --- +− ...
 
 ## Chapter 1
 
