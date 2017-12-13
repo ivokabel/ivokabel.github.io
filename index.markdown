@@ -5,15 +5,15 @@ title: Ivo's Graphics Blog
 Here I will hopefully occasionally publish some posts about realistic computer graphics which I implemented or found interesting.
 
 
-Posts may contain some inline math with single dollar: $\int_{S^2}f_s(\omega)\cos(\theta)d\omega$ or double dollars: $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$, or with round brackets: \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\), or with square brackets: \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\].
+Posts may contain some inline math (double dollar): $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$.
 
-and block math:
+and block math (double dollar):
 
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
 
-or raw block math?:
+or raw block math (double dollar in raw):
 
 {% raw %}
 $$
