@@ -29,8 +29,10 @@ if (isMatch){
 
 proper typography: - -- --- ...
 
-and maybe some emoji? :sparkles:
+## Chapter 1
 
-## Chapter
+...and chapters
 
-...and chapters :smile_cat:
+## Chapter 2
+
+Many chapters!!!
