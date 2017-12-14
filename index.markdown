@@ -21,7 +21,7 @@ and, ideally, proper typography: - -- --- +− ...
 
 ## Math
 
-#### Normal (disabled by GP)
+### Normal (disabled by GP)
 
 Posts may contain some inline math (double dollar): $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$.
 
@@ -38,7 +38,7 @@ $$
 $$
 {% endraw %}
 
-#### Bypassed (to be used directly by MathJax)
+### Bypassed (to be used directly by MathJax)
 
 Inline math (round braces): \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\)
 
