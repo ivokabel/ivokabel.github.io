@@ -21,8 +21,6 @@ and, ideally, proper typography: - -- --- +− ...
 
 ## Math
 
-...and chapters
-
 #### Normal (disabled by GP)
 
 Posts may contain some inline math (double dollar): $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$.
