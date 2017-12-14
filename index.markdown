@@ -39,8 +39,8 @@ $$
 $$
 {% endraw %}
 
-#### Bypassed, to be used directly by MathJax
+#### Bypassed (to be used directly by MathJax)
 
-or inline math (round braces): \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\)
+Inline math (round braces): \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\)
 
-or display math (square braces): \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
+Display math (square braces): \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
