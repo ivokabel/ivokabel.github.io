@@ -21,6 +21,10 @@ $$
 $$
 {% endraw %}
 
+or inline math (round braces): \(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\)
+
+or display math (square braces): \[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\]
+
 and lists:
 
 * Item 1
