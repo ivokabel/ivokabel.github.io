@@ -29,6 +29,7 @@ and block math (double dollar):
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
+
 or raw block math (double dollar in raw):
 
 {% raw %}
