@@ -27,9 +27,9 @@ and, ideally, proper typography: - -- --- +− ...
 
 Round braces: \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\).
 
-### Displayed
-
 **Double dollar:** $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
+
+### Displayed
 
 Square braces: \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
 
