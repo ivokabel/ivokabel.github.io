@@ -33,12 +33,6 @@ Double dollar: $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
 
 Square braces: \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
 
-Double dollar on the next line:
-$$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
-
-Square braces on the next line:
-\\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
-
 Double dollar block on the next line:
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
