@@ -19,27 +19,48 @@ if (isMatch){
 
 and, ideally, proper typography: - -- --- +− ...
 
-## Math
+## Math test
 
-### Normal (disabled by GP)
+### Inline
 
-Posts may contain some inline math (double dollar): $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$.
+Single dollar: $\int_{S^2}f_s(\omega)\cos(\theta)d\omega$.
 
-and block math (double dollar):
+Round braces: \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\).
+
+### Displayed
+
+Double dollar: $$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
+
+Square braces: \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
+
+Double dollar on the next line:
+$$\int_{S^2}f_s(\omega)\cos(\theta)d\omega$$
+
+Square braces on the next line:
+\\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
+
+Double dollar block on the next line:
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
 
-or raw block math (double dollar in raw):
+Double dollar block as a separate paragraph:
 
+$$
+\int_{S^2}f_s(\omega)\cos(\theta)d\omega
+$$
+
+Double dollar block in raw on the next line :
 {% raw %}
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
 {% endraw %}
 
-### Bypassed (to be used directly by MathJax)
+Double dollar block in raw as a separate paragraph:
 
-Inline math (round braces): \\(\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\)
-
-Display math (square braces): \\[\int_{S^2}f_s(\omega)\cos(\theta)d\omega\\]
+{% raw %}
+$$
+\int_{S^2}f_s(\omega)\cos(\theta)d\omega
+$$
+{% endraw %}
