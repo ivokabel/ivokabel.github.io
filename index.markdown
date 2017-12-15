@@ -4,7 +4,7 @@ title: Ivo's Graphics Blog
 
 Here I will hopefully occasionally publish some posts about realistic computer graphics which I implemented or found interesting.
 
-and lists:
+There will be lists:
 
 * Item 1
 * Item 2
@@ -20,6 +20,8 @@ if (isMatch){
 and, ideally, proper typography: - -- --- +− ...
 
 ## Math test
+
+Some math will be necessary as well. Since GitHub Pages partially disabled MathJax (for "security reasons"), I need to hack it in somehow and find a way which will work consistently both in my editor and on the resulting web:
 
 ### Inline
 
