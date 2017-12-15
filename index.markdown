@@ -44,7 +44,7 @@ $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
 $$
 
-**Double dollar block in raw on the next line :**
+**Double dollar block in raw on the next line:**
 {% raw %}
 $$
 \int_{S^2}f_s(\omega)\cos(\theta)d\omega
