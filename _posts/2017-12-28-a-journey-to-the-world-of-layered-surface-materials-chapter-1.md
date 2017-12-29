@@ -31,10 +31,10 @@ In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling.
 
 ![BSDF evaluation process](../../../images/Weidlich-Wilkie - Layers - Evaluation.svg "Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.")
 
-<div style="text-align: center">
+<p><div style="text-align: center">
    <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" /><br/>
    Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.
-</div>
+</div></p>
 
 * The BSDF of the outer layer $f_{r1}$ is evaluated for the two given, arbitrary incoming directions $\omega_{i}$ and $\omega_{o}$. This yields a reflection component and two refraction directions $\omega_{i^{\prime}} $ and $\omega_{o^{\prime}}$.
 * The light which is refracted below the outer layer (transmission coefficient $T_{12}$) follows the two refraction directions associated with the initial incident directions, and is attenuated by the medium (attenuation coefficient $a$).
