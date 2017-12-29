@@ -30,14 +30,14 @@ In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling.
 ### Evaluation
 
 <p style="text-align: center">
-   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="35em" /><br/>
+   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="420" /><br/>
    Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.
 </p>
 
-* The BSDF of the outer layer $f_{r1}$ is evaluated for the two given, arbitrary incoming directions $\omega_{i}$ and $\omega_{o}$. This yields a reflection component and two refraction directions $\omega_{i^{\prime}} $ and $\omega_{o^{\prime}}$.
-* The light which is refracted below the outer layer (transmission coefficient $T_{12}$) follows the two refraction directions associated with the initial incident directions, and is attenuated by the medium (attenuation coefficient $a$).
-* These two refraction directions are assumed to meet at a single point on the inner layer $f_{r2}$.
-* On returning from the inner layer, the individual BSDF components are attenuated by the Fresnel transmission coefficients $T_{21}$ for the outer layer, and added to the total BSDF.
+1. The BSDF of the outer layer $f_{r1}​$ is evaluated for the two given, arbitrary incoming directions $\omega_{i}​$ and $\omega_{o}​$. This yields a reflection component and two refraction directions $\omega_{i^{\prime}} ​$ and $\omega_{o^{\prime}}​$.
+1. The light which is refracted below the outer layer (transmission coefficient $T_{12}$) follows the two refraction directions associated with the initial incident directions, and is attenuated by the medium (attenuation coefficient $a$).
+1. These two refraction directions are assumed to meet at a single point on the inner layer $f_{r2}$.
+1. On returning from the inner layer, the individual BSDF components are attenuated by the Fresnel transmission coefficients $T_{21}$ for the outer layer, and added to the total BSDF.
 
 $$
 f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a\cdot t
