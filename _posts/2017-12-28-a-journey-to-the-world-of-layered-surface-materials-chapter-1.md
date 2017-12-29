@@ -30,6 +30,11 @@ In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling.
 
 ![BSDF evaluation process](../../../images/Weidlich-Wilkie - Layers - Evaluation.svg "Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.")
 
+<div style="text-align: center">
+   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" /><br/>
+   Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.
+</div>
+
 * The BSDF of the outer layer $f_{r1}$ is evaluated for the two given, arbitrary incoming directions $\omega_{i}$ and $\omega_{o}$. This yields a reflection component and two refraction directions $\omega_{i^{\prime}} $ and $\omega_{o^{\prime}}$.
 * The light which is refracted below the outer layer (transmission coefficient $T_{12}$) follows the two refraction directions associated with the initial incident directions, and is attenuated by the medium (attenuation coefficient $a$).
 * These two refraction directions are assumed to meet at a single point on the inner layer $f_{r2}$.
@@ -45,7 +50,7 @@ $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta{i^{\prime}}}+\frac{1}{\cos\theta{o^{\prime}}}\right)\right)}
 $$
 
-where d is the thickness of the layer, and
+where $d$ is the thickness of the layer, and
 
 $$
 t=\left(1-G\right)+T_{21}\cdot G
@@ -63,7 +68,7 @@ $$
 
 It seems to me that this is their ad-hoc (and incorrect) attempt to evaluate the light transmission through micro-facet-based surface, which was properly solved and published just in the same year (2007) by Walter et al. in the paper [Microfacet Models for Refraction through Rough Surfaces](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.html).
 
-Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path while also neglecting the multiple scattering nature of the process. An interesting property of this approximation is---and the paper doesn’t explain this clearly enough---that they use the micro-facet’s normal for computing the refracted directions. This may cause the approximation imprecisions for the incoming directions $\omega_{i}$ and $\omega_{o}$ at grazing angles.
+Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path while also neglecting the multiple scattering nature of the process. An interesting property of this approximation is (and the paper doesn’t explain this clearly enough) that they use the micro-facet’s normal for computing the refracted directions. This may cause approximation imprecisions for the incoming directions $\omega_{i}$ and $\omega_{o}$ at grazing angles.
 
 Last, but not least, it completely ignores effect of solid angle (de-)compression when the light crosses the boundaries between media with different indices of refraction.
 
