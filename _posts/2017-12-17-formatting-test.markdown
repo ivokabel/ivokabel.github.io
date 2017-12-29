@@ -29,6 +29,10 @@ if (isMatch){
 
 Typography: - -- --- +− ...
 
+Images:
+
+![BRDF evaluation process](../images/Weidlich-Wilkie - Layers - Evaluation.svg)
+
 ## Math
 
 Some math will be necessary as well. Since GitHub Pages partially disabled MathJax (for "security reasons"), I need to hack it in somehow and find a way which will work consistently both in my editor and on the resulting web:
