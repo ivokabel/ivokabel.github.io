@@ -30,7 +30,7 @@ In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling.
 ### Evaluation
 
 <p style="text-align: center">
-   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" /><br/>
+   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="35em" /><br/>
    Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.
 </p>
 
