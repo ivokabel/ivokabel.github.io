@@ -40,21 +40,27 @@ f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{
 $$
 
 where $a$ represents the medium attenuation (Bouguer-Lambert-Beer law)
+
 $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta{i^{\prime}}}+\frac{1}{\cos\theta{o^{\prime}}}\right)\right)}
 $$
+
 where d is the thickness of the layer, and
+
 $$
 t=\left(1-G\right)+T_{21}\cdot G
 $$
+
 where $G$ is the geometric attenuation term of the micro-facet model used. The authors didn't bother to explain whether it is the geometric term of the outer or the inner layer, but it, most likely, is the outer one.
 
 #### My notes
 
 First, there is no explanation of the $t$ component at all! The inner layer reflection component looks like this after expansion of $t$:
+
 $$
 T_{12} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a \cdot \left(\left(1-G\right)+T_{21}\cdot G\right)
 $$
+
 It seems to me that this is their ad-hoc (and incorrect) attempt to evaluate the light transmission through micro-facet-based surface, which was properly solved and published just in the same year (2007) by Walter et al. in the paper [Microfacet Models for Refraction through Rough Surfaces](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.html).
 
 Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path while also neglecting the multiple scattering nature of the process. An interesting property of this approximation is---and the paper doesn’t explain this clearly enough---that they use the micro-facet’s normal for computing the refracted directions. This may cause the approximation imprecisions for the incoming directions $\omega_{i}$ and $\omega_{o}$ at grazing angles.
