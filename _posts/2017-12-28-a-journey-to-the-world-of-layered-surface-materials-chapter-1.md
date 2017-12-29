@@ -8,7 +8,7 @@ I decided to implement some kind of multi-layered material model (BSDF) in my pe
 
 In the beginning I wanted to just directly implement the paper [Arbitrarily Layered Micro-Facet Surfaces](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie. However, it turned out that the paper is too ad-hoc to my standards and their justifications too vague or even non-existent, so I decided to come up with my own approach, which is heavily inspired by the ideas from the paper.
 
-I decided to restrict the model to just two layers (1 -- outer and 2 -- inner). This decision simplifies both theory and implementation a bit while still having the rich expressivity of a layered model. In my following explanation I ignore the fact that there can be more than two layers even in the original Weidlich-Wilkie paper.
+I decided to restrict the model to just two layers (1 -- outer and 2 -- inner). This decision simplifies both theory and implementation a bit while still having the rich expressivity of a layered model. In my following explanation I will ignore the fact that there can be more than two layers even in the original Weidlich-Wilkie paper.
 
 ## Weidlich-Wilkie Layered Model
 
