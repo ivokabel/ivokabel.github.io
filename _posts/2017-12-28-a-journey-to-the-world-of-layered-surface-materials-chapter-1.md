@@ -25,7 +25,7 @@ To avoid evaluation of complex sub-surface light scattering, they proposed an ap
 
 The simplification 1 allows them to assume that an incident ray of light will leave through the same micro-facet through wich it entered the surface, thus simplifying both evaluation and sampling. The simplifications 2 and 3 cause, along with easier evaluation and sampling, that the resulting model stays a “single-point” scattering function (BSDF) instead extendending to an “areal” sub-surface scattering function (BSSDF), which would be necessary if we wanted to do a full light transport simulation. The simplification 4 simply forbids volumetric scattering within the medium, which would make the whole task much more complicated.
 
-In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling. Let’s see how the Weidlich-Wilkie model addresses them.
+In a modern realistic renderer, a BSDF needs to handle two tasks: evaluation and sampling. Let’s see how the Weidlich-Wilkie model addresses them.
 
 ### Evaluation
 
