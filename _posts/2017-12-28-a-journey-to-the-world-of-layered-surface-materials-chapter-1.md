@@ -83,9 +83,7 @@ Last, but not least, the paper completely ignores effects of solid angle (de-)co
 
 When a ray hits a surface, a micro-facet normal for the outer model is generated. The sampling of the whole BSDF then resembles a light propagation simulation -- light would be partially reflected and partially refracted according to the Fresnel equation, which defines two paths to follow. One of the paths is chosen randomly.
 
-For the reflection path, we only reflect the incident direction from the micro-facet and we are done.
-
-For the refraction path, we have to refract the incident direction through the micro-facet and use it to sample a reflection direction of the inner layer. The direction has to be refracted back through the micro-facet of the outer layer to the outside world.
+For the reflection path, we only reflect the incident direction from the micro-facet and we are done. For the refraction path, we have to refract the incident direction through the micro-facet and use it to sample a reflection direction of the inner layer. The direction has to be refracted back through the micro-facet of the outer layer to the outside world.
 
 #### PDF
 
