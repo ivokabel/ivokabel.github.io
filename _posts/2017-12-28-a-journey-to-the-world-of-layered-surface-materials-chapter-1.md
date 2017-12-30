@@ -39,6 +39,7 @@ In a modern renderer, a BSDF needs to handle two tasks: evaluation and sampling.
 3. These two refraction directions are assumed to meet at a single point on the inner layer $f_{r2}$.
 4. On returning from the inner layer, the individual BSDF components are attenuated by the Fresnel transmission coefficients $T_{21}$ for the outer layer, and added to the total BSDF.
 
+The total BSDF is then
 $$
 f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a\cdot t
 $$
