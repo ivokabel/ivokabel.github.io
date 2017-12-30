@@ -46,6 +46,7 @@ f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{
 $$
 
 where $a$ represents the medium attenuation (modeled with Bouguer-Lambert-Beer law)
+
 $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta{i^{\prime}}}+\frac{1}{\cos\theta{o^{\prime}}}\right)\right)}
 $$
