@@ -4,9 +4,7 @@ title: Chapter 1: Weidlich-Wilkie Layered Model
 comments: true
 ---
 
-This is the first chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html).
-
-Let’s start with a (not that) brief introduction of the original model by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
+This is the first chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present a (not that) brief introduction of the [original layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
 
 They assume that layers are micro-facet-based models and there is homogeneous attenuating medium between the layers. The ideally smooth Fresnel model can be used for outer layer too, since it can be thought of as a special case of a micro-facet model. Additionally a diffuse Lambert model can be used for the bottom layer since we only need to compute the reflection component without any special micro-facet-related assumptions on it.
 
@@ -21,7 +19,7 @@ The simplification 1 allows them to assume that an incident ray of light will le
 
 In a modern realistic renderer, a BSDF needs to handle two tasks: evaluation and sampling. Let’s see how the Weidlich-Wilkie model addresses them.
 
-### Evaluation
+## Evaluation
 
 <p style="text-align: center">
    <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="360" /><br/>
@@ -47,7 +45,7 @@ t=\left(1-G\right)+T_{21}\cdot G
 $$
 where $G$ is the geometric attenuation term of the micro-facet model used. The authors didn't bother to explain whether it is the geometric term of the outer or the inner layer, but it, most likely, is the outer one.
 
-#### My notes
+### My notes
 
 First, there is no explanation of the $t$ component at all! The inner layer reflection component looks like this after expansion of $t$:
 $$
@@ -55,13 +53,13 @@ T_{12} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a \
 $$
 It seems to me that this is their ad-hoc (and incorrect) attempt to evaluate the light transmission through micro-facet-based surface, which was properly solved and published just in the same year (2007) by Walter et al. in the paper [Microfacet Models for Refraction through Rough Surfaces](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.html), and probably also an energy compensation term.
 
-Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path. Moreover, it also neglects the multiple scattering nature of the light transport within the layers. This basically cuts the energy which is reflected (partially or completely in case of total internal reflection) from the inner layer and then from the the outer layer back into the medium between the two layers. They try to compensate the missing energy by some "energy compensation term" which is, again, not explained at all in the paper.
+Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path. Moreover, it also neglects the multiple scattering nature of the light transport within the layers. This basically cuts the energy which is reflected (partially or completely in case of total internal reflection) from the inner layer and then from the the outer layer back into the medium between the two layers. They try to compensate the missing energy by "energy compensation term" which, again, is not explained at all in the paper.
 
 An interesting property of their single-path approximation is (and the paper doesn’t explain this clearly enough) that they use the micro-facet’s normal for computing the refracted directions. This may cause approximation imprecisions when the normal approaches grazing angles.
 
 Last, but not least, the paper completely ignores effects of solid angle (de-)compression which happens when the light crosses the boundaries between media with different indices of refraction.
 
-### Sampling
+## Sampling
 
 <p style="text-align: center">
    <img src="../../../images/Weidlich-Wilkie - Layers - Assumptions - Base.svg" alt="BSDF evaluation process" width="700" /><br/>
@@ -72,14 +70,14 @@ When a ray hits a surface, a micro-facet normal for the outer model is generated
 
 For the reflection path, we only reflect the incident direction from the micro-facet and we are done. For the refraction path, we have to refract the incident direction through the micro-facet and use it to sample a reflection direction of the inner layer. The direction has to be refracted back through the micro-facet of the outer layer to the outside world.
 
-#### PDF
+### PDF
 
 The paper doesn't properly explain how to compute the resulting PDF when sampling the BSDF, but we can assume that it is consistent with the computations done when the whole BSDF is evaluated. In that case, the PDF is computed as a weighted sum of the individual PDFs $p_i$ of both layers with some arbitrarily chosen constant weights $w_i$:
 $$
 p=w_{1}p_{1} + w_{2}p_{2}
 $$
 
-#### My notes
+### My notes
 
 I find the sampling process of the paper problematic. It basically randomly picks one of the layers according to probabilities equal to constants $w_i$ and uses its PDF to generate the resulting direction. Since the sampling strategy should be as much proportional to the whole BSDF as possible to get good importance sampling, we need to weight the individual sampling PDFs with the actual contributions of the respective BSDF components (layers). Therefore, using constant weights hardly leads to an optimal sampling strategy since it completely ignores both the Fresnel attenuation and the attenuation within the medium which are both direction dependent.
 
