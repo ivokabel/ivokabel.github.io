@@ -4,7 +4,7 @@ title: Chapter 1: Weidlich-Wilkie Layered Model
 comments: true
 ---
 
-Intro: A part of a series...
+This is the first chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html).
 
 Let’s start with a (not that) brief introduction of the original model by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
 
