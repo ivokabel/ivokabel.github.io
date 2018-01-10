@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Chapter 1: Weidlich-Wilkie Layered Model
+title: Chapter 1 - Weidlich-Wilkie Layered Model
 comments: true
 ---
 

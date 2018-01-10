@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Chapter 2: Smooth Refraction Approximation Layered Model
+title: "Chapter 2: Smooth Refraction Approximation Layered Model"
 comments: true
 ---
 
