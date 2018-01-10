@@ -32,25 +32,33 @@ In a modern realistic renderer, a BSDF needs to handle two tasks: evaluation and
 4. On returning from the inner layer, the individual BSDF components are attenuated by the Fresnel transmission coefficients $T_{21}$ for the outer layer, and added to the total BSDF.
 
 The total BSDF is then
+
 $$
 f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a\cdot t
 $$
+
 where $a$ represents the medium attenuation (modeled with Bouguer-Lambert-Beer law)
+
 $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta{i^{\prime}}}+\frac{1}{\cos\theta{o^{\prime}}}\right)\right)}
 $$
+
 where $\alpha$ is the medium attenuation coefficient, and $d$ is the thickness of the layer, and
+
 $$
 t=\left(1-G\right)+T_{21}\cdot G
 $$
+
 where $G$ is the geometric attenuation term of the micro-facet model used. The authors didn't bother to explain whether it is the geometric term of the outer or the inner layer, but it, most likely, is the outer one.
 
 ### My notes
 
 First, there is no explanation of the $t$ component at all! The inner layer reflection component looks like this after expansion of $t$:
+
 $$
 T_{12} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a \cdot \left(\left(1-G\right)+T_{21}\cdot G\right)
 $$
+
 It seems to me that this is their ad-hoc (and incorrect) attempt to evaluate the light transmission through micro-facet-based surface, which was properly solved and published just in the same year (2007) by Walter et al. in the paper [Microfacet Models for Refraction through Rough Surfaces](https://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.html), and probably also an energy compensation term.
 
 Second, it is important to understand that the model tries to approximate the whole sub-surface light transport by evaluating just one path. Moreover, it also neglects the multiple scattering nature of the light transport within the layers. This basically cuts the energy which is reflected (partially or completely in case of total internal reflection) from the inner layer and then from the the outer layer back into the medium between the two layers. They try to compensate the missing energy by "energy compensation term" which, again, is not explained at all in the paper.
@@ -73,6 +81,7 @@ For the reflection path, we only reflect the incident direction from the micro-f
 ### PDF
 
 The paper doesn't properly explain how to compute the resulting PDF when sampling the BSDF, but we can assume that it is consistent with the computations done when the whole BSDF is evaluated. In that case, the PDF is computed as a weighted sum of the individual PDFs $p_i$ of both layers with some arbitrarily chosen constant weights $w_i$:
+
 $$
 p=w_{1}p_{1} + w_{2}p_{2}
 $$
