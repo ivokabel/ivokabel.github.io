@@ -1,28 +1,34 @@
 ---
 layout: post
-title: "Chapter 2: Smooth Refraction Approximation Layered Model"
+title: "Chapter 2: Smooth Refraction Approximation Layered Model (SRAL)"
 comments: true
 ---
 
-This is the second chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I explain my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007.
+This is the second chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (the WWL model).
 
-At first sight, my layered model doesn't differ very much from the WW model, but it contains important improvements, which solve some (critical) problems of the previous model. The main *(philosophical)* differences are using the (main) geometrical normal rather than the reflection micro-facet's one for computing refraction directions and a more rigorous formulation of the model. Besides that:
+*This chapter contains: an overall explanation of my model (philosophy, differences from WWL, ...), its evaluation and sampling and, at the end, an analysis of the model behaviour...*
 
-- (Fresnel-based geometric-normal refraction: Proper smooth surface refraction rather than some ad-hoc single-path rough surface refraction. Better approximation? Needs comparison!)
-- Adds the missing solid angle (de-)compression compensation in both evaluation and sampling -- solves energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- Improves/optimizes the sampling routine
-- ...
+## Overall Model Description
 
-...comparison of the behaviour with path-traced reference renderings...
+At first sight, my layered model doesn't differ very much from the WWL model, but it contains *incremental/important* improvements, which solve *some/critical?/various/several* problems of the previous model and offers a rigorous formulation of the model consistent with radiometry*/(BSDF)* framework and Monte Carlo theory. Namely, the changes are:
 
-## Overall model description
+- For refraction it uses **geometric normal** instead of micro-facet's one for better approximation.
+- Adds the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- this solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
+- **Improves/optimizes the sampling routine**.
 
-If it's brief, merge with the introduction...or, if it makes sense, move to evaluation.
+Formally, I denote the layers [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) $f_{s1}$ and $f_{s2}$ (1 -- outer, 2 -- inner) consistently with the original paper. The resulting BSDF $f_{s}$ is then a sum of two components representing the contributions of the respective layers $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$:
 
-Explain the motivation behind it? (still single-ray/path approximation, but smooth surface refraction -- better justification --> more physically based approximation?).
+$$
+f_{s} = f_{s1}^{\ast} + f_{s2}^{\ast}
+$$
 
-- Formula -- a sum of two components: $f_{s} = f_{s1} + f_{s2}$
-  -  Name the basic (micro-facet) models (parameters) somehow?
+## Geometrical normal
+
+The new model still assumes single-point simplifications of both refraction and sampling from the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which justifies using a single micro-facet during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* **geometrical normal** rather than the reflection-defined micro-facet's one. It is *worth noting/important to understand* that the new model still estimates the sub-surface light transport with just one light path and a single scattering event, but the used directions define a path, which is more likely the one through which it flows *the peak amount of energy*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
+
+It is also necessary to keep in mind that both models neglect the energy which is reflected from the outer layer back into the medium (multiple scattering). *WWL model uses some kind of compensation!...*
+
+[?Image? refraction direction, peak energy path, neglected energy]
 
 ## Evaluation
 
@@ -63,9 +69,11 @@ Optimizations: Weighting -- contribution estimation:
 - Medium attenuation approximation
 - ...
 
-## Model analysis
+## Model Analysis
 
 Certain configuration...
+
+...comparison of the behaviour with path-traced reference renderings...
 
 ### Reference images
 
@@ -79,6 +87,6 @@ Certain configuration...
 
 ...
 
-## Conclusion
+### Conclusion
 
 ...

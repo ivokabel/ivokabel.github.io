@@ -12,5 +12,5 @@ I decided to restrict the model to just two layers (1 -- outer and 2 -- inner). 
 
 Since this post is fairly large, I decided to split it into two chapters:
 
-- [Chapter 1: Weidlich-Wilkie Layered Model](chapter-1-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model.
+- [Chapter 1: Weidlich-Wilkie Layered Model](chapter-1-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model, which I sometimes refer to as the WWL model.
 - [Chapter 2: Smooth Refraction Approximation Layered Model](chapter-2-smooth-refraction-approximation-layered-model.html), where I explain and analyse my approach to layering.
