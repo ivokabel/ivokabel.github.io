@@ -18,7 +18,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 
 Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. In the following text I will omit the surface point $x$ from the notation and sometimes also the direction parameters for clarity. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
-The resulting model BSDF $f_{s}$ can be understood as a sum of two components representing the *contributions* of the respective layers -- denoted $f_{s1}$ and $f_{s2}$:
+The resulting model BSDF $f_{s}$ can be understood as a sum of two components representing the *contributions* of the respective layers $f_{s1}$ and $f_{s2}$:
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
@@ -31,9 +31,9 @@ It is *worth noting/important to understand* that the new model still estimates 
 
 It is also important to keep in mind that both models neglect the energy which is reflected from the outer layer back into the medium (multiple scattering). *WWL model uses some kind of compensation!...*
 
-[?Image #RefrGeomNorm? refraction direction, peak energy path, neglected energy]
+*[?Image #RefrGeomNorm? refraction direction, peak energy path, neglected energy]*
 
-*...why should the approximation work???... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
+*Why should my approximation work?... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
 
 ## Evaluation
 
@@ -66,14 +66,13 @@ Second, the light passing through the smooth interface, as in our model, get att
 
 [Images...]
 
-...
+Energy conservation problem...
 
 TODO:
 
 - OK: Refraction directions
 - OK: Fresnel transmission attenuations
-- Solid angle (de)compression
-- Formula derivation: Oh yeah! :-)
+- Energy conservation & Solid angle (de)compression: formula derivation, oh yeah! :-)
 
 #### Solid angle (de)compression (?) compensation
 
