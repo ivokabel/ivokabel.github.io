@@ -14,17 +14,17 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 
 - For refraction it uses **geometric normal** instead of micro-facet's one for better approximation.
 - Adds the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- this solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- **Optimizes the sampling routine**.
+- **Optimizes the sampling** routine.
 
-Formally, I denote the layers [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) $f_{s1}$ and $f_{s2}$ (1 -- outer, 2 -- inner) consistently with the original paper. The resulting BSDF $f_{s}$ is then a sum of two components representing the contributions of the respective layers $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$:
+Formally and consistently with the original paper, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) $f_{s1}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. In the following text I will omit the surface point $x$ from the notation for clarity. The resulting BSDF $f_{s}$ can then be understood as a sum of two components representing the *contributions* of the respective layers $f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)$:
 
 $$
-f_{s} = f_{s1}^{\ast} + f_{s2}^{\ast}
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-## Geometrical normal (?)
+## Refraction Through the Geometrical Normal
 
-The new model still assumes single-point simplifications of both refraction and sampling from the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which justifies using a single micro-facet during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* **geometrical normal** rather than the reflection-defined micro-facet's one.
+The new model still assumes single-point simplifications of both refraction and sampling from the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which justifies using a single micro-facet during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the reflection-defined micro-facet's one.
 
 It is *worth noting/important to understand* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which it flows *the peak amount of energy*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
 
@@ -32,20 +32,37 @@ It is also important to keep in mind that both models neglect the energy which i
 
 [?Image? refraction direction, peak energy path, neglected energy]
 
+*...why should the approximation work???... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
+
 ## Evaluation
+
+As mentioned earlier, the model can be understood as a sum of contributions of both layers:
+
+$$
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
+$$
+
+### Outer layer
+
+Since the direct contribution of the outer layer is just its reflection component, which is not affected by other parts of the model, it can be evaluated directly without any modification:
+$$
+f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right)
+$$
+
+### Inner layer
+
+For the inner layer, the thing are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time.
 
 ...
 
-Outer layer
+TODO:
 
-- Almost trivial...
-
-Inner layer
-
-- Needs Fresnel attenuations and solid angle (de)compression.
+- Refraction directions
+- Fresnel attenuations
+- Solid angle (de)compression
 - Formula derivation: Oh yeah! :-)
 
-### Solid angle (de)compression (?) compensation
+#### Solid angle (de)compression (?) compensation
 
 ...
 
