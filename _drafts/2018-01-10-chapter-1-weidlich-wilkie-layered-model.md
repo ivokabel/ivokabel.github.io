@@ -37,13 +37,13 @@ $$
 f_{r}=f_{r1}\left(\theta_{i},\theta_{o}\right)+T_{21} \cdot f_{r2}\left(\theta_{i^{\prime}},\theta_{o^{\prime}}\right)\cdot a\cdot t
 $$
 
-where $a$ represents the medium attenuation (modeled with Bouguer-Lambert-Beer law)
+where $a$ represents the medium attenuation (modeled with the [Beer-Lambert-Bouguer law](https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law))
 
 $$
-a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta{i^{\prime}}}+\frac{1}{\cos\theta{o^{\prime}}}\right)\right)}
+a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i^{\prime}}}+\frac{1}{\cos\theta_{o^{\prime}}}\right)\right)}
 $$
 
-where $\alpha$ is the medium attenuation coefficient, and $d$ is the thickness of the layer, and
+where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, $\theta_{i^{\prime}}$ and $\theta_{o^{\prime}}$ are inclinations of the respective refraction directions, and
 
 $$
 t=\left(1-G\right)+T_{21}\cdot G
