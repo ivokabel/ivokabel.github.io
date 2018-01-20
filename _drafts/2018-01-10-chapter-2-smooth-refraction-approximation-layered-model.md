@@ -16,12 +16,15 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
 - The **sampling routine optimization**.
 
-Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. In the following text I will omit the surface point $x$ from the notation and sometimes also the direction parameters for clarity. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
+Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
-The resulting model BSDF $f_{s}$ can be understood as a sum of two components representing the *contributions* of the respective layers $f_{s1}$ and $f_{s2}$:
+The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two *components/sub-BSDFs* representing the *contributions* of the respective layers $f_{s1}$ and $f_{s2}$:
+
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
+
+I sometimes call the functions $f_{s1}$ and $f_{s2}$ the **contribution BSDFs** or just **contributions**.
 
 ## Refraction Through the Geometrical Normal
 
@@ -39,7 +42,7 @@ It is also important to keep in mind that both models neglect the energy which i
 
 ## Evaluation
 
-As mentioned earlier, the model can be understood as a sum of contributions of both layers:
+As mentioned earlier, the model can be understood as a sum of two contribution BSDFs:
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -47,7 +50,7 @@ $$
 
 ### Outer layer
 
-Since the (direct) contribution of the outer layer is just its reflection component $f_{s1}^{\ast}$, which is not affected by other parts of the model, it can be evaluated directly without any modification, therefore:
+The contribution BSDF of the outer layer is trivial. It can be split into the reflection and refraction part. The light which gets refracted through the first layer into the model is accounted for in the inner layer component so we ignore it here. Since the reflected light is unaffected by the rest of the model and the whole model takes only reflection directions into account, it can be evaluated directly by evaluating the outer layer BSDF $f_{s1}^{\ast}$ *without any modification*. Therefore:
 
 $$
 f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -55,19 +58,32 @@ $$
 
 ### Inner layer
 
-For the inner layer, the thing are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
+For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
 
 #### Refraction
 
-Let's start with an example inner layer (orange Lambert) without any modifications (light: point, area, diffuse), which will undergo the aforementioned modifications.
+Let's start with an inner layer (orange Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
 
+$$
+f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
+$$
 *[Images: Orange Lambert layer without any modifications (light: point, area, diffuse)]*
 
-First of all, the inner layer deals with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeomNorm]*. After applying just these modified directions, the example inner layer contribution will look like this:
+The inner layer, in fact, deals with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeomNorm]*. After applying  the modified directions, the inner layer contribution will look like this:
+
+$$
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
+$$
 
 *[Images: Orange Lambert layer with refracted directions (light: point, area, diffuse)]*
 
-Second, the light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles.
+The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
+
+$$
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21}
+$$
+
+Where $T_{12} = T\left(\theta_{i}^{\prime}\right)$ and $T_{21} = T\left(\theta_{o}^{\prime}\right)$ are the Fresnel transmission coefficients.
 
 *[Images: Orange Lambert layer with Fresnel attenuation (light: point, area, diffuse)]*
 
@@ -79,21 +95,32 @@ $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i}^{\prime}}+\frac{1}{\cos\theta_{o}^{\prime}}\right)\right)}
 $$
 
-where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, and $\theta_{i}^{\prime}$ and $\theta_{o}^{\prime}$ are inclinations of the respective refraction directions.
+where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, and $\theta_{i}^{\prime}$ and $\theta_{o}^{\prime}$ are inclinations of the respective refraction directions. The BSDF is now:
 
-To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a bluish medium with different inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
+$$
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21} \cdot a
+$$
+
+To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a blue medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
 
 *[Images: Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
 
-You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. There obviously is an energy conservation problem, which took me quite some time to decipher. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
+You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
-#### Solid angle (de)compression compensation
+#### Solid angle (de-)compression compensation
 
 In this sub-section I will explain how to compensate the light (de-)compression to obtain an energy-conserving layered model. To do that, I will have to dig deeper into the theory of BDSFs. If you are not feeling nerdy enough nor mentally prepared for that ;-), just skip to the final sub-section, which summarizes the whole inner model formula.
 
+...
+
 TODO: Energy conservation & Solid angle (de)compression: formula derivation, oh yeah! :-)
 
-- ...
+- To understand the problem properly we need to work with the fundamental concepts/theory upon which the material model is built:
+  - Radiometric quantities: Radiant energy, flux/power, irradiance, radiance. Assume knowledge and do a very light introduction?
+  - Definition of bi-directional scattering distribution function (BSDF)
+- What are we trying to achieve:
+  - Formulate the BSDF of the inner layer with respect to the (non-refracted) incoming and outgoing directions $\omega_{i}$ and $\omega_{o}$ of the whole model. We want to see how the layer behaves in the eyes of the path-tracer which doesn't care about the inside mechanisms of the model (refractions and attenuations) -- it just wants a properly defined BSDF which it evaluates. I'll *(maybe)* call this function the **"outside" BSDF of the internal layer** and denote it.
+  - After we have got the . See how the standalone inner layer BSDF differs from the 
 
 #### The complete formula
 
