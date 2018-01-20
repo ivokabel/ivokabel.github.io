@@ -67,6 +67,7 @@ Let's start with an inner layer (orange Lambert) without any modifications, whic
 $$
 f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
+
 *[Images: Orange Lambert layer without any modifications (light: point, area, diffuse)]*
 
 The inner layer, in fact, deals with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeomNorm]*. After applying  the modified directions, the inner layer contribution will look like this:
@@ -107,20 +108,39 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
-#### Solid angle (de-)compression compensation
+#### Solid angle (de-)compression compensation ?
 
-In this sub-section I will explain how to compensate the light (de-)compression to obtain an energy-conserving layered model. To do that, I will have to dig deeper into the theory of BDSFs. If you are not feeling nerdy enough nor mentally prepared for that ;-), just skip to the final sub-section, which summarizes the whole inner model formula.
+Alternative title: "BSDF under smooth refractive interface"
 
-...
+In this section I will explain how to *(compensate the light (de-)compression to)* obtain a correct energy-conserving form of a BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs. If you are not feeling nerdy enough, just skip to the final sub-section, which summarizes the whole inner model formula including the derived compensation.
 
-TODO: Energy conservation & Solid angle (de)compression: formula derivation, oh yeah! :-)
+**TODO:**
 
-- To understand the problem properly we need to work with the fundamental concepts/theory upon which the material model is built:
-  - Radiometric quantities: Radiant energy, flux/power, irradiance, radiance. Assume knowledge and do a very light introduction?
-  - Definition of bi-directional scattering distribution function (BSDF)
-- What are we trying to achieve:
-  - Formulate the BSDF of the inner layer with respect to the (non-refracted) incoming and outgoing directions $\omega_{i}$ and $\omega_{o}$ of the whole model. We want to see how the layer behaves in the eyes of the path-tracer which doesn't care about the inside mechanisms of the model (refractions and attenuations) -- it just wants a properly defined BSDF which it evaluates. I'll *(maybe)* call this function the **"outside" BSDF of the internal layer** and denote it.
-  - After we have got the . See how the standalone inner layer BSDF differs from the 
+- We want the correct form of BSDF, we need to:
+  - Re-formulate *(from definition)* the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions $\omega_{i}$ and $\omega_{o}$ of the whole model rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$
+    - [image: geometry]
+  - We want to see how the layer behaves in the eyes of the path-tracer which doesn't care about the inside mechanisms of the model (refractions and attenuations) -- *it just wants a properly defined BSDF which it evaluates*.
+- To understand the problem properly we need to go down to the fundamental concepts/theory upon which the model is built:
+  - Assume knowledge of underlying frameworks: solid angle, ...
+  - Radiometric quantities (assume knowledge or do a very light introduction -- using Radon-Nykodym derivation; measure-theoretic radiometry?):
+    - Radiant energy: $Q \quad \left[J\right]$
+    - Radiant flux/power: $\Phi = \frac{\mathrm{d}Q}{\mathrm{d}t} \quad \left[W=Js^{-1}\right]$
+    - Irradiance: $E=\frac{\mathrm{d}\Phi}{\mathrm{d}S} \quad \left[Wm^{-2}\right]$
+    - Radiance: $L = \frac{\mathrm{d}^{2}\Phi}{\cos\theta\cdot \mathrm{d}S\cdot \mathrm{d}\omega} \quad \left[Wm^{-2}sr^{-1}\right]$
+      - Projected solid angle measure: $\mathrm{d}\sigma^{\bot}$
+  - Bi-directional scattering distribution function (BSDF):
+    - Geometry explanation with image (from Veach for example)
+    - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
+    - How to understand it...
+  - Prerequisite formulae:
+    - [geometry image]
+    - 1, 2 -- Radiances: $L_{o}\left(\omega_{o}\right)$, $L_{i}\left(\omega_{i}\right)$
+    - 3 -- Projected solid angle measure: $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+      - Use Veach, eq. 5.4, p. 143: relationship between $i$ and $o$ measures
+    - 4 -- Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+  - Refracted formula (using the prerequisites)
+    - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}$
+    - ...single-point adjustment
 
 #### The complete formula
 
