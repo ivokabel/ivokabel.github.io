@@ -85,15 +85,15 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 *[Images: Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
 
-You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. There obviously is an energy conservation problem, which took me some time to decipher. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
+You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. There obviously is an energy conservation problem, which took me quite some time to decipher. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
-#### Solid angle (de)compression (?) compensation
+#### Solid angle (de)compression compensation
 
-In this sub-section I will explain how to compensate the light (de-)compression to obtain an energy-conserving layered model. To do that, I will have to dig deeper into the theory of BDSFs. If you are not nerdy enough for that, just skip to the final sub-section, which summarizes the whole inner model formula.
-
-...
+In this sub-section I will explain how to compensate the light (de-)compression to obtain an energy-conserving layered model. To do that, I will have to dig deeper into the theory of BDSFs. If you are not feeling nerdy enough nor mentally prepared for that ;-), just skip to the final sub-section, which summarizes the whole inner model formula.
 
 TODO: Energy conservation & Solid angle (de)compression: formula derivation, oh yeah! :-)
+
+- ...
 
 #### The complete formula
 
