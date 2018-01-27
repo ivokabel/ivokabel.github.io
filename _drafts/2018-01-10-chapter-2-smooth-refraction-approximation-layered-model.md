@@ -147,7 +147,9 @@ where $A$ is the surface area measure. While irradiance measures energy density 
 $$
 L\left(x,\omega\right) = \frac{\mathrm{d}^{2}\Phi\left(x,\omega\right)}{\mathrm{d}A\left(x\right) \mathrm{d}\sigma^{\bot}\left(\omega\right)} \quad \left[Wm^{-2}sr^{-1}\right]
 $$
-Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than solid angle to make the quantity independent from relative position of the direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure, which, in this case, compensates the areal density loss when direction $\omega$ is getting further from the normal.
+Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than solid angle measure $\sigma$ to make the quantity independent from relative position of the direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the areal density loss when direction $\omega$ is getting further from the normal.
+
+Now that we have defined the needed radiometry quantities, we can finally define the *Bi-directional scattering density function* BSDF -- a formal description of the light-scattering properties of a surface.
 
 **TODO:**
 
