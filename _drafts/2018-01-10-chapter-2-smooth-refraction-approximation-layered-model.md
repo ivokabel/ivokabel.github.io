@@ -16,7 +16,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
 - The **sampling routine optimization**.
 
-Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
+Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. Any direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is azimuth and $\theta$ is inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
 The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two *components/sub-BSDFs* representing the *contributions* of the respective layers $f_{s1}$ and $f_{s2}$:
 
@@ -127,21 +127,27 @@ In other words: we want to see how the layer behaves to the rendered (e.g path-t
 
 To handle the problem properly we need to *go down/grasp it through* to the fundamental *concepts/theory* upon which the model is built. *My explanation assumes knowledge of mathematical concepts like derivative, measure, solid angle, etc.*
 
-First, we need to define a few radiometric quantities, which the BSDF theory builds upon. There are several ways of doing that, but I will follow the measure-theoretic radiometry way, which defines its quantities as ratios of measures and is explained in more detail for example in the third chapter of the [Eric Veach's dissertation thesis](http://graphics.stanford.edu/papers/veach_thesis/). This approach uses the so-called Radon-Nikodym derivative, which, expresses density of one measure with respect to another one. For measures $Q$ and $\rho$ the corresponding Radon-Nikodym derivative is denoted $\frac{\mathrm{d}Q}{\mathrm{d}\rho}$. In the measure-theoretic radiometry case, we are usually expressing the density of electro-magnetic energy measure (amount of photons, loosely speaking) with respect to some space and/or time measure.
+First, we need to define a few radiometric quantities, which the BSDF theory builds upon. There are several ways of doing that, but I will follow the measure-theoretic radiometry way, which defines its quantities as ratios of measures and is explained in more detail for example in the third chapter of the [Eric Veach's dissertation thesis](http://graphics.stanford.edu/papers/veach_thesis/). This approach uses the so-called Radon-Nikodym derivative, which, expresses density of one measure with respect to another one. For measures $Q$ and $\rho$ the corresponding Radon-Nikodym derivative is denoted $\frac{\mathrm{d}Q}{\mathrm{d}\rho}$ (similarly to the "normal" derivative). In the measure-theoretic radiometry case, we usually express the density of electro-magnetic energy measure (amount of photons, loosely speaking) with respect to some space and/or time measure.
+
+*...cohesion: energy measure == energy...*
 
 The most basic/fundamental radiometric quantity is *radiant energy*:
 $$
 Q \quad \left[J\right]
 $$
-measured in Joules, which can be understood as the amount of energy of photons in a given time set and space. For the density of energy per unit of time, there is *radiant flux* (or *power*):
+measured in Joules, which can be understood as the amount of energy of photons in a given time set and space. For the density of energy per unit of time, there is *radiant flux* or *radiant power*:
 $$
-\Phi = \frac{\mathrm{d}Q}{\mathrm{d}t} \quad \left[Js^{-1}=W\right]
+\Phi\left(t\right) = \frac{\mathrm{d}Q\left(t\right)}{\mathrm{d}t} \quad \left[Js^{-1}=W\right]
 $$
-...
-
-- Irradiance: $E=\frac{\mathrm{d}\Phi}{\mathrm{d}S} \quad \left[Wm^{-2}\right]$
-- Radiance: $L = \frac{\mathrm{d}^{2}\Phi}{\cos\theta\cdot \mathrm{d}S\cdot \mathrm{d}\omega} \quad \left[Wm^{-2}sr^{-1}\right]$
-  - Projected solid angle measure: $\mathrm{d}\sigma^{\bot}$
+where $t$ is the time parameter and also the time measure. In computer graphics we are very often interested in "amount of light" which arrives at, gets scattered or is emitted from a certain surface point $x$. This is *expressed* with density of radiant power per unit of surface area and is called *irradiance* for incident radiation and *radiant exitance* or *radiosity* for scattered and emitted radiation:
+$$
+E\left(x\right) = \frac{\mathrm{d}\Phi\left(x\right)}{\mathrm{d}A\left(x\right)} \quad \left[Wm^{-2}\right]
+$$
+where $A$ is the surface area measure. While irradiance measures energy density from all directions, we often need to measure the amount of light entering or leaving at a point of surface in a single direction. This is what quantity called *radiance* is for. Formally, it is expressed as the density of radiant power per unit. There are several equivalent formulations for radiance, but the most practical one for our purposes is
+$$
+L\left(x,\omega\right) = \frac{\mathrm{d}^{2}\Phi\left(x,\omega\right)}{\mathrm{d}A\left(x\right) \mathrm{d}\sigma^{\bot}\left(\omega\right)} \quad \left[Wm^{-2}sr^{-1}\right]
+$$
+Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than solid angle to make the quantity independent from relative position of the direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure, which, in this case, compensates the areal density loss when direction $\omega$ is getting further from the normal.
 
 **TODO:**
 
@@ -149,6 +155,9 @@ $$
   - Geometry explanation with image (from Veach for example)
   - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
   - How to understand it...
+
+##### Refracted BSDF
+
 - Prerequisite formulae:
   - [geometry image]
   - 1, 2 -- Radiances: $L_{o}\left(\omega_{o}\right)$, $L_{i}\left(\omega_{i}\right)$
