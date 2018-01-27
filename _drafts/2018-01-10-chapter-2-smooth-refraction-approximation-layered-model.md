@@ -36,7 +36,7 @@ It is *worth noting/important to understand* that the new model still estimates 
 
 It is also important to keep in mind that both models neglect the energy which is reflected from the outer layer back into the medium (*multiple scattering*). *WWL model uses some kind of compensation!...*
 
-*[?Image #RefrGeomNorm? refraction direction, peak energy path, neglected energy]*
+*[?Image #RefrGeomNorm refraction direction, peak energy path, neglected energy]*
 
 *Why should my approximation work?... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
 
@@ -60,7 +60,7 @@ $$
 
 For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
 
-#### Refraction
+#### *(Naive)* Refraction
 
 Let's start with an inner layer (orange Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
 
@@ -70,7 +70,7 @@ $$
 
 *[Images: Orange Lambert layer without any modifications (light: point, area, diffuse)]*
 
-The inner layer, in fact, deals with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeomNorm]*. After applying  the modified directions, the inner layer contribution will look like this:
+The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeomNorm]*. After applying  the modified directions, the inner layer contribution will look like this:
 
 $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
@@ -108,39 +108,56 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
-#### Solid angle (de-)compression compensation ?
+#### Proper refraction (formula)
 
-Alternative title: "BSDF under smooth refractive interface"
+Alternative titles:
 
-In this section I will explain how to *(compensate the light (de-)compression to)* obtain a correct energy-conserving form of a BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs. If you are not feeling nerdy enough, just skip to the final sub-section, which summarizes the whole inner model formula including the derived compensation.
+- "Solid angle (de-)compression compensation"
+- "BSDF under smooth refractive interface"
+
+In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the final sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
+
+One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
+
+*[image: #RefrBsdfGeom]*
+
+In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
+
+##### Foundations
+
+To handle the problem properly we need to *go down/grasp it through* to the fundamental *concepts/theory* upon which the model is built. *My explanation assumes knowledge of mathematical concepts like derivative, measure, solid angle, etc.*
+
+First, we need to define a few radiometric quantities, which the BSDF theory builds upon. There are several ways of doing that, but I will follow the measure-theoretic radiometry way, which defines its quantities as ratios of measures and is explained in more detail for example in the third chapter of the [Eric Veach's dissertation thesis](http://graphics.stanford.edu/papers/veach_thesis/). This approach uses the so-called Radon-Nikodym derivative, which, expresses density of one measure with respect to another one. For measures $Q$ and $\rho$ the corresponding Radon-Nikodym derivative is denoted $\frac{\mathrm{d}Q}{\mathrm{d}\rho}$. In the measure-theoretic radiometry case, we are usually expressing the density of electro-magnetic energy measure (amount of photons, loosely speaking) with respect to some space and/or time measure.
+
+The most basic/fundamental radiometric quantity is *radiant energy*:
+$$
+Q \quad \left[J\right]
+$$
+measured in Joules, which can be understood as the amount of energy of photons in a given time set and space. For the density of energy per unit of time, there is *radiant flux* (or *power*):
+$$
+\Phi = \frac{\mathrm{d}Q}{\mathrm{d}t} \quad \left[Js^{-1}=W\right]
+$$
+...
+
+- Irradiance: $E=\frac{\mathrm{d}\Phi}{\mathrm{d}S} \quad \left[Wm^{-2}\right]$
+- Radiance: $L = \frac{\mathrm{d}^{2}\Phi}{\cos\theta\cdot \mathrm{d}S\cdot \mathrm{d}\omega} \quad \left[Wm^{-2}sr^{-1}\right]$
+  - Projected solid angle measure: $\mathrm{d}\sigma^{\bot}$
 
 **TODO:**
 
-- We want the correct form of BSDF, we need to:
-  - Re-formulate *(from definition)* the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions $\omega_{i}$ and $\omega_{o}$ of the whole model rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$
-    - [image: geometry]
-  - We want to see how the layer behaves in the eyes of the path-tracer which doesn't care about the inside mechanisms of the model (refractions and attenuations) -- *it just wants a properly defined BSDF which it evaluates*.
-- To understand the problem properly we need to go down to the fundamental concepts/theory upon which the model is built:
-  - Assume knowledge of underlying frameworks: solid angle, ...
-  - Radiometric quantities (assume knowledge or do a very light introduction -- using Radon-Nykodym derivation; measure-theoretic radiometry?):
-    - Radiant energy: $Q \quad \left[J\right]$
-    - Radiant flux/power: $\Phi = \frac{\mathrm{d}Q}{\mathrm{d}t} \quad \left[W=Js^{-1}\right]$
-    - Irradiance: $E=\frac{\mathrm{d}\Phi}{\mathrm{d}S} \quad \left[Wm^{-2}\right]$
-    - Radiance: $L = \frac{\mathrm{d}^{2}\Phi}{\cos\theta\cdot \mathrm{d}S\cdot \mathrm{d}\omega} \quad \left[Wm^{-2}sr^{-1}\right]$
-      - Projected solid angle measure: $\mathrm{d}\sigma^{\bot}$
-  - Bi-directional scattering distribution function (BSDF):
-    - Geometry explanation with image (from Veach for example)
-    - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
-    - How to understand it...
-  - Prerequisite formulae:
-    - [geometry image]
-    - 1, 2 -- Radiances: $L_{o}\left(\omega_{o}\right)$, $L_{i}\left(\omega_{i}\right)$
-    - 3 -- Projected solid angle measure: $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
-      - Use Veach, eq. 5.4, p. 143: relationship between $i$ and $o$ measures
-    - 4 -- Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
-  - Refracted formula (using the prerequisites)
-    - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}$
-    - ...single-point adjustment
+- Bi-directional scattering distribution function (BSDF):
+  - Geometry explanation with image (from Veach for example)
+  - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
+  - How to understand it...
+- Prerequisite formulae:
+  - [geometry image]
+  - 1, 2 -- Radiances: $L_{o}\left(\omega_{o}\right)$, $L_{i}\left(\omega_{i}\right)$
+  - 3 -- Projected solid angle measure: $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+    - Use Veach, eq. 5.4, p. 143: relationship between $i$ and $o$ measures
+  - 4 -- Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+- *(Final)* refracted BSDF formula (using the prerequisites)
+  - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}$
+  - ...single-point adjustment
 
 #### The complete formula
 
