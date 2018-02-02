@@ -123,7 +123,7 @@ One way of obtaining the correct form of a BSDF under a smooth refractive interf
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
 
-##### Foundations / *?Radiometric quantities?*
+##### Radiometric quantities
 
 To handle the problem properly we need to *go down/grasp it through* to the fundamental *concepts/theory* upon which the model is built. *My explanation assumes knowledge of mathematical concepts like derivative, measure, solid angle, etc.*
 
@@ -149,12 +149,13 @@ L\left(x,\omega\right) = \frac{\mathrm{d}^{2}\Phi\left(x,\omega\right)}{\mathrm{
 $$
 Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than "normal" solid angle measure $\sigma$ in order to make the quantity independent from relative position of the light direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the loss of area density when direction $\omega$ *gets further* from the normal.
 
-##### ?BSDF?
+##### BSDF
 
-Now that we have defined the needed radiometry quantities, we can finally define the *bidirectional scattering density function* (BSDF) -- a formal description of the light-scattering properties of a surface point. It expresses how the radiance outgoing from a point on a surface in a particular direction $\omega_o$ is dependent on radiance incoming to the point from a particular direction $\omega_i$:
+Now that we have defined the needed radiometry quantities, we can finally define the *bidirectional scattering density function* (BSDF), a formal description of the light-scattering properties of a surface point. It expresses how the light outgoing from a point $x$ on a surface in a particular direction $\omega_o$ is dependent on the light incoming to the point from a particular direction $\omega_i$:
 
 *[image: BSDF geometry from Veach, fig. 3.1]*
 
+- *The surface point $x$ will be omitted from the notation in the following text for clarity.*
 - We denote the radiance leaving the point $x$ in the direction $\omega_o$ as $L_o\left(\omega_o\right)$. In general, it is dependent on the radiance incoming to $x$ from all possible directions.
 - Let's now consider the radiance $L_i\left(\omega_i\right)$ incoming to $x$ through an infinitesimal cone $\mathrm{d}\omega_{i}$ around the direction $\omega_i$ with solid angle size $\mathrm{d}\sigma\left(\omega_{i}\right)$. This generates irradiance denoted $\mathrm{d}E\left(\omega_{i}\right)$, which can be computed as *[displayed formula]* $\mathrm{d}E\left(\omega_{i}\right) = L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)$.
 - The incident light can be partially absorbed by the surface and partially scattered in all directions. Let's denote $\mathrm{d}L_{o}\left(\omega_{o}\right)$ the contribution/ of $\mathrm{d}E\left(\omega_{i}\right)$ to the radiance leaving in direction $\omega_{o}$.
@@ -163,14 +164,12 @@ Now that we have defined the needed radiometry quantities, we can finally define
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]
 $$
-...components... The surface point parameter is omitted for clarity.
-
-**TODO:**
+...components... 
 
 - Bidirectional scattering distribution function (BSDF):
   - OK: Geometry explanation with image (from Veach for example)
   - OK: $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
-  - How to understand it...
+  - ...how to understand it?
   - ...Inspired by...for more detailed explanation read the excellent Veach's PhD thesis (more of a book than a PhD thesis;-))
 
 ##### Refracted BSDF
