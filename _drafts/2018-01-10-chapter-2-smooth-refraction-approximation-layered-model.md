@@ -6,7 +6,7 @@ comments: true
 
 This is the second chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (which I refer to as the original model or the WWL model).
 
-*This chapter contains: an overall explanation of my model (philosophy, differences from WWL, ...), its evaluation and sampling and, at the end, an analysis of the model behaviour...*
+*This chapter contains: an overall explanation of my model (philosophy, differences from WWL, ...), its evaluation and sampling and an analysis of the model behaviour...*
 
 ## Overall Model Description
 
@@ -60,7 +60,7 @@ $$
 
 For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
 
-#### *(Naive)* Refraction
+#### Naïve refraction
 
 Let's start with an inner layer (orange Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
 
@@ -108,12 +108,12 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
-#### Proper refraction (formula)
+#### Proper refraction
 
-Alternative titles:
+*Alternative titles:*
 
-- "Solid angle (de-)compression compensation"
-- "BSDF under smooth refractive interface"
+- *"Solid angle (de-)compression compensation"*
+- *"BSDF under smooth refractive interface"*
 
 In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the final sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
@@ -123,7 +123,7 @@ One way of obtaining the correct form of a BSDF under a smooth refractive interf
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
 
-##### Foundations
+##### Foundations / *?Radiometric quantities?*
 
 To handle the problem properly we need to *go down/grasp it through* to the fundamental *concepts/theory* upon which the model is built. *My explanation assumes knowledge of mathematical concepts like derivative, measure, solid angle, etc.*
 
@@ -147,14 +147,34 @@ where $A$ is the surface area measure. While irradiance measures energy density 
 $$
 L\left(x,\omega\right) = \frac{\mathrm{d}^{2}\Phi\left(x,\omega\right)}{\mathrm{d}A\left(x\right) \mathrm{d}\sigma^{\bot}\left(\omega\right)} \quad \left[Wm^{-2}sr^{-1}\right]
 $$
-Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than solid angle measure $\sigma$ to make the quantity independent from relative position of the direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the areal density loss when direction $\omega$ is getting further from the normal.
+Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than "normal" solid angle measure $\sigma$ in order to make the quantity independent from relative position of the light direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the loss of area density when direction $\omega$ *gets further* from the normal.
 
-Now that we have defined the needed radiometry quantities, we can finally define the *Bi-directional scattering density function* BSDF -- a formal description of the light-scattering properties of a surface.
+##### ?BSDF?
+
+Now that we have defined the needed radiometry quantities, we can finally define the *Bi-directional scattering density function* BSDF -- a formal description of the light-scattering properties of a surface point. It expresses how the radiance outgoing from a point on a surface in a particular direction $\omega_o$ is dependent on radiance incoming to the point from a particular direction $\omega_i$:
+
+*[image: BSDF geometry from Veach, fig. 3.1]*
+
+- We denote the radiance leaving the point $x​$ in the direction $\omega_o​$ as $L_o\left(\omega_o\right)​$. In general, it is dependent on the radiance incoming to $x​$ from all possible directions.
+- Radiance $L_i\left(\omega_i\right)$ incoming to the point $x$ through a differential *solid angle/cone* $\mathrm{d}\omega_{i}$ around the direction $\omega_i$. This generates *certain* amount of irradiance $\mathrm{d}E\left(\omega_{i}\right)$ at the point $x$.
+- It can be shown experimentally that amount of outgoing radiance $L_o\left(\omega_o\right)$ is proportional to the incoming irradiance --> 
+
+The definition:
+$$
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]
+$$
+...components... The surface point parameter is omitted for clarity.
+
+...
+
+Consider radiance leaving the point in the direction $\omega_o$, denoted $L_o\left(\omega_o\right)$. It depends on the radiance $L_i\left(\omega_i\right)$ incoming to the point from all possible directions $\omega_i$ and the scattering properties of the surface point.
+
+...
 
 **TODO:**
 
 - Bi-directional scattering distribution function (BSDF):
-  - Geometry explanation with image (from Veach for example)
+  - OK: Geometry explanation with image (from Veach for example)
   - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\cos\theta_{i}\mathrm{d}\omega_{i}} \quad \left[sr^{-1}\right]$
   - How to understand it...
 
