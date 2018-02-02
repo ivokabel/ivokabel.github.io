@@ -165,16 +165,29 @@ f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\
 $$
 The radiometry and BSDF explanation is heavily inspired by the excellent Veach's PhD thesis (more of a book than a PhD thesis;-)), which I recommend to read for more details and also to everyone who is seriously interested in computer graphics, especially in realistic 3D rendering.
 
-##### Refracted BSDF
+##### Refraction-lit BSDF
 
-Now we'll take the general definition of BSDF and derive the it's form/formula for a base BSDF lit through a smooth Fresnel surface.
+Now, using the general definition of BSDF, we'll derive the proper formula for a layer lit through a smooth Fresnel surface.
+
+*[image: #RefrBsdfGeom again?]*
 
 - Prerequisite formulae:
-  - [geometry image]
-  - 1, 2 -- Radiances: $L_{o}\left(\omega_{o}\right)$, $L_{i}\left(\omega_{i}\right)$
-  - 3 -- Projected solid angle measure: $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
-    - Use Veach, eq. 5.4, p. 143: relationship between $i$ and $o$ measures
-  - 4 -- Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+  - Formula 1
+    - What happens to the incoming radiance: $L_{i}\left(\omega_{i}^{\prime}\right) = L_{i}\left(\omega_{i}\right) \frac{\eta_1^2}{\eta_0^2} T\left(\theta_i\right)$
+      - $\frac{\eta_1^2}{\eta_0^2}$ is the radiance scaling due to radiance/solid angle compression when the light enters the medium between the two layers. (Veach, formula 5.2)
+      - $T\left(\theta_i\right)$ is the Fresnel transmission coefficient (how much light is refracted rather than reflected)
+      - *Formally distinguish between radiance reaching/leaving outer and inner layer?*
+    - We now need to express the amount of radiance reaching the upper smooth layer: $L_{i}\left(\omega_{i}\right) = L_{i}\left(\omega_{i}^{\prime}\right)  \frac{\eta_0^2}{\eta_1^2} T\left(\theta_i\right)^{-1}$
+  - Formula 2
+    - Similarly, we need to adjust the the outgoing radiance: $L_{o}\left(\omega_{o}\right) = L_{o}\left(\omega_{o}^{\prime}\right) \frac{\eta_0^2}{\eta_1^2} T\left(\theta_o\right)$
+  - Formula 3
+    - How the projected solid angle $\mathrm{d}\sigma^{\bot}$ of a light cone changes when entering a medium with different index of refraction
+    - *[image: geometry?] ...probably not necessary*
+    - Veach, eq. 5.4, p. 143: relationship between incoming and refracted cones measures: $\eta_0^2 \mathrm{d}\sigma^{\bot} \left({\omega}_i\right) = \eta_1^2 \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+      - Where $\omega_t$ is the refracted direction of $\omega_i$ 
+    - Therefore $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$ is ...
+  - Formula 4
+    - Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
 - *(Final)* refracted BSDF formula (using the prerequisites)
   - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}$
   - ...single-point adjustment
