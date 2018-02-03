@@ -252,20 +252,25 @@ Just a side note: Since we are implicitly dealing with a rendering system which 
 
 ## Sampling
 
-Main idea: sum BSDF --> weighted average of two sampling strategies ($p^{\ast}_1$ and $p^{\ast}_2$)
+Main idea: sum BSDF --> weighted average of two sampling strategies ($p^{\ast}_1$ and $p^{\ast}_2$).
 
-**Outer layer:**
+First, have a look at the separate layers sampling procedures, then combine them together.
 
-- Trivial: $p^{\ast}_1\left(\omega_{i}, \omega_{o}\right) = p_1\left(\omega_{i}, \omega_{o}\right)$
+**Outer layer sampling**
 
-**Inner layer:**
+- Almost trivial: $p^{\ast}_1\left(\omega_{i}, \omega_{o}\right) = p_1\left(\omega_{i}, \omega_{o}\right)$
+  - Just the upper hemisphere -- reflection contribution
 
-- Sampling almost trivial (just refraction).
+**Inner layer sampling**
+
+- Easy:
+  - Use refracted direction $\omega_o^{\prime}$ (obviously)
+  - Refract the sampled direction; with brief justification?
 - PDF: "Too dark" problem -- missing solid angle (de)compression
 
-**Both layers together:**
+**Sampling both layers together**
 
-Optimizations: Weighting -- contribution estimation: 
+Optimizations: Weighting = contribution estimation: 
 
 - Fresnel split approximation
 - Medium attenuation approximation
@@ -273,9 +278,10 @@ Optimizations: Weighting -- contribution estimation:
 
 ## Model Analysis
 
-Certain configuration...
+- Certain configuration...
 
-...comparison of the behaviour with path-traced reference renderings...
+- ...comparison of the behaviour with path-traced reference renderings...
+
 
 ### Reference images
 
