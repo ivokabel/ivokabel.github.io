@@ -115,11 +115,11 @@ You can, as well, see that there is something wrong with the model when the medi
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
 
-In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the final sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
+In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "Complete formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
-*[image: #RefrBsdfGeom]*
+*[image: #RefrBsdfGeom?]*
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
 
@@ -163,34 +163,41 @@ The incident light can be partially absorbed by the surface and partially scatte
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{\mathrm{d}E\left(\omega_{i}\right)} = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)} \quad \left[sr^{-1}\right]
 $$
-The radiometry and BSDF explanation is heavily inspired by the excellent Veach's PhD thesis (more of a book than a PhD thesis;-)), which I recommend to read for more details and also to everyone who is seriously interested in computer graphics, especially in realistic 3D rendering.
+The radiometry and BSDF explanation is heavily inspired by the excellent [Eric Veach's PhD thesis](http://graphics.stanford.edu/papers/veach_thesis/) (it's more of a book than a PhD dissertation ;-)), which I recommend to read for more detailed explanation and also to everyone who is seriously interested in computer graphics, especially in realistic 3D rendering.
 
 ##### Refraction-lit BSDF
 
-Now, using the general definition of BSDF, we'll derive the proper formula for a layer lit through a smooth Fresnel surface.
+Using the general definition of BSDF, we'll now derive the proper formula for a layer under a smooth Fresnel surface.
 
 *[image: #RefrBsdfGeom again?]*
 
-- Prerequisite formulae:
+- For that we will need formulate 4 prerequisite formulae, which we will then directly put together into the final formula:
   - Formula 1
-    - What happens to the incoming radiance: $L_{i}\left(\omega_{i}^{\prime}\right) = L_{i}\left(\omega_{i}\right) \frac{\eta_1^2}{\eta_0^2} T\left(\theta_i\right)$
-      - $\frac{\eta_1^2}{\eta_0^2}$ is the radiance scaling due to radiance/solid angle compression when the light enters the medium between the two layers. (Veach, formula 5.2)
+    - What happens to the incoming radiance when it passes a smooth interface between two media with different indices of refraction: $L_{i}\left(\omega_{i}^{\prime}\right) = L_{i}\left(\omega_{i}\right) \frac{\eta_1^2}{\eta_0^2} T\left(\theta_i\right)$
+      - $\frac{\eta_1^2}{\eta_0^2}$ is the radiance scaling due to solid angle compression (Veach, formula 5.2)
       - $T\left(\theta_i\right)$ is the Fresnel transmission coefficient (how much light is refracted rather than reflected)
-      - *Formally distinguish between radiance reaching/leaving outer and inner layer?*
-    - We now need to express the amount of radiance reaching the upper smooth layer: $L_{i}\left(\omega_{i}\right) = L_{i}\left(\omega_{i}^{\prime}\right)  \frac{\eta_0^2}{\eta_1^2} T\left(\theta_i\right)^{-1}$
+    - For our purposes, we need to rewrite the equation a little bit: $L_{i}\left(\omega_{i}\right) = L_{i}\left(\omega_{i}^{\prime}\right)  \frac{\eta_0^2}{\eta_1^2} T\left(\theta_i\right)^{-1}$
   - Formula 2
-    - Similarly, we need to adjust the the outgoing radiance: $L_{o}\left(\omega_{o}\right) = L_{o}\left(\omega_{o}^{\prime}\right) \frac{\eta_0^2}{\eta_1^2} T\left(\theta_o\right)$
+    - Similarly, we can obtain the amount of outgoing radiance: $L_{o}\left(\omega_{o}\right) = L_{o}\left(\omega_{o}^{\prime}\right) \frac{\eta_0^2}{\eta_1^2} T\left(\theta_o\right)$
+    - Note that we simplified the notation by using  $T\left(\theta_o\right)$ instead of $T\left(-\theta_o^{\prime}\right)$ because the two are equal.
   - Formula 3
-    - How the projected solid angle $\mathrm{d}\sigma^{\bot}$ of a light cone changes when entering a medium with different index of refraction
+    - How the projected solid angle $\mathrm{d}\sigma^{\bot}$ of a light cone changes when refracted through smooth interface
     - *[image: geometry?] ...probably not necessary*
-    - Veach, eq. 5.4, p. 143: relationship between incoming and refracted cones measures: $\eta_0^2 \mathrm{d}\sigma^{\bot} \left({\omega}_i\right) = \eta_1^2 \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
-      - Where $\omega_t$ is the refracted direction of $\omega_i$ 
-    - Therefore $\mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$ is ...
+    - The answer can be found for example in Veach's thesis in the equation 5.4 at page 143: $\eta_0^2 \mathrm{d}\sigma^{\bot} \left({\omega}_i\right) = \eta_1^2 \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$, where $\omega_t$ is the refracted direction of $\omega_i$. We can now rewrite the equation to form $\mathrm{d}\sigma^{\bot} \left(\omega_i\right) = \frac{\eta_1^2}{\eta_0^2} \mathrm{d}\sigma^{\bot} \left(\omega_t\right)$
   - Formula 4
-    - Equality: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
-- *(Final)* refracted BSDF formula (using the prerequisites)
-  - $f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = \frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}$
-  - ...single-point adjustment
+    - I will not go into detail of this one, but it can be shown that the projected solid angle measure of the refracted cone equals the cone of light reaching the inner layer given that the both layers are parallel *to each other*: $\mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)$
+- Now we have all the necessary pieces to build the BSDF for the a layer under a smooth Fresnel surface. Let's *put/substitute* them to the plain definition of BSDF, reorder it and separate the BSDF of the stand-alone inner layer BSDF to see what compensation factors have to be applied to it:
+  - ...
+  - And that's it. *All the circus* for a single, relatively trivial compensation factor, which, however, makes the difference in the end.
+  - *Mention Mitsuba's version?*
+  - It's important to note, that we use single-point simplification here as was used in the original WWL paper -- we assume the incoming and outgoing light to pass through the same point on the outer (smooth interface) layer.
+
+...
+$$
+\begin{eqnarray*}
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)&=&\frac{\mathrm{d}L_{o}\left(\omega_{o}\right)}{L_{i}\left(\omega_{i}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}\right)}\\&=&\frac{\mathrm{d}L_{o}\left(\omega_{o}^{\prime}\right)\frac{\eta_{0}^{2}}{\eta_{1}^{2}}T\left(\theta_{o}\right)}{L_{i}\left(\omega_{i}^{\prime}\right)\frac{\eta_{0}^{2}}{\eta_{1}^{2}}T\left(\theta_{i}\right)^{-1}\frac{\eta_{1}^{2}}{\eta_{0}^{2}}\mathrm{d}\sigma^{\bot}\left(\omega_{i}^{\prime}\right)}\\&=&\frac{\mathrm{d}L_{o}\left(\omega_{o}^{\prime}\right)}{L_{i}\left(\omega_{i}^{\prime}\right)\mathrm{d}\sigma^{\bot}\left(\omega_{i}^{\prime}\right)}T\left(\theta_{o}\right)T\left(\theta_{i}\right)\frac{\eta_{0}^{2}}{\eta_{1}^{2}}\\&=&f_{s}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)T\left(\theta_{o}\right)T\left(\theta_{i}\right)\frac{\eta_{0}^{2}}{\eta_{1}^{2}}
+\end{eqnarray*}
+$$
 
 #### The complete formula
 
