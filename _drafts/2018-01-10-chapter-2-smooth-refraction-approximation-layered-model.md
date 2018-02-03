@@ -16,7 +16,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
 - The **sampling routine optimization**.
 
-Formally, I denote the outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. Any direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is azimuth and $\theta$ is inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
+Formally, I denote the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. Any direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is azimuth and $\theta$ is inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
 The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two *components/sub-BSDFs* representing the *contributions* of the respective layers $f_{s1}$ and $f_{s2}$:
 
@@ -25,6 +25,8 @@ f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\right
 $$
 
 I sometimes call the functions $f_{s1}$ and $f_{s2}$ the **contribution BSDFs** or just **contributions**.
+
+The outer layer is expected to be an interface between two media with refractive indices: $\eta_0$ above the outer layer and $\eta_1$ between the outer and inner layer. There is no assumption on the medium below the inner layer.
 
 ## Refraction Through the Geometrical Normal
 
@@ -81,10 +83,10 @@ $$
 The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
 
 $$
-f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21}
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right)
 $$
 
-Where $T_{12} = T\left(\theta_{i}^{\prime}\right)$ and $T_{21} = T\left(\theta_{o}^{\prime}\right)$ are the Fresnel transmission coefficients.
+Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
 *[Images: Orange Lambert layer with Fresnel attenuation (light: point, area, diffuse)]*
 
@@ -96,10 +98,10 @@ $$
 a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i}^{\prime}}+\frac{1}{\cos\theta_{o}^{\prime}}\right)\right)}
 $$
 
-where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, and $\theta_{i}^{\prime}$ and $\theta_{o}^{\prime}$ are inclinations of the respective refraction directions. The BSDF is now:
+where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, and $\theta_{i}^{\prime}$ and $\theta_{o}^{\prime}$ are inclinations of the respective refraction directions. The BSDF is now
 
 $$
-f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21} \cdot a
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a
 $$
 
 To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a blue medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
@@ -115,7 +117,7 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
 
-In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "Complete formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
+In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "The complete inner layer formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
@@ -238,10 +240,15 @@ It's important to note, that we use single-point simplification here as was used
 
 #### The complete inner layer formula
 
-If we put together all the components which affect the inner layer contribution (i.e. refraction, radiance compression and medium attenuation), we'll get the final formula
+If we put together all the components which affect the inner layer contribution, we'll get the final formula
+
 $$
-f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21} \cdot \frac{\eta_{0}^{2}}{\eta_{1}^{2}} \cdot a
+f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a
 $$
+
+where $f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)$ is the stand-alone BSDF of the inner layer, $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the radiance compression coefficient and $a$ is the medium attenuation coefficient.
+
+Just a side note: Since we are implicitly dealing with a rendering system which is not polarization aware we don't have to worry about the order in which the coefficients are multiplied together. In a polarization-aware system, however, multiplication operations (representing light-matter interaction) would have to be dealt with much more care.
 
 ## Sampling
 
