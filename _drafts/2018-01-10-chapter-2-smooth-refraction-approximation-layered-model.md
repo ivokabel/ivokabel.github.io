@@ -213,7 +213,10 @@ It's important to note, that we use single-point simplification here as was used
 
 #### The complete inner layer formula
 
-...
+If we put together all the components which affect the inner layer contribution (i.e. refraction, radiance compression and medium attenuation), we'll get the final formula
+$$
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cdot T_{12} \cdot T_{21} \cdot \frac{\eta_{0}^{2}}{\eta_{1}^{2}} \cdot a
+$$
 
 ## Sampling
 
