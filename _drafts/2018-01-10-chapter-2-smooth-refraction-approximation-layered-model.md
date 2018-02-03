@@ -160,7 +160,7 @@ $$
 
 Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than "normal" solid angle measure $\sigma$ in order to make the quantity independent from relative position of the light direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the loss of area density when direction $\omega$ *gets further* from the normal.
 
-##### BSDF
+##### BSDF definition
 
 Now that we have defined the needed radiometry quantities, we can finally define the *bidirectional scattering density function* (BSDF), a formal description of the light-scattering properties of a surface point. It expresses how the light outgoing from a point $x$ on a surface in a particular direction $\omega_o$ is dependent on the light incoming to the point from a particular direction $\omega_i$:
 
@@ -180,7 +180,7 @@ $$
 
 The radiometry and BSDF explanation is heavily inspired by the excellent [Eric Veach's PhD thesis](http://graphics.stanford.edu/papers/veach_thesis/) (it's more of a book than a PhD dissertation ;-)), which I recommend to read for more detailed explanation and also to everyone who is seriously interested in computer graphics, especially in realistic 3D rendering.
 
-##### Refraction-lit BSDF
+##### BSDF under a smooth refractive interface
 
 *[image: #RefrBsdfGeom again?]*
 
