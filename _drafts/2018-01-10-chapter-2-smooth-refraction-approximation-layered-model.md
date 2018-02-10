@@ -222,7 +222,7 @@ $$
 \mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)
 $$
 
-Now we have all the necessary pieces to build the BSDF for the a layer under a smooth Fresnel surface. Let's *put/substitute* them into the plain definition of BSDF, simplify it and separate the BSDF of the stand-alone inner layer BSDF to see what compensation factors have to be applied to get the correct formula:
+Now we finally have all the necessary pieces to build the BSDF for the a layer under a smooth Fresnel surface. Let's *put/substitute* them into the plain definition of BSDF, simplify it and separate the BSDF of the stand-alone inner layer BSDF to see what compensation factors have to be applied to get the correct formula:
 
 $$
 \begin{eqnarray*}
@@ -230,25 +230,33 @@ f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)&=&\frac{\mathrm{d}L_{o}\left(\
 \end{eqnarray*}
 $$
 
-And that's it, folks! You can see that our original approach, in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients, was almost *correct*. What we were missing was the (relatively trivial) compensation factor, which, however, makes the difference as you can see in the following images:
+And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor, which, however, makes the difference as you can see in the following images:
 
 *[Images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
 
-It's important to note, that we use single-point simplification here as was used in the original WWL paper -- we assume the incoming and outgoing light to pass through the same point on the outer layer.
+It's important to note, that we use single-point simplification here as *was used* in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.
 
 *Mention Mitsuba's version? Even they struggled with it and still don't use the correct BSDF. Maybe after I try its approach practically and show the results...*
 
-#### The complete inner layer formula
+#### Inner layer formula
 
-If we put together all the components which affect the inner layer contribution, we'll get the final formula
+If we put together all the components which affect the inner layer contribution, we'll get the final formula for the inner layer:
 
 $$
 f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a
 $$
 
-where $f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)$ is the stand-alone BSDF of the inner layer, $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the radiance compression coefficient and $a$ is the medium attenuation coefficient.
+where $f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)$ is the stand-alone BSDF of the inner layer, $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation and $a$ is the medium attenuation coefficient.
 
 Just a side note: Since we are implicitly dealing with a rendering system which is not polarization aware we don't have to worry about the order in which the coefficients are multiplied together. In a polarization-aware system, however, multiplication operations (representing light-matter interaction) would have to be dealt with much more care.
+
+### Whole formula
+
+Just to summarize, the complete BSDF formula containing contributions of both layers is
+$$
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
+$$
+where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a$ is the medium attenuation (see section "Medium attenuation") and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation. It's important to notice that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function), because it is properly defined only for directions from the upper hemisphere.
 
 ## Sampling
 
