@@ -310,6 +310,8 @@ As you can see, the result is consistently darker than it should be according to
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right) \frac{\eta_{0}^2}{\eta_{1}^2}
 $$
+**<u>*TODO: The compensation factor is not complete yet!*</u>**
+
 This will finally yield the actual PDF values leading to an unbiased Monte Carlo estimator and therefore to the correct rendering output:
 
 *[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
