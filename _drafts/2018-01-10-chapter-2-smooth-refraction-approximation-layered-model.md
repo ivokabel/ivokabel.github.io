@@ -296,21 +296,21 @@ The renderer just has to force the sampling routine to draw samples only from th
 
 *[image: sampling geometry?]*
 
-Sampling of the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with the refracted version of the outgoing direction $\omega_{o}^{\prime}$ and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. If the generated direction $\omega_{i}^{\prime}$ is refracted back into the material due to total internal reflection, the resulting sample is still valid, must not be discarded and its contribution is zero because our model neglects energy which undergone multiple scattering events. This approach will modify the shape of original sampling routine consistently with the way we modified the original stand-alone BSDF.
+Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. If the generated direction $\omega_{i}^{\prime}$ is then refracted back into the model due to total internal reflection, the resulting sample is still valid and must not be discarded. The contribution of such sample is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of original sampling routine consistently with the way we modified the original stand-alone BSDF.
 
-Not that we have constructed the sampling routine, we also need to evaluate the its PDF. One would say that we use the original PDF and feed it with the refracted directions, analogically to the way we modified the original strategy
+Now that we have constructed the sampling routine, we also need to evaluate the its PDF. At first sight it seems that we just have to use the original PDF and feed it with the refracted directions, analogically to the way we modified the sampling original strategy
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right)
 $$
-If we do it like this and feed it to a MC renderer the result will look something like this:
+If we feed this PDF to a MC renderer the result will look like this:
 
 *[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
 
-As you can see, the result is consistently darker than it should be according to the reference images. This is caused by an incorrectly calculated PDF value. ... When the generated incoming direction $\omega_{i}^{\prime}$ is refracted through the imaginary outer smooth interface and becomes $\omega_{o}$, its angular density changes in the same way the it happens to the light passing the boundary. The correct, compensated formula for the refulting PDF is then
+As you can see, the result is consistently darker than it should be according to the reference images. It's because our PDF is wrong! When the generated incoming direction $\omega_{i}^{\prime}$ is refracted through the imaginary outer smooth interface and becomes $\omega_{o}$, its angular density changes in the same way it happens to the light passing the interface. The correct, compensated formula for the resulting PDF is then
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right) \frac{\eta_{0}^2}{\eta_{1}^2}
 $$
-This will finally yield an unbiased Monte Carlo estimator and therefore the correct rendering output:
+This will finally yield the actual PDF values leading to an unbiased Monte Carlo estimator and therefore to the correct rendering output:
 
 *[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
 
