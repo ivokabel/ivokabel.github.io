@@ -14,7 +14,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 
 - Using **geometric normal** for refraction instead of micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- The **sampling routine optimization**.
+- The **sampling strategy optimization**.
 
 Formally, I denote the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (parameters of the whole model) $f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ and $f_{s2}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)$ respectively, where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. Any direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is azimuth and $\theta$ is inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
@@ -253,36 +253,53 @@ Just a side note: Since we are implicitly dealing with a rendering system which 
 ### Whole formula
 
 Just to summarize, the complete BSDF formula containing contributions of both layers is
+
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
 $$
+
 where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a$ is the medium attenuation (see section "Medium attenuation") and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation. It's important to notice that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function), because it is properly defined only for directions from the upper hemisphere.
 
 ## Sampling
 
-Main idea: sum BSDF --> weighted average of two sampling strategies ($p^{\ast}_1$ and $p^{\ast}_2$).
+In a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_integration)-based (MC) rendering system (e.g. path tracing) a BSDF model needs to provide not only an evaluation formula, but also a direction *sampling strategy* with evaluation of its [PDF](https://en.wikipedia.org/wiki/Probability_density_function) *for a given direction*. Since the sampling strategy can be partially described by its PDF, it is often sufficient to use the symbol of the PDF to denote the whole strategy (e.g. $p$).
 
-First, have a look at the separate layers sampling procedures, then combine them together.
+We assume that the stand-alone *outer and inner layer* BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ provide their own sampling strategies $p^{\ast}_1$ and $p^{\ast}_2$ respectively, which we will use to build a sampling strategy $p$ for the whole layered model. Since our BSDF is a simple sum of two slightly modified BSDFs, we can build a reasonably efficient overall sampling strategy $p$ by *clever* blending two slightly modified strategies $p^{\ast}_1$ and $p^{\ast}_2$, given that they are reasonably efficient on their own:
+$$
+p\left(\omega_{i},\omega_{o}\right) = w_{1}p_{1}\left(\omega_{i},\omega_{o}\right) + w_{2} p_{2}\left(\omega_{i},\omega_{o}\right)
+$$
 
-**Outer layer sampling**
+where $p_1$ and $p_2$ are the sampling strategies of the respective BSDF layers contributions (modified strategies $p^{\ast}_1$ and $p^{\ast}_2$), $\omega_{i}$ is the (sampled) direction of incident light, $\omega_{o}$ is the (fixed) outgoing light direction and $w_1$ and $w_2$ are the blending coefficients.
+
+First, we'll have a look at separate sampling strategies $p_1$ and $p_2$, then we'll combine them together to obtain $p$.
+
+### Outer layer sampling
 
 - Almost trivial: $p^{\ast}_1\left(\omega_{i}, \omega_{o}\right) = p_1\left(\omega_{i}, \omega_{o}\right)$
   - Just the upper hemisphere -- reflection contribution
 
-**Inner layer sampling**
+### Inner layer sampling
 
 - Easy:
   - Use refracted direction $\omega_o^{\prime}$ (obviously)
   - Refract the sampled direction; with brief justification?
-- PDF: "Too dark" problem -- missing solid angle (de)compression
+- PDF: "Too dark" problem -- missing solid angle (de)compression (similar to the refraction problem in evaluation, but a separate thing)
 
-**Sampling both layers together**
+### Sampling both layers together
 
-Optimizations: Weighting = contribution estimation: 
+*Naïve approach? (50:50?)*
 
-- Fresnel split approximation
+Weighting = contribution estimation: 
+
+- Not trivial to estimate the contribution --> Fresnel split approximation
 - Medium attenuation approximation
 - ...
+
+...
+
+To obtain an efficient MC integrator, the sampling PDF has to be as proportional to the integrand of the scattering/rendering integral as possible.
+
+*...integrand: BSDF, the incident radiance and the cosine projection factor. Since we usually don't know the distribution of the incident radiance and we can employ the multiple-importance sampling technique, it is possible to base the sampling strategy just on the BSDF and cosine factor.*
 
 ## Model Analysis
 
@@ -293,7 +310,7 @@ Optimizations: Weighting = contribution estimation:
 
 ### Reference images
 
-Story...
+Story?...
 
 ### No medium attenuation
 
