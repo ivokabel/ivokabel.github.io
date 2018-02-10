@@ -286,13 +286,17 @@ First, we'll have a look at separate sampling strategies $p_1$ and $p_2$, then w
 
 ### Outer layer sampling
 
-Because the outer layer BSDF $f_{s1}^{\ast}$ is evaluated directly without any modification, the sampling strategy is trivial:
+Because the outer layer BSDF $f_{s1}^{\ast}$ is evaluated directly without any modification, we can use the original sampling strategy of the outer layer stand-alone BSDF
 $$
 p_1\left(\omega_{i}, \omega_{o}\right) = p_1^{\ast}\left(\omega_{i}, \omega_{o}\right)
 $$
-The renderer just has to order the sampling routine to draw samples only from the upper hemisphere because we are interested only in the reflected contribution of the layer, not refracted.
+The renderer just has to force the sampling routine to draw samples only from the upper hemisphere because we are interested only in the reflected contribution of the layer, not refracted.
 
 ### Inner layer sampling
+
+
+
+...
 
 - Easy:
   - Use refracted direction $\omega_o^{\prime}$ (obviously)
