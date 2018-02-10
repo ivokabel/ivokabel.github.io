@@ -60,7 +60,7 @@ $$
 
 ### Outer layer
 
-The contribution BSDF of the outer layer is trivial. It can be split into the reflection and refraction part. The light which gets refracted through the first layer into the model is accounted for in the inner layer component so we ignore it here. Since the reflected light is unaffected by the rest of the model and the whole model takes only reflection directions into account, it can be evaluated directly by evaluating the outer layer BSDF $f_{s1}^{\ast}$ *without any modification*. Therefore:
+The contribution BSDF of the outer layer is trivial. It can be split into the reflection and refraction part. The light which gets refracted through the first layer into the model is accounted for in the inner layer component so we ignore it here and the renderer must make sure that it is not evaluated for directions below surface. Since the reflected light is unaffected by the rest of the model and the whole model takes only reflection directions into account, it can be evaluated directly by evaluating the outer layer BSDF $f_{s1}^{\ast}$ *without any modification*. Therefore:
 
 $$
 f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -286,8 +286,11 @@ First, we'll have a look at separate sampling strategies $p_1$ and $p_2$, then w
 
 ### Outer layer sampling
 
-- Almost trivial: $p^{\ast}_1\left(\omega_{i}, \omega_{o}\right) = p_1\left(\omega_{i}, \omega_{o}\right)$
-  - Just the upper hemisphere -- reflection contribution
+Because the outer layer BSDF $f_{s1}^{\ast}$ is evaluated directly without any modification, the sampling strategy is trivial:
+$$
+p_1\left(\omega_{i}, \omega_{o}\right) = p_1^{\ast}\left(\omega_{i}, \omega_{o}\right)
+$$
+The renderer just has to order the sampling routine to draw samples only from the upper hemisphere because we are interested only in the reflected contribution of the layer, not refracted.
 
 ### Inner layer sampling
 
