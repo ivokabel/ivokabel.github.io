@@ -273,9 +273,10 @@ where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner la
 
 ## Sampling
 
-In a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_integration)-based (MC) rendering system (e.g. path tracing) a BSDF model needs to provide not only an evaluation formula, but also a direction *sampling strategy* with evaluation of its [PDF](https://en.wikipedia.org/wiki/Probability_density_function) *for a given direction*. Since the sampling strategy can be partially described by its PDF, it is often sufficient to use the symbol of the PDF to denote the whole strategy (e.g. $p$).
+In a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_integration)-based (MC) rendering system (e.g. path tracing) a BSDF model needs to provide not only an evaluation formula, but also a direction *sampling strategy* with evaluation of its [PDF](https://en.wikipedia.org/wiki/Probability_density_function). Since the sampling strategy can be partially described by its PDF, it is often sufficient to use the symbol of the PDF to denote the whole strategy (e.g. $p$).
 
-We assume that the stand-alone *outer and inner layer* BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ provide their own sampling strategies $p^{\ast}_1$ and $p^{\ast}_2$ respectively, which we will use to build a sampling strategy $p$ for the whole layered model. Since our BSDF is a simple sum of two slightly modified BSDFs, we can build a reasonably efficient overall sampling strategy $p$ by *clever* blending two slightly modified strategies $p^{\ast}_1$ and $p^{\ast}_2$, given that they are reasonably efficient on their own:
+In our layered model we assume that the stand-alone *outer and inner layer* BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ provide their own sampling strategies $p^{\ast}_1$ and $p^{\ast}_2$ respectively, which we will use to build a sampling strategy $p$ for the whole model. Since our BSDF is a simple sum of two slightly modified BSDFs, we can build a reasonably efficient overall sampling strategy $p$ by blending two slightly modified strategies $p^{\ast}_1$ and $p^{\ast}_2$, given that they are reasonably efficient on their own:
+
 $$
 p\left(\omega_{i},\omega_{o}\right) = w_{1}p_{1}\left(\omega_{i},\omega_{o}\right) + w_{2} p_{2}\left(\omega_{i},\omega_{o}\right)
 $$
@@ -287,34 +288,38 @@ First, we'll have a look at separate sampling strategies $p_1$ and $p_2$, then w
 ### Outer layer sampling
 
 Because the outer layer BSDF $f_{s1}^{\ast}$ is evaluated directly without any modification, we can use the original sampling strategy of the outer layer stand-alone BSDF
+
 $$
 p_1\left(\omega_{i}, \omega_{o}\right) = p_1^{\ast}\left(\omega_{i}, \omega_{o}\right)
 $$
-The renderer just has to force the sampling routine to draw samples only from the upper hemisphere because we are interested only in the reflected contribution of the layer, not refracted.
+
+The renderer just has to instruct the sampling routine to draw samples only from the upper hemisphere because we are interested only in the reflected contribution of the layer, not refracted.
 
 ### Inner layer sampling
 
 *[image: sampling geometry?]*
 
-Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It can happen that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to total internal reflection. In such case, the resulting sample is still valid, must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF consistently with the way we modified the shape of the original stand-alone BSDF.
+Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to total internal reflection. The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
-Now that we have constructed the sampling routine, we also need to evaluate the its PDF. At first sight it seems that we just have to use the original PDF and feed it with the refracted directions, analogically to the way we modified the sampling original strategy
+Now that we have constructed the sampling routine, we also need to evaluate its PDF. At first sight it seems that we just have to evaluate the original PDF using the refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, analogically to the way we modified the original sampling strategy
+
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right)
 $$
+
 If we feed a MC renderer with such PDF, the result will look like this:
 
 *[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
 
-As you can see, the result is consistently darker than it should be according to the reference images. It's because our PDF is computed incorrectly! The reason is that the non-uniform direction change due to refraction changes the *solid angular* density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
+As you can see, the result is consistently darker than it should be according to the reference images. It's because our PDF is computed incorrectly! The reason is that the non-uniform change of directions due to refraction changes the *solid* angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
+
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right) \frac{\eta_{0}^2 \cos\theta_{i}}{\eta_{1}^2 \cos\theta^{\prime}_{i}}
 $$
-This will finally yield the correct PDF values leading to an unbiased Monte Carlo estimator, and therefore to the correct rendering output:
 
-*[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
+This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
-This compensation factor is, in fact, closely related to what happens to radiance when it get refracted through a smooth interface between two media with different refractive indices.
+*[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]
 
 ### Sampling both layers
 
