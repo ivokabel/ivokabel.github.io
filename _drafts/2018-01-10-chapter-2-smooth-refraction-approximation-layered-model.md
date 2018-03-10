@@ -336,12 +336,14 @@ $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}
 $$
 
-...
-
-Weighting = contribution estimation: 
-
-- Not trivial to estimate the contribution --> Fresnel split approximation
-- Medium attenuation approximation
+- Assuming we have good sampling strategies for both layers ($p^{\ast}_1$ and $p^{\ast}_2$) ==> we have good sampling strategies of the respective BSDF layers contributions ($p_1$ and $p_2$) -- modified strategies $p^{\ast}_1$ and $p^{\ast}_2$).
+- Now we want to construct a sampling routine/PDF for the sum of the two layers (contributions)
+  - *Ideally a normalized sum -- hard to do: how to analytically integrate?, how to sample? ... basically trying to derive (nontrivial) sampling strategy...*
+  - Base it on the already existing strategies ($p_1$ and $p_2$). We can easily sample + evaluate weighted PDF. Weight them to make the result as proportional to $f_{s}$ as possible.
+  - Weights: (normalized) estimates of the layer PDFs' integrals
+    - Not trivial to estimate the integral --> Fresnel split approximation
+    - Medium attenuation approximation
+    - ...
 - ...
 
 ## Model Analysis
