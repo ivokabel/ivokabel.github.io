@@ -323,19 +323,26 @@ This compensation factor is closely related to what happens to radiance when it 
 
 ### Sampling both layers
 
-*Naïve approach? (50:50?)*
+*Naïve approach? One could possibly use some ad-hoc weighting approach, but to obtain better result possible, we need to be more sophisticated about it....*
+
+To obtain an efficient MC estimator of the *scattering/rendering* integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. Normalized means that the integral of the sampling PDF over the whole sphere equals 1. The integrand in the practically used form is
+$$
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)L_{i}\left(\omega_{i}\right)\cos\theta_{i}
+$$
+
+Since we usually don't know the distribution of the incident radiance, the sampling routine is usually trying to mimic at least the product of the BSDF and the cosine factor.
+
+$$
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}
+$$
+
+...
 
 Weighting = contribution estimation: 
 
 - Not trivial to estimate the contribution --> Fresnel split approximation
 - Medium attenuation approximation
 - ...
-
-...
-
-To obtain an efficient MC integrator, the sampling PDF has to be as proportional to the integrand of the scattering/rendering integral as possible.
-
-*...integrand: BSDF, the incident radiance and the cosine projection factor. Since we usually don't know the distribution of the incident radiance and we can employ the multiple-importance sampling technique, it is possible to base the sampling strategy just on the BSDF and cosine factor.*
 
 ## Model Analysis
 
