@@ -42,7 +42,7 @@ The new model still assumes single-point simplifications of both refraction and 
 
 *[Image?]*
 
-It is *worth noting/important to understand* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
+It is *important to keep in mind* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
 
 It is also important to keep in mind that both models neglect the energy which is reflected from the outer layer back into the medium (*multiple scattering*). *WWL model uses some kind of compensation!...*
 
@@ -103,13 +103,13 @@ Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel 
 After refraction, we will add the effect of medium attenuation. In a non-scattering medium, the attenuation $a$ can be well modeled with the [Beer-Lambert-Bouguer law](https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law), exactly as it was done in the original paper:
 
 $$
-a=e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i}^{\prime}}+\frac{1}{\cos\theta_{o}^{\prime}}\right)\right)}
+a\left(\theta_{i}, \theta_{o}\right)  = e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i}^{\prime}}+\frac{1}{\cos\theta_{o}^{\prime}}\right)\right)}
 $$
 
 where $\alpha$ is the medium attenuation coefficient, $d$ is the thickness of the layer, and $\theta_{i}^{\prime}$ and $\theta_{o}^{\prime}$ are inclinations of the respective refraction directions. The BSDF is now
 
 $$
-f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
 To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a blue medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
@@ -254,7 +254,7 @@ It's important to note, that we use single-point simplification here as *was use
 If we put together all the components which affect the inner layer contribution, we'll get the final formula for the inner layer:
 
 $$
-f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a
+f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a\left(\theta_{i}, \theta_{o}\right)
 $$
 
 where $f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)$ is the stand-alone BSDF of the inner layer, $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation and $a$ is the medium attenuation coefficient.
@@ -266,10 +266,10 @@ Just a side note: Since we are implicitly dealing with a rendering system which 
 Just to summarize, the complete BSDF formula containing contributions of both layers is
 
 $$
-f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
+f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
 $$
 
-where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a$ is the medium attenuation (see section "Medium attenuation") and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation. It's important to notice that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function), because it is properly defined only for directions from the upper hemisphere.
+where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see section "Medium attenuation") and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation. It's important to notice that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function), because it is properly defined only for directions from the upper hemisphere.
 
 ## Sampling
 
@@ -343,40 +343,78 @@ $$
 f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i} + f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i}
 $$
 
-It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1$ and $p_2$ just by blending them together. If we can sample and evaluate $p_1$ and $p_2$, it is easy to sample and evaluate a weighted average of the two. The main question *then* is how to choose the weights to make the resulting PDF as proportional to $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
+It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1$ and $p_2$ just by blending them together. If we can sample and evaluate both $p_1$ and $p_2$, it is easy to sample and evaluate a weighted average of the two
 
-On the outer layer, the light is either reflected from or refracted through the layers micro-facets and we will approximate the amount of reflected light by the Fresnel reflection coefficient of a smooth interface. Not-yet-normalized weight of the outer layer is therefore
+$$
+p = w_{1}p_{1} * w_{2}p_{2}
+$$
+
+The main question *then* is how to choose the weights to make the resulting PDF as proportional to $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
+
+#### Outer layer integral
+
+On the outer layer, the light is either reflected from or refracted through the layers micro-facets and we will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
+
 $$
 w_{1}^{\ast} = F\left(\theta_{o}\right)
 $$
+
+#### Inner layer integral
+
+Let's now recall the inner layer contribution
+$$
+f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right)
+$$
+
+We will approximate its integral
+
+$$
+\frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{o}\right) \int_{\mathcal{H}_{+}^{2}} {T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right) f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}}
+$$
+
+Note that we have moved the components which independent from $\omega_{i}$ outside the integral and integrate over the upper hemisphere $\mathcal{H}_{+}^{2}$ only because there's no transmission through the inner layer allowed.
+
+The components outside integral are easy to evaluate analytically with no approximation needed.
+
+The integral is more complicated and has to be approximated. We assume that the stand-alone BSDFs can compute their reflectance (over the upper hemisphere), i.e.
+
+$$
+\int_{\mathcal{H}_{+}^{2}} f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}\mathrm{d}\omega_{i}
+$$
+
+and we will use it as the core of our integral approximation. Both missing components $T\left(\theta_{i}\right)$ and $a\left(\theta_{i}, \theta_{o}\right)$ change the shape of the integrand and have to be taken into account, but are hard to solve analytically. One way to approximate their overall effect is to evaluate them over the mirror reflection path ($\theta_{i} = \theta_{o}$) -- analogically to what we did in evaluating the sub-surface scattering contribution of the whole model -- and pretend they are constant over the whole hemisphere.
+
+There resulting approximation for the inner layer contribution integral is then
+
+$$
+w_{2}^{\ast} = 
+\frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{o}, \theta_{o}\right) \rho_{s2}^{\ast}
+$$
+
+Where $\rho_{s2}^{\ast}$ is the reflectance of the stand-alone inner layer BSDF.
+
+#### Complete sampling routine
+
+Now that we have the integrals approximations, we obtain the PDF weights by normalizing the integrals
+$$
+\begin{eqnarray}
+w_{1}&=&\frac{w_{1}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}} \\
+w_{2}&=&\frac{w_{2}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}}
+\end{eqnarray}
+$$
+which define our mighty overall sampling routine
+
+$$
+p = w_{1}p_{1} * w_{2}p_{2}
+$$
+To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
+
 ...
 
-Let's recall the inner layer contribution:
-$$
-f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a
-$$
-...
-
-- We will approximate its integral 
-
-$$
-\begin{eqnarray*}
-&&\int{f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}} a\\
-&=&f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a|
-\end{eqnarray*}
-$$
-
-
-
-- For the inner layer, the contribution depends on *several/multiple* factors.
-  - First, the contribution of the second layer is *mainly* defined by the shape of inner BSDF
-    - we need to add the inner BSDF reflectance, which should be computed or approximated by the inner (stand-alone) model itself.
-    - *What about projected solid angle compression compensation?*
-  - Second, only the refracted light contributes to the inner component integral. We will use the complementary approach for the integral of the inner component
-    - Fresnel transmission coefficient for outgoing direction: $F\left(\theta_{o}\right)$
-    - *Incoming direction: It is not know at the time of sampling -- we are generating it by the sampling. Approximate??*
-    - *What about the light blocked by TIR?*
-  - Approximation of medium attenuation ($a$) : again hard to to analytically -- estimate using the mirror path
+- *TODO: BSDF reflectance:*
+  - *TODO: Change of integral parameterization: $\omega_{i} \rightarrow \omega_{i}^{\ast}$*
+    - *Is the Jacobian $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ or its inverse? Will it cancel the already present $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$?*
+  - *TODO: What about the light blocked by TIR?*
 
 ## Model Analysis
 
