@@ -34,7 +34,7 @@ $$
 
 I sometimes call the functions $f_{s1}$ and $f_{s2}$ the **contribution BSDFs** or just **contributions**.
 
-The outer layer is expected to be an interface between two media with refractive indices: $\eta_0$ above the outer layer and $\eta_1$ between the outer and inner layer. There is no assumption on the medium below the inner layer.
+The outer layer is expected to be a microfacet-based interface between two media with refractive indices: $\eta_0$ above the outer layer and $\eta_1$ between the outer and inner layer. There is no assumption on the medium below the inner layer.
 
 ## Refraction Through the Geometrical Normal
 
@@ -241,7 +241,7 @@ f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)&=&\frac{\mathrm{d}L_{o}\left(\
 \end{eqnarray*}
 $$
 
-And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor, which, however, makes the difference as you can see in the following images:
+And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
 
 *[Images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
 
@@ -323,28 +323,60 @@ This compensation factor is closely related to what happens to radiance when it 
 
 ### Sampling both layers
 
-*Naïve approach? One could possibly use some ad-hoc weighting approach, but to obtain better result possible, we need to be more sophisticated about it....*
+*Naïve approach? One could possibly use some ad-hoc weighting approach, but to obtain better result, we need to be more sophisticated about it....*
 
-To obtain an efficient MC estimator of the *scattering/rendering* integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. Normalized means that the integral of the sampling PDF over the whole sphere equals 1. The integrand in the practically used form is
+To obtain an efficient MC estimator of the *scattering/rendering* integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. i.e. scaled by a factor to make its integral over the whole sphere equal 1. The integrand in the practically used form is
+
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)L_{i}\left(\omega_{i}\right)\cos\theta_{i}
 $$
 
-Since we usually don't know the distribution of the incident radiance, the sampling routine is usually trying to mimic at least the product of the BSDF and the cosine factor.
+However, because we usually don't know the distribution of the incident radiance, the sampling routine is usually trying to mimic at least the product of the BSDF and the cosine factor.
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}
 $$
 
-- Assuming we have good sampling strategies for both layers ($p^{\ast}_1$ and $p^{\ast}_2$) ==> we have good sampling strategies of the respective BSDF layers contributions ($p_1$ and $p_2$) -- modified strategies $p^{\ast}_1$ and $p^{\ast}_2$).
-- Now we want to construct a sampling routine/PDF for the sum of the two layers (contributions)
-  - *Ideally a normalized sum -- hard to do: how to analytically integrate?, how to sample? ... basically trying to derive (nontrivial) sampling strategy...*
-  - Base it on the already existing strategies ($p_1$ and $p_2$). We can easily sample + evaluate weighted PDF. Weight them to make the result as proportional to $f_{s}$ as possible.
-  - Weights: (normalized) estimates of the layer PDFs' integrals
-    - Not trivial to estimate the integral --> Fresnel split approximation
-    - Medium attenuation approximation
-    - ...
-- ...
+In the case of our layered model, the BSDF is a sum of two components so the integrand looks like
+
+$$
+f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i} + f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i}
+$$
+
+It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1$ and $p_2$ just by blending them together. If we can sample and evaluate $p_1$ and $p_2$, it is easy to sample and evaluate a weighted average of the two. The main question *then* is how to choose the weights to make the resulting PDF as proportional to $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
+
+On the outer layer, the light is either reflected from or refracted through the layers micro-facets and we will approximate the amount of reflected light by the Fresnel reflection coefficient of a smooth interface. Not-yet-normalized weight of the outer layer is therefore
+$$
+w_{1}^{\ast} = F\left(\theta_{o}\right)
+$$
+...
+
+Let's recall the inner layer contribution:
+$$
+f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a
+$$
+...
+
+- We will approximate its integral 
+
+$$
+\begin{eqnarray*}
+&&\int{f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}} a\\
+&=&f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a|
+\end{eqnarray*}
+$$
+
+
+
+- For the inner layer, the contribution depends on *several/multiple* factors.
+  - First, the contribution of the second layer is *mainly* defined by the shape of inner BSDF
+    - we need to add the inner BSDF reflectance, which should be computed or approximated by the inner (stand-alone) model itself.
+    - *What about projected solid angle compression compensation?*
+  - Second, only the refracted light contributes to the inner component integral. We will use the complementary approach for the integral of the inner component
+    - Fresnel transmission coefficient for outgoing direction: $F\left(\theta_{o}\right)$
+    - *Incoming direction: It is not know at the time of sampling -- we are generating it by the sampling. Approximate??*
+    - *What about the light blocked by TIR?*
+  - Approximation of medium attenuation ($a$) : again hard to to analytically -- estimate using the mirror path
 
 ## Model Analysis
 
