@@ -14,7 +14,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 
 - Using **geometric normal** for refraction instead of micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- The **sampling strategy optimization**.
+- *(more efficient?, ...)* **sampling strategy optimization**.
 
 The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (outer and inner), which I denote
 
@@ -39,9 +39,9 @@ The outer layer is expected to be a microfacet-based interface between two media
 
 ## Refraction Through the Geometrical Normal
 
-The new model still assumes single-point simplifications of both refraction and sampling from the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which justified using a single micro-facet during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the reflection-defined micro-facet's one.
+The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the micro-facet's one.
 
-*[Image?]*
+*[image?: ]*
 
 It is *important to keep in mind* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
 
@@ -126,7 +126,7 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
 
-In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "The complete inner layer formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
+In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "Inner layer formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
@@ -298,7 +298,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 ### Inner layer sampling
 
-*[image: sampling geometry?]*
+*[image: Sampling geometry?]*
 
 Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
@@ -320,11 +320,11 @@ $$
 
 This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
-*[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]
+*[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
 
 ### Sampling both layers
 
-*Naïve approach? One could possibly use some ad-hoc weighting approach, but to obtain better result, we need to be more sophisticated about it....*
+*Naïve approach? One could possibly use some ad-hoc/fixed weighting approach, but to obtain better result, we need to be more sophisticated about it....*
 
 To obtain an efficient MC estimator of the *scattering/rendering* integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. i.e. scaled by a factor to make its integral over the whole sphere equal 1. The integrand in the practically used form is
 
@@ -420,6 +420,8 @@ $$
 
 To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
+*[image?: Sampling performance at low sample rate: fixed ratio?, Fresnel ratio?, my approach]*
+
 ## Model Analysis
 
 - Certain configuration...
@@ -435,7 +437,7 @@ Story?...
 
 - energy conservation, fitting the reference, ...
 
-### Later: With medium attenuation
+### *Later: With medium attenuation*
 
 ...
 
