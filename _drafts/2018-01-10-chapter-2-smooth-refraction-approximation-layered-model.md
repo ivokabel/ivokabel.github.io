@@ -362,11 +362,12 @@ $$
 #### Inner layer integral
 
 Let's now recall the inner layer contribution
+
 $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
-We will approximate its integral
+We will approximate the corresponding integral
 
 $$
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{o}\right) \int_{\mathcal{H}_{+}^{2}} {T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right) f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}}
@@ -393,28 +394,31 @@ $$
 
 Where $\rho_{s2}^{\ast}$ is the reflectance of the stand-alone inner layer BSDF.
 
-#### Complete sampling routine
-
-Now that we have the integrals approximations, we obtain the PDF weights by normalizing the integrals
-$$
-\begin{eqnarray}
-w_{1}&=&\frac{w_{1}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}} \\
-w_{2}&=&\frac{w_{2}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}}
-\end{eqnarray}
-$$
-which define our mighty overall sampling routine
-
-$$
-p = w_{1}p_{1} * w_{2}p_{2}
-$$
-To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
-
 ...
 
 - *TODO: BSDF reflectance:*
   - *TODO: Change of integral parameterization: $\omega_{i} \rightarrow \omega_{i}^{\ast}$*
     - *Is the Jacobian $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ or its inverse? Will it cancel the already present $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$?*
   - *TODO: What about the light blocked by TIR?*
+
+#### Complete sampling routine
+
+Now that we have the integrals approximations, we obtain the PDF weights by normalizing the integrals
+
+$$
+\begin{eqnarray}
+w_{1}&=&\frac{w_{1}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}} \\
+w_{2}&=&\frac{w_{2}^{\ast}}{w_{1}^{\ast} + w_{2}^{\ast}}
+\end{eqnarray}
+$$
+
+which define our mighty overall sampling routine
+
+$$
+p = w_{1}p_{1} * w_{2}p_{2}
+$$
+
+To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
 ## Model Analysis
 
