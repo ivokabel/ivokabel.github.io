@@ -17,6 +17,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 - The **sampling strategy optimization**.
 
 The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (outer and inner), which I denote
+
 $$
 \begin{eqnarray*}
 &f_{s1}^{\ast}\left(x,\omega_{i}\rightarrow\omega_{o}\right)& \\
@@ -299,7 +300,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 *[image: sampling geometry?]*
 
-Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to total internal reflection. The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
+Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
 Now that we have constructed the sampling routine, we also need to evaluate its PDF. At first sight it seems that we just have to evaluate the original PDF using the refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, analogically to the way we modified the original sampling strategy
 
@@ -367,43 +368,42 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
-We will approximate the corresponding integral
+Let's now approximate its integral
 
 $$
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{o}\right) \int_{\mathcal{H}_{+}^{2}} {T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right) f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}}
 $$
 
-Note that we have moved the components which independent from $\omega_{i}$ outside the integral and integrate over the upper hemisphere $\mathcal{H}_{+}^{2}$ only because there's no transmission through the inner layer allowed.
+Note that the components independent from $\omega_{i}$ were moved outside the integral and we integrate only over the upper hemisphere $\mathcal{H}_{+}^{2}$ rather than over the whole sphere $\mathcal{S}^{2}$ because there's no transmission through the inner layer allowed.
 
-The components outside integral are easy to evaluate analytically with no approximation needed.
-
-The integral is more complicated and has to be approximated. We assume that the stand-alone BSDFs can compute their reflectance (over the upper hemisphere), i.e.
+While the components outside the integral are easy to evaluate analytically, the integral part is more complicated and has to be approximated. We will start with the partial integral
 
 $$
-\int_{\mathcal{H}_{+}^{2}} f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}\mathrm{d}\omega_{i}
+\int_{\mathcal{H}_{+}^{2}} f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}
 $$
 
-and we will use it as the core of our integral approximation. Both missing components $T\left(\theta_{i}\right)$ and $a\left(\theta_{i}, \theta_{o}\right)$ change the shape of the integrand and have to be taken into account, but are hard to solve analytically. One way to approximate their overall effect is to evaluate them over the mirror reflection path ($\theta_{i} = \theta_{o}$) -- analogically to what we did in evaluating the sub-surface scattering contribution of the whole model -- and pretend they are constant over the whole hemisphere.
+We assume that the stand-alone BSDFs can compute their reflectance over the upper hemisphere
 
-There resulting approximation for the inner layer contribution integral is then
+$$
+\rho_{s2}^{\ast} = \int_{\mathcal{H}_{+}^{2}} f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}\mathrm{d}\omega_{i}
+$$
+
+and we will use it as an approximation of the partial integral. This is rather inaccurate because $\rho_{s2}^{\ast}$ uses the original directions $\omega_{i}$ and $\omega_{o}$ instead of their refracted versions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$; therefore, the shape of the integrand is not stretched out and also contains the parts which are cut away by the [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) in our model, which can lead to substantial error especially at grazing angles. However, this approximation contains -- at least partially -- the characteristics of the inner material and is better than nothing.
+
+Both missing components $T\left(\theta_{i}\right)$ and $a\left(\theta_{i}, \theta_{o}\right)$ change the shape of the integrand and have to be taken into account, but their effect is hard to solve analytically. One way to approximate their overall effect is to evaluate them over the mirror reflection path ($\theta_{i} = \theta_{o}$) -- analogically to what we did in evaluating the sub-surface scattering contribution of the whole model -- and pretend they are constant over the whole hemisphere.
+
+After putting everything together, the resulting approximation for the inner layer contribution integral is then
 
 $$
 w_{2}^{\ast} = 
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{o}, \theta_{o}\right) \rho_{s2}^{\ast}
 $$
 
-Where $\rho_{s2}^{\ast}$ is the reflectance of the stand-alone inner layer BSDF.
-
-...
-
-- *TODO: BSDF reflectance:*
-  - *TODO: Change of integral parameterization: $\omega_{i} \rightarrow \omega_{i}^{\ast}$*
-    - *Is the Jacobian $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ or its inverse? Will it cancel the already present $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$?*
-  - *TODO: What about the light blocked by TIR?*
+Where $\eta_{1}^{2}$ and $\eta_{0}^{2}$ are refractive indices of the respective media, $T\left(\theta_{o}\right)$ is the Fresnel transmission coefficient, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see the section "Medium attenuation"), and $\rho_{s2}^{\ast}$ is the reflectance of the stand-alone inner layer BSDF.
 
 #### Complete sampling routine
 
-Now that we have the integrals approximations, we obtain the PDF weights by normalizing the integrals
+Now that we have the integrals approximations $w_{1}^{\ast}$ and $w_{2}^{\ast}$, we obtain the PDF weights by normalizing the approximations
 
 $$
 \begin{eqnarray}
