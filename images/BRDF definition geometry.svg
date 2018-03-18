@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="158.74107mm"
+   height="79.625603mm"
+   viewBox="0 0 158.74107 79.625603"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="BRDF definition geometry.svg">
+  <defs
+     id="defs2">
+    <clipPath
+       id="clipPath30"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path28"
+         d="M 0,0 H 673 V 226 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath46"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path44"
+         d="M 0,0 H 673 V 226 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.3737409"
+     inkscape:cx="300.22844"
+     inkscape:cy="151.04947"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0.5"
+     fit-margin-left="0.5"
+     fit-margin-right="0.5"
+     fit-margin-bottom="0.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-21.964186,-85.84131)">
+    <g
+       id="g20"
+       transform="matrix(0.35277777,0,0,-0.35277777,-15.815357,165.25254)" />
+    <g
+       id="g22"
+       transform="matrix(0.35277777,0,0,-0.35277777,-15.815357,165.25254)">
+      <g
+         id="g24"
+         transform="translate(0,-0.0672302)">
+        <g
+           id="g26" />
+        <g
+           id="g38">
+          <g
+             clip-path="url(#clipPath30)"
+             id="g36">
+            <g
+               id="g34">
+              <path
+                 d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z"
+                 style="fill:#c0fef9;fill-opacity:1;fill-rule:evenodd;stroke:none"
+                 id="path32"
+                 inkscape:connector-curvature="0" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <g
+         id="g40"
+         transform="translate(0,-0.0672302)">
+        <g
+           id="g42" />
+        <g
+           id="g54">
+          <g
+             clip-path="url(#clipPath46)"
+             id="g52">
+            <g
+               id="g50">
+              <path
+                 d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z"
+                 style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                 id="path48"
+                 inkscape:connector-curvature="0" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <text
+       id="text60"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="148.40317"
+       y="117.01018">
+      <tspan
+         id="tspan58"
+         y="117.01018"
+         x="148.40317"
+         style="stroke-width:0.35277778">d</tspan>
+    </text>
+    <text
+       id="text64"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="161.29367"
+       y="119.42318">
+      <tspan
+         id="tspan62"
+         y="119.42318"
+         x="161.29367"
+         style="stroke-width:0.35277778">i</tspan>
+    </text>
+    <text
+       id="text68"
+       style="font-variant:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="27.735535"
+       y="112.77685">
+      <tspan
+         id="tspan66"
+         y="112.77685"
+         x="27.735535"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:'CairoFont-1, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778">L</tspan>
+    </text>
+    <text
+       id="text72"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="33.704536"
+       y="115.18985">
+      <tspan
+         id="tspan70"
+         y="115.18985"
+         x="33.704536"
+         style="stroke-width:0.35277778">o</tspan>
+    </text>
+    <text
+       id="text76"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="36.413868"
+       y="112.77685">
+      <tspan
+         id="tspan74"
+         y="112.77685"
+         x="36.413868"
+         style="stroke-width:0.35277778">(</tspan>
+    </text>
+    <text
+       id="text80"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="46.743202"
+       y="115.18985">
+      <tspan
+         id="tspan78"
+         y="115.18985"
+         x="46.743202"
+         style="stroke-width:0.35277778">o</tspan>
+    </text>
+    <text
+       id="text84"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="50.299202"
+       y="112.77685">
+      <tspan
+         id="tspan82"
+         y="112.77685"
+         x="50.299202"
+         style="stroke-width:0.35277778">)</tspan>
+    </text>
+    <text
+       id="text88"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999985px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       transform="skewX(-18.433231)"
+       x="125.77192"
+       y="131.53052">
+      <tspan
+         id="tspan86"
+         y="131.53052"
+         x="125.77192"
+         style="stroke-width:0.33467773">θ</tspan>
+    </text>
+    <text
+       id="text92"
+       style="font-variant:normal;font-size:6.60399961px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="87.05513"
+       y="133.94353">
+      <tspan
+         id="tspan90"
+         y="133.94353"
+         x="87.05513"
+         style="stroke-width:0.35277778">o</tspan>
+    </text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path94"
+       style="fill:#fcfeb9;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       d="m 78.704391,160.5606 12.60475,-12.34723 h 37.842469 l -12.60369,12.34723 z" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path96"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       d="M 104.10439,154.56337 V 88.283839 h -0.35278 v 66.279531 z m 0.88194,-65.926753 -1.05833,-2.116667 -1.05833,2.116667 z" />
+    <text
+       id="text100"
+       style="font-variant:normal;font-weight:bold;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:Georgia-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="105.13852"
+       y="96.323303">
+      <tspan
+         id="tspan98"
+         y="96.323303"
+         x="105.13852"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778">n</tspan>
+    </text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path106"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:0.35277777, 0.35277777;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 104.14708,154.38698 h 41.93786" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path108"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:0.35277777, 0.35277777;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 104.10439,154.60606 52.9943,164.79393" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path110"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       d="m 104.02713,154.72177 -68.572588,-33.40347 0.154517,-0.31856 68.573651,33.40524 z m -68.642791,-32.45555 -1.440039,-1.8796 2.367492,-0.0247 z" />
+    <text
+       id="text114"
+       style="font-variant:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="156.87689"
+       y="93.719795">
+      <tspan
+         id="tspan112"
+         y="93.719795"
+         x="156.87689"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:'CairoFont-1, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778">L</tspan>
+    </text>
+    <text
+       id="text118"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="162.84589"
+       y="96.132797">
+      <tspan
+         id="tspan116"
+         y="96.132797"
+         x="162.84589"
+         style="stroke-width:0.35277778">i</tspan>
+    </text>
+    <text
+       id="text122"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="164.79323"
+       y="93.719795">
+      <tspan
+         id="tspan120"
+         y="93.719795"
+         x="164.79323"
+         style="stroke-width:0.35277778">(</tspan>
+    </text>
+    <text
+       id="text126"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="175.12256"
+       y="96.132797">
+      <tspan
+         id="tspan124"
+         y="96.132797"
+         x="175.12256"
+         style="stroke-width:0.35277778">i</tspan>
+    </text>
+    <text
+       id="text130"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="177.06989"
+       y="93.719795">
+      <tspan
+         id="tspan128"
+         y="93.719795"
+         x="177.06989"
+         style="stroke-width:0.35277778">)</tspan>
+    </text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path132"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       d="m 103.97069,131.32273 h 0.0455 c 4.76638,0 9.42022,1.47743 13.31453,4.22663" />
+    <text
+       id="text136"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999985px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       transform="skewX(-18.433231)"
+       x="148.41919"
+       y="127.75932">
+      <tspan
+         id="tspan134"
+         y="127.75932"
+         x="148.41919"
+         style="stroke-width:0.33467773">θ</tspan>
+    </text>
+    <text
+       id="text140"
+       style="font-variant:normal;font-size:6.60399961px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="110.95934"
+       y="130.73677">
+      <tspan
+         id="tspan138"
+         y="130.73677"
+         x="110.95934"
+         style="stroke-width:0.35277778">i</tspan>
+    </text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path142"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       d="M 83.202307,144.34375 C 87.019363,136.4627 94.961096,131.42468 103.7061,131.32273" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path144"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:1.41111108, 1.05833331;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 137.42553,97.745903 104.18271,154.40498"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path146"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:1.41111108, 1.05833331;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 146.95469,105.45241 -42.77198,48.95257"
+       sodipodi:nodetypes="cc" />
+    <text
+       id="text196"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999889px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       transform="skewX(-18.433231)"
+       x="76.660675"
+       y="112.70223">
+      <tspan
+         id="tspan190"
+         y="112.70223"
+         x="76.660675"
+         style="stroke-width:0.33467773">ω</tspan>
+      <tspan
+         id="tspan192"
+         y="116.88641"
+         x="192.21371"
+         style="stroke-width:0.33467773">ω</tspan>
+      <tspan
+         id="tspan194"
+         y="93.629578"
+         x="198.00729"
+         style="stroke-width:0.33467773">ω</tspan>
+    </text>
+    <text
+       id="text60-4"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="22.117416"
+       y="112.95271">
+      <tspan
+         id="tspan58-8"
+         y="112.95271"
+         x="22.117416"
+         style="stroke-width:0.35277778">d</tspan>
+    </text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path110-7"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       d="m 104.23038,154.59527 44.51152,-61.941245 -0.28717,-0.207094 -44.51161,61.943299 z m 45.0231,-61.140142 0.37574,-2.337827 -2.09573,1.10163 z" />
+    <text
+       id="text100-1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       x="104.00013"
+       y="160.25168">
+      <tspan
+         id="tspan98-9"
+         y="160.25168"
+         x="104.00013"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778">x</tspan>
+    </text>
+    <g
+       transform="matrix(0.35277777,0,0,-0.35277777,-15.815357,165.25254)"
+       id="g494" />
+    <g
+       transform="matrix(0.35277777,0,0,-0.35277777,-15.815357,165.25254)"
+       id="g520"
+       style="fill:#ffd5d5">
+      <g
+         transform="translate(0,-0.0672302)"
+         id="g506"
+         style="fill:#ffd5d5">
+        <g
+           id="g496"
+           style="fill:#ffd5d5" />
+        <g
+           id="g504"
+           style="fill:#ffd5d5">
+          <g
+             id="g502"
+             clip-path="url(#clipPath30)"
+             style="fill:#ffd5d5">
+            <g
+               id="g500"
+               style="fill:#ffd5d5">
+              <path
+                 inkscape:connector-curvature="0"
+                 id="path498"
+                 style="fill:#ffd5d5;fill-opacity:1;fill-rule:evenodd;stroke:none"
+                 d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <g
+         transform="translate(0,-0.0672302)"
+         id="g518"
+         style="fill:#ffd5d5">
+        <g
+           id="g508"
+           style="fill:#ffd5d5" />
+        <g
+           id="g516"
+           style="fill:#ffd5d5">
+          <g
+             id="g514"
+             clip-path="url(#clipPath46)"
+             style="fill:#ffd5d5">
+            <g
+               id="g512"
+               style="fill:#ffd5d5">
+              <path
+                 inkscape:connector-curvature="0"
+                 id="path510"
+                 style="fill:#ffd5d5;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                 d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <text
+       y="117.01018"
+       x="148.40317"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text524">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="148.40317"
+         y="117.01018"
+         id="tspan522">d</tspan>
+    </text>
+    <text
+       y="119.42318"
+       x="161.29367"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text528">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="161.29367"
+         y="119.42318"
+         id="tspan526">i</tspan>
+    </text>
+    <text
+       y="112.77685"
+       x="27.735535"
+       style="font-variant:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text532">
+      <tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:'CairoFont-1, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778"
+         x="27.735535"
+         y="112.77685"
+         id="tspan530">L</tspan>
+    </text>
+    <text
+       y="115.18985"
+       x="33.704536"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text536">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="33.704536"
+         y="115.18985"
+         id="tspan534">o</tspan>
+    </text>
+    <text
+       y="112.77685"
+       x="36.413868"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text540">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="36.413868"
+         y="112.77685"
+         id="tspan538">(</tspan>
+    </text>
+    <text
+       y="115.18985"
+       x="46.743202"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text544">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="46.743202"
+         y="115.18985"
+         id="tspan542">o</tspan>
+    </text>
+    <text
+       y="112.77685"
+       x="50.299202"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text548">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="50.299202"
+         y="112.77685"
+         id="tspan546">)</tspan>
+    </text>
+    <text
+       y="131.53052"
+       x="125.77192"
+       transform="skewX(-18.433231)"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999985px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       id="text552">
+      <tspan
+         style="stroke-width:0.33467773"
+         x="125.77192"
+         y="131.53052"
+         id="tspan550">θ</tspan>
+    </text>
+    <text
+       y="133.94353"
+       x="87.05513"
+       style="font-variant:normal;font-size:6.60399961px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text556">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="87.05513"
+         y="133.94353"
+         id="tspan554">o</tspan>
+    </text>
+    <path
+       d="m 78.704391,160.5606 12.60475,-12.34723 h 37.842469 l -12.60369,12.34723 z"
+       style="fill:#ececec;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       id="path558"
+       inkscape:connector-curvature="0" />
+    <path
+       d="M 104.10439,154.56337 V 88.283839 h -0.35278 v 66.279531 z m 0.88194,-65.926753 -1.05833,-2.116667 -1.05833,2.116667 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="path560"
+       inkscape:connector-curvature="0" />
+    <text
+       y="96.323303"
+       x="105.13852"
+       style="font-variant:normal;font-weight:bold;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:Georgia-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text564">
+      <tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778"
+         x="105.13852"
+         y="96.323303"
+         id="tspan562">n</tspan>
+    </text>
+    <path
+       d="m 104.14708,154.38698 h 41.93786"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:0.35277777, 0.35277777;stroke-dashoffset:0;stroke-opacity:1"
+       id="path566"
+       inkscape:connector-curvature="0" />
+    <path
+       d="M 104.10439,154.60606 52.9943,164.79393"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:0.35277777, 0.35277777;stroke-dashoffset:0;stroke-opacity:1"
+       id="path568"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m 104.02713,154.72177 -68.572588,-33.40347 0.154517,-0.31856 68.573651,33.40524 z m -68.642791,-32.45555 -1.440039,-1.8796 2.367492,-0.0247 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="path570"
+       inkscape:connector-curvature="0" />
+    <text
+       y="93.719795"
+       x="156.87689"
+       style="font-variant:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text574">
+      <tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:CairoFont-1;-inkscape-font-specification:'CairoFont-1, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778"
+         x="156.87689"
+         y="93.719795"
+         id="tspan572">L</tspan>
+    </text>
+    <text
+       y="96.132797"
+       x="162.84589"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text578">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="162.84589"
+         y="96.132797"
+         id="tspan576">i</tspan>
+    </text>
+    <text
+       y="93.719795"
+       x="164.79323"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text582">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="164.79323"
+         y="93.719795"
+         id="tspan580">(</tspan>
+    </text>
+    <text
+       y="96.132797"
+       x="175.12256"
+       style="font-variant:normal;font-weight:normal;font-size:6.60399961px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text586">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="175.12256"
+         y="96.132797"
+         id="tspan584">i</tspan>
+    </text>
+    <text
+       y="93.719795"
+       x="177.06989"
+       style="font-variant:normal;font-weight:normal;font-size:9.86366653px;font-family:Georgia;-inkscape-font-specification:Georgia;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text590">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="177.06989"
+         y="93.719795"
+         id="tspan588">)</tspan>
+    </text>
+    <path
+       d="m 103.97069,131.32273 h 0.0455 c 4.76638,0 9.42022,1.47743 13.31453,4.22663"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       id="path592"
+       inkscape:connector-curvature="0" />
+    <text
+       y="127.75932"
+       x="148.41919"
+       transform="skewX(-18.433231)"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999985px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       id="text596">
+      <tspan
+         style="stroke-width:0.33467773"
+         x="148.41919"
+         y="127.75932"
+         id="tspan594">θ</tspan>
+    </text>
+    <text
+       y="130.73677"
+       x="110.95934"
+       style="font-variant:normal;font-size:6.60399961px;font-family:CairoFont-1;-inkscape-font-specification:CairoFont-1-0;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text600">
+      <tspan
+         style="stroke-width:0.35277778"
+         x="110.95934"
+         y="130.73677"
+         id="tspan598">i</tspan>
+    </text>
+    <path
+       d="M 83.202307,144.34375 C 87.019363,136.4627 94.961096,131.42468 103.7061,131.32273"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:none;stroke-opacity:1"
+       id="path602"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="cc"
+       d="M 137.42553,97.745903 104.18271,154.40498"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:1.41111108, 1.05833331;stroke-dashoffset:0;stroke-opacity:1"
+       id="path604"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="cc"
+       d="m 146.95469,105.45241 -42.77198,48.95257"
+       style="fill:none;stroke:#000000;stroke-width:0.35277778;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:8;stroke-dasharray:1.41111108, 1.05833331;stroke-dashoffset:0;stroke-opacity:1"
+       id="path606"
+       inkscape:connector-curvature="0" />
+    <text
+       y="112.70223"
+       x="76.660675"
+       transform="skewX(-18.433231)"
+       style="font-variant:normal;font-weight:normal;font-size:10.15999889px;font-family:Arial;-inkscape-font-specification:ArialMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33467773"
+       id="text614">
+      <tspan
+         style="stroke-width:0.33467773"
+         x="76.660675"
+         y="112.70223"
+         id="tspan608">ω</tspan>
+      <tspan
+         style="stroke-width:0.33467773"
+         x="192.21371"
+         y="116.88641"
+         id="tspan610">ω</tspan>
+      <tspan
+         style="stroke-width:0.33467773"
+         x="198.00729"
+         y="93.629578"
+         id="tspan612">ω</tspan>
+    </text>
+    <path
+       d="m 104.23038,154.59527 44.51152,-61.941245 -0.28717,-0.207094 -44.51161,61.943299 z m 45.0231,-61.140142 0.37574,-2.337827 -2.09573,1.10163 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="path620"
+       inkscape:connector-curvature="0" />
+    <text
+       y="160.25168"
+       x="104.00013"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35277778"
+       id="text624">
+      <tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.86366653px;font-family:'Georgia Bold';-inkscape-font-specification:'Georgia Bold, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.35277778"
+         x="104.00013"
+         y="160.25168"
+         id="tspan622">x</tspan>
+    </text>
+  </g>
+</svg>
