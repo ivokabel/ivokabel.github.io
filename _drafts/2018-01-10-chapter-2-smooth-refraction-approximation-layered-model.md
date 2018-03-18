@@ -79,7 +79,7 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-*[images: Orange Lambert layer without any modifications (light: point, area, diffuse)]*
+*[images: Orange Lambert layer without any modifications (3 lights)]*
 
 The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
 
@@ -87,7 +87,7 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
 $$
 
-*[images: Orange Lambert layer with refracted directions (light: point, area, diffuse)]*
+*[images: Orange Lambert layer with refracted directions (3 lights)]*
 
 The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
 
@@ -97,7 +97,7 @@ $$
 
 Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
-*[images: Orange Lambert layer with Fresnel attenuation (light: point, area, diffuse)]*
+*[images: Orange Lambert layer with Fresnel attenuation (3 lights)]*
 
 #### Medium attenuation
 
@@ -115,14 +115,15 @@ $$
 
 To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a blue medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
 
-*[images: Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
+*[images: Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; 3 lights)]*
 
-*?MOVE TO THE BEGINNING OF THE NEXT SUB-SECTION?:* You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is sometimes much lighter than one would expect it to be. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
+You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is much lighter than one would expect it to be for some settings. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
 
 #### Proper refraction
 
 *Alternative titles:*
 
+- *"Proper/correct refraction formula/computation/implementation"*
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
 
@@ -130,7 +131,7 @@ In this section I will explain how to obtain a correct energy-conserving BSDF un
 
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
-*[image: #RefrBsdfGeom?]*
+*[?image? #RefrBsdfGeomPlain: Basic geometry of a BSDF under a smooth refractive interface.]*
 
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
@@ -191,12 +192,11 @@ The radiometry and BSDF explanation is heavily inspired by the excellent [Eric V
 
 ##### BSDF under a smooth refractive interface
 
-*[image: #RefrBsdfGeom again?]*
-
 Using the general definition of BSDF, we'll now derive the proper formula for a layer under a smooth Fresnel surface. For that we will need to prepare 4 prerequisite formulae, which we will then use to build the final BSDF formula
 
-First, let's see what happens to the incoming radiance when it passes a smooth interface between two media with different indices of refraction
+*[image #RefrBsdfGeomFull: Full geometry of a BSDF under a smooth refractive interface.]*
 
+First, let's see what happens to the incoming radiance when it passes a smooth interface between two media with different indices of refraction
 $$
 L_{i}\left(\omega_{i}^{\prime}\right) = L_{i}\left(\omega_{i}\right) \frac{\eta_1^2}{\eta_0^2} T\left(\theta_i\right)
 $$
@@ -214,8 +214,6 @@ L_{o}\left(\omega_{o}\right) = L_{o}\left(\omega_{o}^{\prime}\right) \frac{\eta_
 $$
 
 Now, the factor $\frac{\eta_0^2}{\eta_1^2}$ represents the amount of solid angle de-compression. Note that we simplified the notation by using  $T\left(\theta_o\right)$ instead of $T\left(-\theta_o^{\prime}\right)$ because the two are equal.
-
-*[image: light cones geometry?] ...probably not necessary*
 
 The third piece of our puzzle is how the projected solid angle $\mathrm{d}\sigma^{\bot}$ of a light cone changes when refracted through smooth interface. The relation between the incident and refracted light cone can be found for example in the Veach's thesis in the equation 5.4 at page 143 and, after a minor rewrite, we will get
 
@@ -244,7 +242,7 @@ $$
 
 And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
 
-*[images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; light: point, area, diffuse)]*
+*[images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; 3 lights)]*
 
 It's important to note, that we use single-point simplification here as *was used* in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.
 
@@ -298,7 +296,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 ### Inner layer sampling
 
-*[image: Sampling geometry?]*
+*[image #InnerLayerSampling: Sampling the inner layer contribution]*
 
 Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
@@ -310,7 +308,7 @@ $$
 
 If we feed a MC renderer with such PDF, the result will look like this:
 
-*[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
+*[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 lights]*
 
 As you can see, the result is consistently darker than it should be according to the reference images. It's because our PDF is computed incorrectly! The reason is that the non-uniform change of directions due to refraction changes the *solid* angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
 
@@ -320,7 +318,7 @@ $$
 
 This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
-*[images: "Too dark inner layer problem fixed" Just the inner layer. Lambert. Reference vs. model. 3 light settings?]*
+*[images: "Too dark inner layer problem fixed." Just the inner layer. Lambert. Reference vs. model. 3 lights]*
 
 ### Sampling both layers
 
@@ -420,13 +418,13 @@ $$
 
 To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
-*[image?: Sampling performance at low sample rate: fixed ratio?, Fresnel ratio?, my approach]*
+*[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
 
 ## Model Analysis
 
 - Certain configuration...
-
 - ...comparison of the behaviour with path-traced reference renderings...
+- Images, lots of images :-)
 
 
 ### Reference images
