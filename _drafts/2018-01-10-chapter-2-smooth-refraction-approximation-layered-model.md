@@ -37,7 +37,7 @@ I sometimes call the functions $f_{s1}$ and $f_{s2}$ the **contribution BSDFs** 
 
 The outer layer is expected to be a microfacet-based interface between two media with refractive indices: $\eta_0$ above the outer layer and $\eta_1$ between the outer and inner layer. There is no assumption on the medium below the inner layer.
 
-## Refraction Through the Geometrical Normal
+### Refraction through the geometrical normal
 
 The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the micro-facet's one.
 
@@ -131,7 +131,7 @@ In this section I will explain how to obtain a correct energy-conserving BSDF un
 
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
-*[?image? #RefrBsdfGeomPlain: Basic geometry of a BSDF under a smooth refractive interface.]*
+*[image #RefrBsdfGeomPlain: Basic geometry of a BSDF under a smooth refractive interface.]*
 
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
