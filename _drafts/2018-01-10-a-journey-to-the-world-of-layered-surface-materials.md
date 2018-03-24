@@ -2,6 +2,7 @@
 layout: post
 title: A Journey to the World of Layered Surface Materials
 comments: true
+visible: true
 ---
 
 I decided to implement some kind of multi-layered material model (BSDF) in my pet renderer since they offer much more expressivity than basic models (e.g. smooth Fresnel, glossy micro-facet models, or diffuse Lambert) and I also wanted to learn some more advanced rendering-related tech.
