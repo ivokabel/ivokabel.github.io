@@ -2,7 +2,7 @@
 layout: post
 title: "Chapter 2: Smooth Refraction Approximation Layered Model (SRAL)"
 comments: true
-visible: 0
+hidden: true
 ---
 
 This is the second chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (which I refer to as *the original model or* the WWL model).
