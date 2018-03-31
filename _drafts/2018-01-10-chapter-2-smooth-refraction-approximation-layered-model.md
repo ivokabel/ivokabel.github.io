@@ -73,13 +73,13 @@ For the inner layer, the things are considerably more complicated because the li
 
 #### Naïve refraction
 
-Let's start with an inner layer (orange Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
+Let's start with an inner layer (white Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
 
 $$
 f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-*[images: Orange Lambert layer without any modifications (3 lights)]*
+*[images: White Lambert layer without any modifications (3 lights)]*
 
 The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
 
@@ -87,7 +87,9 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
 $$
 
-*[images: Orange Lambert layer with refracted directions (3 lights)]*
+*[images: White Lambert layer with refracted directions (3 lights)]*
+
+*This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...*
 
 The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
 
@@ -97,7 +99,7 @@ $$
 
 Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
-*[images: Orange Lambert layer with Fresnel attenuation (3 lights)]*
+*[images: White Lambert layer with Fresnel attenuation (3 lights)]*
 
 #### Medium attenuation
 
@@ -113,11 +115,9 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
-To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a blue medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
+To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a brown medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
 
-*[images: Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; 3 lights)]*
-
-You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving Lambert model for the inner layer, the model is much lighter than one would expect it to be for some settings. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.
+*[images: Ideally white (albedo 100%) Lambert layer under brown medium (thicknesses: large to none; 3 lights)]*
 
 #### Proper refraction
 
@@ -126,6 +126,12 @@ You can, as well, see that there is something wrong with the model when the medi
 - *"Proper/correct refraction formula/computation/implementation"*
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
+
+*TODO: Although everything looks nice for the previously shown images... problems with BSDFs other than constant (Lambert) BSDF*
+
+*[images: Missing solid angle problem. Glossy layer under brown medium (thicknesses: large to none; 3 lights)]*
+
+*You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving ~~Lambert~~ model for the inner layer, the model is much lighter than one would expect it to be for some settings. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.*
 
 In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "Inner layer formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
@@ -245,7 +251,7 @@ $$
 
 And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
 
-*[images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under blue medium (thicknesses: large to none; 3 lights)]*
+*[images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under brown medium (thicknesses: large to none; 3 lights)]*
 
 It's important to note, that we use single-point simplification here as *was used* in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.
 
@@ -275,7 +281,7 @@ where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner la
 
 The complete model for one type of configuration may look like this:
 
-*[images: Highly glossy outer layer, ideally white (albedo 100%) Lambert inner layer and blue medium between them (thicknesses: large to none; 3 lights)]*	
+*[images: Highly glossy outer layer, ideally white (albedo 100%) Lambert inner layer and brown medium between them (thicknesses: large to none; 3 lights)]*	
 
 ## Sampling
 
