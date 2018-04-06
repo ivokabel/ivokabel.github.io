@@ -14,7 +14,7 @@ At first sight, my layered model doesn't differ very much from the WWL model, bu
 
 - Using **geometric normal** for refraction instead of micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- *(more efficient?, ...)* **sampling strategy optimization**.
+- *(reworked and more efficient?, ...)* **sampling strategy optimization**.
 
 The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (outer and inner), which I denote
 
