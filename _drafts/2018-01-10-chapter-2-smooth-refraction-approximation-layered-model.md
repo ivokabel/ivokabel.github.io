@@ -81,6 +81,11 @@ $$
 
 *[images: White Lambert layer without any modifications (3 lights)]*
 
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerOnly_NoModif_64s.jpg" alt="" width="500" /><br/>
+*TODO: Plain Lambert without any modifications...*
+</p>
+
 The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
 
 $$
@@ -89,7 +94,12 @@ $$
 
 *[images: White Lambert layer with refracted directions (3 lights)]*
 
-*This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...*
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_64s.jpg" alt="" width="500" /><br/>
+*TODO: Lambert with refracted directions (identical to the plain version)...*
+</p>
+
+*This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...we stick with Lambert for simplicity...we'll get to different configurations later...*
 
 The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
 
@@ -100,6 +110,11 @@ $$
 Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
 *[images: White Lambert layer with Fresnel attenuation (3 lights)]*
+
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_64s.jpg" alt="" width="500" /><br/>
+*TODO: Lambert with refracted directions and Fresnel attenuation...*
+</p>
 
 #### Medium attenuation
 
@@ -119,6 +134,14 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 *[images: Ideally white (albedo 100%) Lambert layer under brown medium (thicknesses: large to none; 3 lights)]*
 
+*TODO: Without Fresnel?*
+
+<p style="text-align: center">
+<img src="..\images\SRAL\Blog_MediumAttenuation_EM1_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_MediumAttenuation_EM7_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_MediumAttenuation_EM10_64s.jpg" alt="" width="700" /><br/>*TODO: Describe: Lambert layer with refracted directions, Fresnel attenuation and medium attenuation...*
+</p>
+
 #### Proper refraction
 
 *Alternative titles:*
@@ -129,7 +152,12 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 
 *TODO: Although everything looks nice for the previously shown images... problems with BSDFs other than constant (Lambert) BSDF*
 
-*[images: Missing solid angle problem. Glossy layer under brown medium (thicknesses: large to none; 3 lights)]*
+*[images: Missing solid angle problem. Glossy layer under brown medium (thicknesses: large to none)]*
+
+<p style="text-align: center">
+<img src="..\images\SRAL\Blog_InnerMedium_SolAngProblem_EM1_64s.jpg" alt="" width="700" /><br/>
+*TODO: Broken energy conservation due to refracted directions...*
+</p>
 
 *You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving ~~Lambert~~ model for the inner layer, the model is much lighter than one would expect it to be for some settings. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.*
 
@@ -181,7 +209,7 @@ Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ r
 Now that we have defined the needed radiometry quantities, we can finally define the *bidirectional scattering density function* (BSDF), a formal description of the light-scattering properties of a surface point. It expresses how the light outgoing from a point $x$ on a surface in a particular direction $\omega_o$ is dependent on the light incoming to the point from a particular direction $\omega_i$:
 
 <p style="text-align: center">
-   <img src="../images/BRDF definition geometry.svg" alt="BSDF evaluation process" width="500" /><br/>
+   <img src="../images/BRDF definition geometry.svg" alt="" width="500" /><br/>
    BSDF geometry.
 </p>
 
@@ -251,7 +279,13 @@ $$
 
 And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
 
-*[images: Solid angle compression applied. Ideally white (albedo 100%) Lambert layer under brown medium (thicknesses: large to none; 3 lights)]*
+*[images: Without and with solid angle compression compensation applied. Glossy layer under brown medium. Without outer layer. (thicknesses: large to none; 3 lights)]*
+
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerMedium_SolAngProblem_EM1_64s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/Blog_InnerMedium_SolAngComp_EM1_64s.jpg" alt="" width="700" /><br/>
+*TODO: Describe...*
+</p>
 
 It's important to note, that we use single-point simplification here as *was used* in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.
 
@@ -282,6 +316,20 @@ where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner la
 The complete model for one type of configuration may look like this:
 
 *[images: Highly glossy outer layer, ideally white (albedo 100%) Lambert inner layer and brown medium between them (thicknesses: large to none; 3 lights)]*	
+
+<p style="text-align: center">
+<img src="..\images\SRAL\Blog_WholeLambert_EM1_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_WholeLambert_EM7_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_WholeLambert_EM10_64s.jpg" alt="" width="700" /><br/>*TODO: Describe...*
+</p>
+
+*[images: Highly glossy outer layer, Glossy inner layer and brown medium between them (thicknesses: large to none; 3 lights)]*	
+
+<p style="text-align: center">
+<img src="..\images\SRAL\Blog_WholeGlossy_EM1_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_WholeGlossy_EM7_64s.jpg" alt="" width="700" /><br/>
+<img src="..\images\SRAL\Blog_WholeGlossy_EM10_64s.jpg" alt="" width="700" /><br/>*TODO: Describe...*
+</p>
 
 ## Sampling
 
