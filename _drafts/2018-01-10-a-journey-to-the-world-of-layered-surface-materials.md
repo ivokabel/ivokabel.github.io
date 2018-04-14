@@ -14,3 +14,4 @@ Since this post is fairly large, I decided to split it into two chapters:
 
 - [Chapter 1: Weidlich-Wilkie Layered Model](chapter-1-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model, which I sometimes refer to as the WWL model.
 - [Chapter 2: Smooth Refraction Approximation Layered Model](chapter-2-smooth-refraction-approximation-layered-model.html), where I explain and analyse my approach to layering.
+  - [Chapter 2.1: Energy conserving BSDF under a smooth refractive interface](chapter-2.1-energy-conserving-BSDF-under-smooth-refractive-interface.html), where I derive the energy-conserving form of a BSDF seen and illuminated through a smooth refractive interface needed in the chapter 2.
