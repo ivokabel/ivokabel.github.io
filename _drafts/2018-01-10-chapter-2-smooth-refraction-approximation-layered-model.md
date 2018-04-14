@@ -69,7 +69,7 @@ $$
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
-Reflection contribution of the outer layer. We used a highly glossy micro-facet material (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface).
+Reflection contribution of the outer layer in various lighting setups (constant light, a.k.a. the furnace test, a large light source -- partially occluded clouds, small light source -- sun). We used a highly glossy micro-facet material (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface).
 </p>
 
 ### Inner layer
@@ -101,7 +101,7 @@ $$
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
-*TODO: Lambert with refracted directions (identical to the plain version)...*
+*TODO: Lambert with refracted directions ( for a constant BSDF it is identical to the version with unmodified directions)...*
 </p>
 
 *This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...we stick with Lambert for simplicity...we'll get to different configurations later...*
@@ -155,7 +155,7 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 - *"Solid angle (de-)compression compensation"*
 - *"BSDF under smooth refractive interface"*
 
-*TODO: Although everything looks nice for the previously shown images... problems with BSDFs other than constant (Lambert) BSDF*
+Although everything looks pretty straightforward in the previous images, there a problem of we use a non-constant BSDF for the inner layer:
 
 *[images: Missing solid angle problem. Glossy layer under brown medium (thicknesses: large to none)]*
 
@@ -164,7 +164,7 @@ To demonstrate the effect of medium attenuation I used a purely white diffuse La
 *TODO: Broken energy conservation due to refracted directions...*
 </p>
 
-*You can, as well, see that there is something wrong with the model when the medium attenuation is week. Although we used a physically-plausible energy-conserving ~~Lambert~~ model for the inner layer, the model is much lighter than one would expect it to be for some settings. In the furnace test (the constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by the compression and decompression of light when crossing an interface between media with different indices of refraction.*
+*Although we used a physically-plausible energy-conserving model for the inner layer, the resulting inner layer model is much lighter than one would expect for some settings. In the furnace test (constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by us neglecting the **compression and decompression of light** when crossing an interface between media with different indices of refraction.*
 
 In this section I will explain how to obtain a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. To do that, I will have to dig deeper into the theory of BDSFs, so if you are not feeling nerdy enough, just skip to the "Inner layer formula" sub-section, which summarizes the whole inner model formula including the compensation derived in this chapter.
 
