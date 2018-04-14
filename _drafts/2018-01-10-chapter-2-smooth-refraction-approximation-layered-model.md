@@ -165,12 +165,17 @@ I derived a correct energy-conserving BSDF under a smooth refractive interface w
 *[images: Without and with solid angle compression compensation applied. Glossy layer under brown medium. Without outer layer. (thicknesses: large to none; 3 lights)]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/Blog_InnerMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
 *TODO: Without and with solid angle compression compensation applied...*
 </p>
 
-The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering approximation of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium.
+The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering nature of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium:
+
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerLambert_SolAngComp_512s.jpg" alt="" width="500" /><br/>
+*TODO: Darkening due to missing multi-scattered energy...*
+</p>
 
 *It's important to note, that we still use the single-point simplification here as was used in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.*
 
@@ -244,7 +249,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 *[image #InnerLayerSampling: Sampling the inner layer contribution]*
 
-Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with $\omega_{o}^{\prime}$ -- the refracted version of the outgoing direction and refract the generated incoming direction $\omega_{i}^{\prime}$ back into the outside world. It is possible that the generated direction $\omega_{i}^{\prime}$ is refracted back into the model due to [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
+Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with  -- the refracted version of the outgoing direction and refract the generated incoming direction  back into the outside world. It is possible that the generated direction  is refracted back into the model due to total internal reflection (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
 Now that we have constructed the sampling routine, we also need to evaluate its PDF. At first sight it seems that we just have to evaluate the original PDF using the refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, analogically to the way we modified the original sampling strategy
 
@@ -256,8 +261,12 @@ If we feed a MC renderer with such PDF, the result will look like this:
 
 *[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 lights]*
 
-As you can see, the result is consistently darker than it should be according to the reference images. It's because our PDF is computed incorrectly! The reason is that the non-uniform change of directions due to refraction changes the *solid* angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
+*TODO?*
+</p>
 
+As you can see, the result is much darker than it should be. *It's because our PDF is computed incorrectly!* The reason is that the non-uniform change of directions due to refraction changes the solid angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
 $$
 p_2\left(\omega_{i}, \omega_{o}\right) = p_2^{\ast}\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right) \frac{\eta_{0}^2 \cos\theta_{i}}{\eta_{1}^2 \cos\theta^{\prime}_{i}}
 $$
@@ -265,6 +274,11 @@ $$
 This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
 *[images: "Too dark inner layer problem fixed." Just the inner layer. Lambert. Reference vs. model. 3 lights]*
+
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
+*TODO: ...*
+</p>
 
 ### Sampling both layers
 
