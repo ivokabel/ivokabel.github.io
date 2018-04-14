@@ -67,6 +67,11 @@ $$
 f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
+<p style="text-align: center">
+<img src="../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
+Reflection contribution of the outer layer. We used a highly glossy micro-facet material (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface).
+</p>
+
 ### Inner layer
 
 For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
