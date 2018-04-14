@@ -22,7 +22,7 @@ In a modern realistic renderer, a BSDF needs to handle two tasks: evaluation and
 ## Evaluation
 
 <p style="text-align: center">
-   <img src="../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="360" /><br/>
+   <img src="../../../images/Weidlich-Wilkie - Layers - Evaluation.svg" alt="BSDF evaluation process" width="360" /><br/>
    Layered BSDF evaluation process. Image reused from the Weidlich-Wilkie paper.
 </p>
 
@@ -70,7 +70,7 @@ Last, but not least, the paper completely ignores effects of solid angle (de-)co
 ## Sampling
 
 <p style="text-align: center">
-   <img src="../images/Weidlich-Wilkie - Layers - Assumptions - Base.svg" alt="BSDF evaluation process" width="700" /><br/>
+   <img src="../../../images/Weidlich-Wilkie - Layers - Assumptions - Base.svg" alt="BSDF evaluation process" width="700" /><br/>
    Sampling configuration. Image reused from the Weidlich-Wilkie paper.
 </p>
 

@@ -68,7 +68,7 @@ f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{
 $$
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
 Reflection contribution of the outer layer in various lighting setups (constant light, a.k.a. the furnace test, a large light source -- partially occluded clouds, small light source -- sun). We used a highly glossy micro-facet material (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface).
 </p>
 
@@ -87,7 +87,7 @@ $$
 *[images: White Lambert layer without any modifications (3 lights)]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
 *TODO: Plain Lambert without any modifications...*
 </p>
 
@@ -100,7 +100,7 @@ $$
 *[images: White Lambert layer with refracted directions (3 lights)]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
 *TODO: Lambert with refracted directions ( for a constant BSDF it is identical to the version with unmodified directions)...*
 </p>
 
@@ -117,7 +117,7 @@ Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel 
 *[images: White Lambert layer with Fresnel attenuation (3 lights)]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
 *TODO: Lambert with refracted directions and Fresnel attenuation...*
 </p>
 
@@ -165,15 +165,15 @@ I derived a correct energy-conserving BSDF under a smooth refractive interface w
 *[images: Without and with solid angle compression compensation applied. Glossy layer under brown medium. Without outer layer. (thicknesses: large to none; 3 lights)]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/Blog_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
 *TODO: Without and with solid angle compression compensation applied...*
 </p>
 
 The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering nature of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium:
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerLambert_SolAngComp_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerLambert_SolAngComp_512s.jpg" alt="" width="500" /><br/>
 *TODO: Darkening due to missing multi-scattered energy...*
 </p>
 
@@ -262,7 +262,7 @@ If we feed a MC renderer with such PDF, the result will look like this:
 *[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 lights]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
 *TODO?*
 </p>
 
@@ -276,7 +276,7 @@ This compensation factor is closely related to what happens to radiance when it 
 *[images: "Too dark inner layer problem fixed." Just the inner layer. Lambert. Reference vs. model. 3 lights]*
 
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/Blog_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
 *TODO: ...*
 </p>
 
