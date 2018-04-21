@@ -41,7 +41,7 @@ The outer layer is expected to be a microfacet-based interface between two media
 
 The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the micro-facet's one.
 
-*It behaves as if we temporarily shank the distribution of micro-facets into a Dirac pulse -- super highly specular material. The same amount of energy gets refracted, but in modified (degenerated) set of directions...*
+*It behaves as if we temporarily shrank the distribution of micro-facets into a Dirac pulse -- super highly specular material. The same amount of energy gets refracted, but in modified (degenerated) set of directions...*
 
 *[image #RefrGeom: Refraction through the geometrical normal]*
 
@@ -69,7 +69,7 @@ $$
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
-Reflection contribution of the outer layer in various lighting setups (constant light, a.k.a. the furnace test, a large light source -- partially occluded clouds, small light source -- sun). We used a highly glossy micro-facet material (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface).
+Reflection contribution of a highly glossy micro-facet outer layer (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface) under various light settings (constant light -- the furnace test, a large light source -- partially occluded clouds, small light source -- sun) .
 </p>
 
 ### Inner layer
@@ -84,11 +84,9 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-*[images: White Lambert layer without any modifications (3 lights)]*
-
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
-*TODO: Plain Lambert without any modifications...*
+Plain, ideally white Lambert without any modifications under various light settings.
 </p>
 
 The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
@@ -97,11 +95,9 @@ $$
 f_{s2}^{\ast}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
 $$
 
-*[images: White Lambert layer with refracted directions (3 lights)]*
-
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
-*TODO: Lambert with refracted directions ( for a constant BSDF it is identical to the version with unmodified directions)...*
+Ideally white Lambert with refracted directions under various light settings. Since Lambert model is a constant BSDF, changing directions doesn't change the shape of the BSDF in the upper hemisphere; therefore, the behaviour is identical to the version with unmodified directions.
 </p>
 
 *This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...we stick with Lambert for simplicity...we'll get to different configurations later...*
@@ -114,11 +110,9 @@ $$
 
 Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
-*[images: White Lambert layer with Fresnel attenuation (3 lights)]*
-
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
-*TODO: Lambert with refracted directions and Fresnel attenuation...*
+Ideally white Lambert with refracted directions and Fresnel attenuation under various light settings.
 </p>
 
 #### Medium attenuation
@@ -137,44 +131,41 @@ $$
 
 To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a brown medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
 
-*[images: Ideally white (albedo 100%) Lambert layer under brown medium (thicknesses: large to none; 3 lights)]*
-
-*TODO: Without Fresnel?*
-
 <p style="text-align: center">
 <img src="..\images\SRAL\Blog_MediumAttenuation_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="..\images\SRAL\Blog_MediumAttenuation_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="..\images\SRAL\Blog_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>*TODO: Describe: Lambert layer with refracted directions, Fresnel attenuation and medium attenuation...*
+<img src="..\images\SRAL\Blog_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>Ideally white Lambert layer with refracted directions, Fresnel attenuation and orange medium attenuation with varying medium thickness under various light settings.
+
+*TODO: Without Fresnel?*
+
 </p>
 
 #### Proper refraction
 
-Although everything looks pretty straightforward in the previous images, there a problem of we use a non-constant BSDF for the inner layer:
-
-*[images: Missing solid angle problem. Glossy layer under brown medium (thicknesses: large to none)]*
+Although everything looks pretty straightforward in the previous images, there is a problem of we use a non-constant BSDF for the inner layer:
 
 <p style="text-align: center">
-<img src="..\images\SRAL\Blog_InnerMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-*TODO: Broken energy conservation due to refracted directions...*
+
+<img src="..\images\SRAL\Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
+Broken energy conservation due to refracted directions: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
+
 </p>
 
 Although we used a physically-plausible energy-conserving model for the inner layer, the resulting inner layer model is much lighter than one would expect for thick medium. In the furnace test (constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by us neglecting the **compression and decompression of light** when crossing an interface between media with different indices of refraction.
 
 I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event.  For that I dug deeper into the theory of BDSFs in another post called [Chapter 2.1: Energy conserving BSDF under a smooth refractive interface](chapter-2.1-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) It basically says that the only thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
 
-*[images: Without and with solid angle compression compensation applied. Glossy layer under brown medium. Without outer layer. (thicknesses: large to none; 3 lights)]*
-
 <p style="text-align: center">
-<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
-*TODO: Without and with solid angle compression compensation applied...*
+Energy conservation fixed with solid angle compression compensation: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
+
 </p>
 
 The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering nature of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium:
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerLambert_SolAngComp_512s.jpg" alt="" width="500" /><br/>
-*TODO: Darkening due to missing multi-scattered energy...*
+Darkening due to missing multi-scattered energy. Ideally white Lambert inner layer with refracted directions under various light settings.
 </p>
 
 *It's important to note, that we still use the single-point simplification here as was used in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.*
@@ -205,20 +196,18 @@ where $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ are the stand-alone outer and inner la
 
 The complete model for one type of configuration may look like this:
 
-*[images: Highly glossy outer layer, ideally white (albedo 100%) Lambert inner layer and brown medium between them (thicknesses: large to none; 3 lights)]*	
-
 <p style="text-align: center">
 <img src="..\images\SRAL\Blog_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="..\images\SRAL\Blog_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="..\images\SRAL\Blog_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>*TODO: Describe...*
+<img src="..\images\SRAL\Blog_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
+The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. *TODO: dark inner layer due to multi-scattering.*
 </p>
-
-*[images: Highly glossy outer layer, Glossy inner layer and brown medium between them (thicknesses: large to none; 3 lights)]*	
 
 <p style="text-align: center">
 <img src="..\images\SRAL\Blog_WholeGlossy_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="..\images\SRAL\Blog_WholeGlossy_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="..\images\SRAL\Blog_WholeGlossy_EM10_512s.jpg" alt="" width="700" /><br/>*TODO: Describe...*
+<img src="..\images\SRAL\Blog_WholeGlossy_EM10_512s.jpg" alt="" width="700" /><br/>
+The whole formula using highly glossy outer layer, glossy conductor inner layer and orange medium between them with varying medium thickness under various light settings.
 </p>
 
 ## Sampling
@@ -259,11 +248,10 @@ $$
 
 If we feed a MC renderer with such PDF, the result will look like this:
 
-*[images: "Too dark inner layer problem" Just the inner layer. Lambert. Reference vs. model. 3 lights]*
-
 <p style="text-align: center">
+
 <img src="../images/SRAL/Blog_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
-*TODO?*
+Too dark inner layer problem: Glossy conductor inner layer with refracted direction and Fresnel attenuation under various light settings.
 </p>
 
 As you can see, the result is much darker than it should be. *It's because our PDF is computed incorrectly!* The reason is that the non-uniform change of directions due to refraction changes the solid angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
@@ -273,11 +261,10 @@ $$
 
 This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
-*[images: "Too dark inner layer problem fixed." Just the inner layer. Lambert. Reference vs. model. 3 lights]*
-
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
-*TODO: ...*
+Too dark inner layer problem fixed: Glossy conductor inner layer with refracted direction and Fresnel attenuation under various light settings.
+
 </p>
 
 ### Sampling both layers
