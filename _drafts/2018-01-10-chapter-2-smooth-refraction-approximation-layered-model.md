@@ -39,7 +39,7 @@ The outer layer is expected to be a microfacet-based interface between two media
 
 ### Refraction through the geometrical normal
 
-The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the *(main)* geometrical normal rather than the micro-facet's one.
+The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the geometrical normal rather than the micro-facet's one.
 
 *It behaves as if we temporarily shrank the distribution of micro-facets into a Dirac pulse -- super highly specular material. The same amount of energy gets refracted, but in modified (degenerated) set of directions...*
 
