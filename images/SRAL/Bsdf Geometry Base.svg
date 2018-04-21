@@ -496,7 +496,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0134804"
-     inkscape:cx="528"
+     inkscape:cx="558.09432"
      inkscape:cy="408"
      inkscape:document-units="mm"
      inkscape:current-layer="layer5"
@@ -517,7 +517,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -625,11 +625,23 @@
        d="M 189.57503,81.049563 V 131.47893"
        id="path10262"
        inkscape:connector-curvature="0" />
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot12956"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="scale(0.26458333)"><flowRegion
+         id="flowRegion12958"><rect
+           id="rect12960"
+           width="141.09795"
+           height="83.869408"
+           x="145.04474"
+           y="348.30472" /></flowRegion><flowPara
+         id="flowPara12962"></flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="Inner Layer">
+     inkscape:label="Inner Layer"
+     style="display:inline">
     <use
        style="display:inline"
        x="0"
@@ -639,6 +651,23 @@
        transform="translate(2.1096282,-43.430047)"
        width="100%"
        height="100%" />
+    <text
+       id="text12978"
+       y="156.63846"
+       x="40.987064"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         dx="0 1"
+         dy="0 -1.14"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
+         y="156.63846"
+         x="40.987064"
+         id="tspan12976"
+         sodipodi:role="line">f*<tspan
+   dx="-5"
+   dy="1.4299991"
+   id="tspan12974"
+   style="font-size:64.99999762%;baseline-shift:sub">s2</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -648,7 +677,8 @@
     <g
        inkscape:groupmode="layer"
        id="layer7"
-       inkscape:label="Smooth Material ">
+       inkscape:label="Smooth Material "
+       style="display:inline">
       <use
          style="display:inline"
          x="0"
@@ -658,11 +688,44 @@
          transform="translate(2.5965639,-114.56616)"
          width="100%"
          height="100%" />
-    </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="38.898548"
+         y="91.372429"
+         id="text12984"><tspan
+           sodipodi:role="line"
+           id="tspan12982"
+           x="38.898548"
+           y="91.372429"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px">Virtual</tspan><tspan
+           sodipodi:role="line"
+           x="38.898548"
+           y="104.63181"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
+           id="tspan12997">smooth</tspan><tspan
+           sodipodi:role="line"
+           x="38.898548"
+           y="117.8912"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
+           id="tspan12986">surface</tspan></text>
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot12999"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         transform="scale(0.26458333)"><flowRegion
+           id="flowRegion13001"><rect
+             id="rect13003"
+             width="59.201935"
+             height="40.454655"
+             x="87.8162"
+             y="375.93228" /></flowRegion><flowPara
+           id="flowPara13005"></flowPara></flowRoot>    </g>
     <g
        inkscape:groupmode="layer"
        id="layer6"
-       inkscape:label="Rough Material">
+       inkscape:label="Rough Material"
+       style="display:inline">
       <use
          style="display:inline"
          x="0"
@@ -672,6 +735,23 @@
          transform="translate(1.8274486,-120.35883)"
          width="100%"
          height="100%" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="40.987061"
+         y="62.916439"
+         id="text12966"><tspan
+           sodipodi:role="line"
+           id="tspan12964"
+           x="40.987061"
+           y="62.916439"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
+           dy="0 -1.14"
+           dx="0 1">f*<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan12968"
+   dy="1.4299991"
+   dx="-5">s1</tspan></tspan></text>
     </g>
   </g>
 </svg>
