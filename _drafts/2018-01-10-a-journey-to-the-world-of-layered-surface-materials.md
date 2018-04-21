@@ -10,8 +10,9 @@ In the beginning I wanted to just directly implement the paper [Arbitrarily Laye
 
 I decided to restrict the model to just two layers (1 -- outer and 2 -- inner). This decision simplifies both theory and implementation a bit while still having the rich expressivity of a layered model. In my following explanation I will ignore the fact that there can be more than two layers even in the original Weidlich-Wilkie paper.
 
-Since this post is fairly large, I decided to split it into two chapters:
+Since this post is fairly large, I decided to split it into more parts:
 
 - [Chapter 1: Weidlich-Wilkie Layered Model](chapter-1-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model, which I sometimes refer to as the WWL model.
 - [Chapter 2: Smooth Refraction Approximation Layered Model](chapter-2-smooth-refraction-approximation-layered-model.html), where I explain and analyse my approach to layering.
   - [Chapter 2.1: Energy conserving BSDF under a smooth refractive interface](chapter-2.1-energy-conserving-BSDF-under-smooth-refractive-interface.html), where I derive the energy-conserving form of a BSDF seen and illuminated through a smooth refractive interface needed in the chapter 2.
+- [Chapter 3: A More Detailed SRAL Model Analysis](2018-01-10-chapter-3-a-more-detailed-analysis-of-sral-model.md), ...

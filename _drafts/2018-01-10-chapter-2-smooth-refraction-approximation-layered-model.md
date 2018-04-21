@@ -4,7 +4,7 @@ title: "Chapter 2: Smooth Refraction Approximation Layered Model (SRAL)"
 comments: true
 ---
 
-This is the second chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (which I refer to as *the original model or* the WWL model).
+This is a chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (which I refer to as *the original model or* the WWL model).
 
 *This chapter contains: an overall explanation of my model (philosophy, differences from WWL, ...), its evaluation and sampling and an analysis of the model behaviour...*
 
@@ -366,25 +366,6 @@ $$
 To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
 *[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
-
-## Model Analysis
-
-- Certain configuration...
-- ...comparison of the behaviour with path-traced reference renderings...
-- Images, lots of images :-)
-
-
-### Reference images
-
-Story?...
-
-### No medium attenuation
-
-- energy conservation, fitting the reference, ...
-
-### *Later: With medium attenuation*
-
-...
 
 ## Conclusion
 
