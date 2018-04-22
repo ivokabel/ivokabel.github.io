@@ -43,7 +43,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.3851341"
-     inkscape:cx="299.98313"
+     inkscape:cx="233.32021"
      inkscape:cy="150.47358"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -651,28 +651,28 @@
     <g
        transform="matrix(0.35277777,0,0,-0.35277777,-15.815357,165.25254)"
        id="g520"
-       style="fill:#f4d7d7">
+       style="fill:#ffd5d5">
       <g
          transform="translate(0,-0.0672302)"
          id="g506"
-         style="fill:#f4d7d7">
+         style="fill:#ffd5d5">
         <g
            id="g496"
-           style="fill:#f4d7d7" />
+           style="fill:#ffd5d5" />
         <g
            id="g504"
-           style="fill:#f4d7d7">
+           style="fill:#ffd5d5">
           <g
              id="g502"
              clip-path="url(#clipPath30)"
-             style="fill:#f4d7d7">
+             style="fill:#ffd5d5">
             <g
                id="g500"
-               style="fill:#f4d7d7">
+               style="fill:#ffd5d5">
               <path
                  inkscape:connector-curvature="0"
                  id="path498"
-                 style="fill:#f4d7d7;fill-opacity:1;fill-rule:evenodd;stroke:none"
+                 style="fill:#ffd5d5;fill-opacity:1;fill-rule:evenodd;stroke:none"
                  d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z" />
             </g>
           </g>
@@ -681,24 +681,24 @@
       <g
          transform="translate(0,-0.0672302)"
          id="g518"
-         style="fill:#f4d7d7">
+         style="fill:#ffd5d5">
         <g
            id="g508"
-           style="fill:#f4d7d7" />
+           style="fill:#ffd5d5" />
         <g
            id="g516"
-           style="fill:#f4d7d7">
+           style="fill:#ffd5d5">
           <g
              id="g514"
              clip-path="url(#clipPath46)"
-             style="fill:#f4d7d7">
+             style="fill:#ffd5d5">
             <g
                id="g512"
-               style="fill:#f4d7d7">
+               style="fill:#ffd5d5">
               <path
                  inkscape:connector-curvature="0"
                  id="path510"
-                 style="fill:#f4d7d7;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+                 style="fill:#ffd5d5;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
                  d="m 444.34,176.219 c -7.508,6.078 -12.047,12.929 -10.137,15.289 1.91,2.359 9.547,-0.66 17.059,-6.742 7.508,-6.078 12.051,-12.93 10.14,-15.289 -1.91,-2.36 -9.55,0.66 -17.062,6.742 z" />
             </g>
           </g>
