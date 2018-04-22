@@ -71,7 +71,7 @@ $$
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_OuterOnly_512s.jpg" alt="" width="500" /><br/>
-Reflection contribution of a highly glossy micro-facet outer layer (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface) under various light settings (constant light -- the furnace test, a large light source -- partially occluded clouds, small light source -- sun) .
+Reflection contribution of a highly glossy micro-facet outer layer (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface) under various light settings (constant light, large light source, small light source).
 </p>
 
 ### Inner layer
@@ -89,6 +89,9 @@ $$
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
 Plain, ideally white Lambert without any modifications under various light settings.
+
+*TODO: Use 95% Lambert to see something geometry in the furnace test?*
+
 </p>
 
 The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
@@ -367,7 +370,7 @@ $$
 
 To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1$ and $p_2$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
-*[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
+*[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance from light sampling. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
 
 ## Conclusion
 
