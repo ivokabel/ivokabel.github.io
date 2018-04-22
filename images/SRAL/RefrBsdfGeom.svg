@@ -525,10 +525,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0134804"
-     inkscape:cx="371.32976"
-     inkscape:cy="425.36992"
+     inkscape:cx="535.89359"
+     inkscape:cy="408"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1020"
@@ -734,19 +734,18 @@
       <text
          id="text1005"
          y="134.96223"
-         x="137.74286"
+         x="136.68454"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            dx="0"
            dy="0"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            y="134.96223"
-           x="137.74286"
+           x="136.68454"
            id="tspan1003"
            sodipodi:role="line">θ'<tspan
-   dx="-1.5"
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan1001">i</tspan></tspan></text>
+   id="tspan1001">o</tspan></tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -760,9 +759,8 @@
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            dy="0"
            dx="0">θ'<tspan
-   dx="-1.5"
    id="tspan1007"
-   style="font-size:64.99999762%;baseline-shift:sub">o</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:sub">i</tspan></tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"
@@ -868,33 +866,33 @@
       <text
          id="text13017"
          y="61.456676"
-         x="90.005089"
+         x="89.475922"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            dx="0"
            dy="0"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            y="61.456676"
-           x="90.005089"
+           x="89.475922"
            id="tspan13015"
            sodipodi:role="line">θ<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan13019">i</tspan></tspan></text>
+   id="tspan13019">o</tspan></tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="195.79936"
+         x="196.32852"
          y="61.463715"
          id="text13028"><tspan
            sodipodi:role="line"
            id="tspan13026"
-           x="195.79936"
+           x="196.32852"
            y="61.463715"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            dy="0"
            dx="0">θ<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan13030">o</tspan></tspan></text>
+   id="tspan13030">i</tspan></tspan></text>
     </g>
   </g>
   <g
@@ -957,7 +955,7 @@
          dy="0"
          dx="0">ω<tspan
    id="tspan13044"
-   style="font-size:64.99999762%;baseline-shift:sub">i</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:sub">o</tspan></tspan></text>
     <text
        id="text13054"
        y="42.75745"
@@ -972,7 +970,7 @@
          id="tspan13052"
          sodipodi:role="line">ω<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan13050">o</tspan></tspan></text>
+   id="tspan13050">i</tspan></tspan></text>
     <text
        id="text13066"
        y="124.84452"
@@ -986,9 +984,8 @@
          x="111.46159"
          id="tspan13064"
          sodipodi:role="line">ω'<tspan
-   dx="-1.5"
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan13062">i</tspan></tspan></text>
+   id="tspan13062">o</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1003,8 +1000,7 @@
          dy="0"
          dx="0">ω'<tspan
    id="tspan13068"
-   style="font-size:64.99999762%;baseline-shift:sub"
-   dx="-1.5">o</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:sub">i</tspan></tspan></text>
     <text
        id="text13078"
        y="37.543205"
