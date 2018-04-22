@@ -562,10 +562,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.0134804"
-     inkscape:cx="450.91608"
+     inkscape:cx="288.60411"
      inkscape:cy="220.82108"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer9"
+     inkscape:current-layer="layer12"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1020"
@@ -661,36 +661,6 @@
          dx="0">η<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
    id="tspan1148">0</tspan></tspan></text>
-    <g
-       inkscape:groupmode="layer"
-       id="layer9"
-       inkscape:label="2"
-       style="display:none">
-      <use
-         style="display:inline"
-         x="0"
-         y="0"
-         xlink:href="#path1131"
-         id="use1137"
-         transform="translate(3.3666668e-7,54.477932)"
-         width="100%"
-         height="100%" />
-      <text
-         id="text1158"
-         y="174.27756"
-         x="22.635399"
-         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           dx="0"
-           dy="0"
-           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
-           y="174.27756"
-           x="22.635399"
-           id="tspan1156"
-           sodipodi:role="line">η<tspan
-   id="tspan1154"
-   style="font-size:64.99999762%;baseline-shift:sub">2</tspan></tspan></text>
-    </g>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -709,7 +679,7 @@
        id="path3880"
        inkscape:connector-curvature="0" />
     <ellipse
-       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       style="display:inline;fill:#f4d7d7;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
        id="path3218"
        cx="138.69579"
        cy="179.40709"
@@ -733,7 +703,7 @@
        cy="205.07973"
        cx="-49.490467"
        id="ellipse3906"
-       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="display:inline;fill:#f4d7d7;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.80000009, 0.60000003;stroke-dashoffset:0;stroke-opacity:1"
        d="m 189.194,81.479999 -5.20002,26.713441"
@@ -745,7 +715,7 @@
        id="path4420"
        inkscape:connector-curvature="0" />
     <ellipse
-       style="display:inline;fill:#f2f2f2;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       style="display:inline;fill:#f4d7d7;stroke:#000000;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
        id="ellipse4422"
        cx="15.216187"
        cy="-205.24586"
