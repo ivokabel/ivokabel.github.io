@@ -44,7 +44,7 @@ The new model still assumes single-point simplifications of both evaluation and 
 *It behaves as if we temporarily shrank the distribution of micro-facets into a Dirac pulse -- super highly specular material. The same amount of energy gets refracted, but in modified (degenerated) set of directions...*
 
 <p style="text-align: center">
-<img src="../images/SRAL/RefrGeom.svg" alt="" width="600" />
+<img src="../images/SRAL/RefractionThroughGeomNormal.svg" alt="" width="600" />
 </p>
 
 It is *important to keep in mind* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
