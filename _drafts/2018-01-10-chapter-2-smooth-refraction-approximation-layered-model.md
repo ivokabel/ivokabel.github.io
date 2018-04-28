@@ -241,9 +241,17 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 ### Inner layer sampling
 
-*[image #InnerLayerSampling: Sampling the inner layer contribution]*
+<p style="text-align: center">
 
-Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with  -- the refracted version of the outgoing direction and refract the generated incoming direction  back into the outside world. It is possible that the generated direction  is refracted back into the model due to total internal reflection (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
+<img src="../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="700" /><br/>
+
+Sampling the inner layer contribution component.
+
+</p>
+
+Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with the refracted version of the outgoing direction and refract the generated incoming direction through the virtual smooth interface back into the outside world. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
+
+It is possible that the generated direction  is refracted back into the model due to total internal reflection (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events.
 
 Now that we have constructed the sampling routine, we also need to evaluate its PDF. At first sight it seems that we just have to evaluate the original PDF using the refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, analogically to the way we modified the original sampling strategy
 

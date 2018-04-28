@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="RefrBsdfGeom.svg">
+   sodipodi:docname="RefrBsdfGeomSampling.svg">
   <defs
      id="defs2">
     <marker
@@ -1011,7 +1011,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1102,7 +1102,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Refractive Indices"
-     style="display:none"
+     style="display:inline"
      transform="translate(-20.395122,-26.891744)">
     <path
        d="m 37.190152,103.46839 v -0.48136 q -1.361954,0.59244 -1.911315,2.96219 -0.331904,1.40704 -0.320459,3.40651 v 4.81355 q 0,2.51786 -0.25179,3.51759 -0.354795,1.37001 -1.350509,1.37001 v 0.88866 q 0.972824,0 1.350509,1.37001 0.25179,0.92568 0.25179,2.92515 v 5.36896 q 0,2.03651 0.354795,3.5176 0.537915,2.25867 1.876979,2.92516 v -0.48136 q -0.904155,-0.77757 -1.258949,-2.36975 -0.32046,-1.44406 -0.32046,-4.073 v -5.10976 q 0,-1.92543 -0.27468,-2.85111 -0.29757,-1.03677 -1.121609,-1.66623 0.812594,-0.44433 1.133054,-1.88839 0.263235,-1.2219 0.263235,-3.70273 v -4.29517 q 0,-2.36975 0.29757,-3.85084 0.38913,-1.92542 1.281839,-2.29569 z"
@@ -1884,10 +1884,11 @@
            id="flowPara13005" /></flowRoot>      <g
          inkscape:groupmode="layer"
          id="layer18"
-         inkscape:label="Layer Name">
+         inkscape:label="Layer Name"
+         style="display:none">
         <text
            xml:space="preserve"
-           style="display:inline;font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="24.77997"
            y="82.397064"
            id="text12966"><tspan
