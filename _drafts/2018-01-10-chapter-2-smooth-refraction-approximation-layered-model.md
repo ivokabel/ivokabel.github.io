@@ -243,7 +243,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 <p style="text-align: center">
 
-<img src="../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="700" /><br/>
+<img src="../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="600" /><br/>
 
 Sampling the inner layer contribution component.
 
