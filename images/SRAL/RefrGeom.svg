@@ -561,11 +561,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4394401"
+     inkscape:zoom="0.72785822"
      inkscape:cx="491.51056"
-     inkscape:cy="257.70277"
+     inkscape:cy="147.79126"
      inkscape:document-units="mm"
-     inkscape:current-layer="svg8"
+     inkscape:current-layer="layer10"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1020"
@@ -587,7 +587,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -596,8 +596,8 @@
      id="layer10"
      inkscape:label="_ Shape Gallery"
      style="display:none"
-     sodipodi:insensitive="true"
-     transform="translate(-1.4689788,-16.412693)">
+     transform="translate(-1.4689788,-16.412693)"
+     sodipodi:insensitive="true">
     <path
        inkscape:connector-curvature="0"
        id="use4835"
@@ -619,7 +619,7 @@
      style="display:inline"
      transform="translate(-1.4689788,-16.412693)">
     <path
-       style="display:inline;fill:none;fill-rule:evenodd;stroke:#e9afaf;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker8602)"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#e9afaf;stroke-width:0.60000003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.20000006,2.40000012;stroke-opacity:1;marker-end:url(#marker8602);stroke-dashoffset:0"
        d="m 189.88091,81.214168 17.39354,32.321342"
        id="path8594"
        inkscape:connector-curvature="0" />
@@ -1020,21 +1020,21 @@
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:89.99999762%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="3.9159613"
-         y="101.03884"
+         y="94.688828"
          id="text12984"><tspan
            sodipodi:role="line"
            id="tspan12982"
            x="3.9159613"
-           y="101.03884"
+           y="94.688828"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:89.99999762%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px">Virtual</tspan><tspan
            sodipodi:role="line"
            x="3.9159613"
-           y="110.59406"
+           y="104.24404"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:89.99999762%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            id="tspan12997">smooth</tspan><tspan
            sodipodi:role="line"
            x="3.9159613"
-           y="120.14928"
+           y="113.79926"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:89.99999762%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            id="tspan12986">surface</tspan></text>
       <flowRoot
@@ -1050,7 +1050,7 @@
              y="375.93228" /></flowRegion><flowPara
            id="flowPara13005" /></flowRoot>      <path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13270)"
-         d="M 37.746772,107.60382 53.091632,84.759984"
+         d="M 36.940424,101.23439 49.756531,84.566394"
          id="path13262"
          inkscape:connector-curvature="0" />
     </g>
