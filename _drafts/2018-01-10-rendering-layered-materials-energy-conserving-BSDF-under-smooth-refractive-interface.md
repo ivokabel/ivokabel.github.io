@@ -13,7 +13,7 @@ Here I explain how to obtain a correct energy-conserving BSDF for a given BSDF s
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
 <p style="text-align: center">
-<img src="../../../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="600" />
+<img src="../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="600" />
 </p>
 
 where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the given BSDF, $\eta_0$, and $\eta_1$ are the refractive indices of media separated by the outer smooth layer, $N_g$ is the geometrical normal of the surface.
@@ -59,7 +59,7 @@ Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ r
 Now that we have defined the needed radiometry quantities, we can finally define the *bidirectional scattering density function* (BSDF), a formal description of the light-scattering properties of a surface point. It expresses how the light outgoing from a point $x$ on a surface in a particular direction $\omega_o$ is dependent on the light incoming to the point from a particular direction $\omega_i$:
 
 <p style="text-align: center">
-   <img src="../../../images/BRDF definition geometry.svg" alt="" width="500" /><br/>
+   <img src="../images/BRDF definition geometry.svg" alt="" width="500" /><br/>
    BSDF geometry.
 </p>
 
@@ -82,7 +82,7 @@ The radiometry and BSDF explanation is heavily inspired by the excellent [Eric V
 Using the general definition of BSDF, we'll now derive the proper formula for a layer under a smooth Fresnel surface. For that we will need to prepare 4 prerequisite formulae, which we will then use to build the final BSDF formula.
 
 <p style="text-align: center">
-<img src="../../../images/SRAL/RefrBsdfGeomSolidAngles.svg" alt="" width="600" />
+<img src="../images/SRAL/RefrBsdfGeomSolidAngles.svg" alt="" width="600" />
 </p>
 
 First, let's see what happens to the incoming radiance when it passes a smooth interface between two media with different indices of refraction
@@ -134,8 +134,8 @@ $$
 And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
 
 <p style="text-align: center">
-<img src="../../../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../../../images/SRAL/Blog_InnerGLossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/Blog_InnerGLossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
 Without and with solid angle compression compensation applied: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 *TODO: ?more general settings (various roughnesses, without medium)?*
