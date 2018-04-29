@@ -72,7 +72,7 @@ Last, but not least, the paper completely ignores effects of solid angle (de-)co
 ## Sampling
 
 <p style="text-align: center">
-   <img src="../images/Weidlich-Wilkie - Layers - Assumptions - Base.svg" alt="BSDF evaluation process" width="700" /><br/>
+   <img src="../images/Weidlich-Wilkie - Layers - Assumptions - Base.svg" alt="BSDF evaluation process" width="600" /><br/>
    Sampling configuration. Image reused from the Weidlich-Wilkie paper.
 </p>
 
