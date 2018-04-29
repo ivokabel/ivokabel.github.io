@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "Chapter 1: Weidlich-Wilkie Layered Model"
+title: "Rendering Layered Materials: Weidlich-Wilkie Layered Model"
 comments: true
 ---
 
-This is the first chapter of the the blog post [A Journey to the World of Layered Surface Materials](a-journey-to-the-world-of-layered-surface-materials.html). Here I present a (not that) brief introduction of the [original layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
+This is a chapter of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
+
+Here I present a (not that) brief explanation of the [original layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
 
 They assume that layers are micro-facet-based models and there is homogeneous attenuating medium between the layers. The ideally smooth Fresnel model can be used for outer layer too, since it can be thought of as a special case of a micro-facet model. Additionally a diffuse Lambert model can be used for the bottom layer since we only need to compute the reflection component without any special micro-facet-related assumptions on it.
 
