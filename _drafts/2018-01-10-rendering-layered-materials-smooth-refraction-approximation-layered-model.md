@@ -10,11 +10,11 @@ Here I present my approach to the layered surface material as an alternative to 
 
 ## Overall Model Description
 
-At first sight, my layered model doesn't differ very much from the WWL model, but it contains *important incremental* improvements, which solve *some/critical?/various/several* problems of the previous model and offers a rigorous formulation of the model consistent with radiometry*/(BSDF)* framework and Monte Carlo theory. Namely, the improvements are:
+At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model consistent with radiometry framework and Monte Carlo theory. Namely, the improvements are:
 
 - Using **geometric normal** for refraction instead of micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
-- *(reworked and more efficient?, ...)* **sampling strategy optimization**.
+- Properly designed and more efficient **sampling strategy**.
 
 The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (outer and inner), which I denote
 
@@ -47,9 +47,9 @@ The new model still assumes single-point simplifications of both evaluation and 
 <img src="../images/SRAL/RefractionThroughGeomNormal.svg" alt="" width="500" />
 </p>
 
-It is *important to keep in mind* that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths. *(Comparisons needed!)*
+It should be kept in mind that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. *This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths.* *(Comparisons needed!)*
 
-It is also important to keep in mind that both models neglect the energy which is reflected from the outer layer back into the medium (*multiple scattering*). *WWL model uses some kind of compensation!...*
+It is also good to remember that both models neglect the energy which is reflected from the outer layer back into the medium (*multiple scattering*). *WWL model uses some kind of compensation!...*
 
 *Why should my approximation work?... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
 
@@ -380,6 +380,17 @@ To sample from blended PDF, first randomly pick one of the sampling sub-routines
 
 *[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance from light sampling. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
 
-## Conclusion
+## Conclusion/Results
 
-...
+I presented here a surface model for rendering layered materials built upon the ideas of the WWL paper while improving various aspects of the original model.
+
+Example images:
+
+- Clear medium
+  - Glossy Paint: Lambert + Smooth
+  - Frosted Paint: Lambert + Glossy
+- Coloured medium
+  - Metal Foil: Smooth + Smooth
+  - Metallic Paint: Glossy + Smooth
+  - Tinted Glazing: Lambert + Smooth
+  - Frosted Metal: Glossy + Glossy
