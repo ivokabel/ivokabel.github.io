@@ -6,9 +6,7 @@ comments: true
 
 This is a chapter of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
-Here I present my approach to the layered surface material as an alternative to the [layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie from 2007 (which I refer to as *the original model or* the WWL model).
-
-*This chapter contains: an overall explanation of my model (philosophy, differences from WWL, ...), its evaluation and sampling and an analysis of the model behaviour...*
+Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as *the original model or* the WWL model). This chapter contains: an overall explanation of my model, its evaluation and sampling process, and a few examples result images.
 
 ## Overall Model Description
 
