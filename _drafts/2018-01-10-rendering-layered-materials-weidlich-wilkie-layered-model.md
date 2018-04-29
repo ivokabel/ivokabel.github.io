@@ -53,7 +53,7 @@ $$
 
 where $G$ is the geometric attenuation term of the micro-facet model used. The authors didn't bother to explain whether it is the geometric term of the outer or the inner layer, but it, most likely, is the outer one.
 
-### My notes
+### My notes on evaluation
 
 First, there is no explanation of the $t$ component at all! The inner layer reflection component looks like this after expansion of $t$:
 
@@ -88,7 +88,7 @@ $$
 p=w_{1}p_{1} + w_{2}p_{2}
 $$
 
-### My notes
+### My notes in sampling
 
 I find the sampling process of the paper problematic. It basically randomly picks one of the layers according to probabilities equal to constants $w_i$ and uses its PDF to generate the resulting direction. Since the sampling strategy should be as much proportional to the whole BSDF as possible to get good importance sampling, we need to weight the individual sampling PDFs with the actual contributions of the respective BSDF components (layers). Therefore, using constant weights hardly leads to an optimal sampling strategy since it completely ignores both the Fresnel attenuation and the attenuation within the medium which are both direction dependent.
 
