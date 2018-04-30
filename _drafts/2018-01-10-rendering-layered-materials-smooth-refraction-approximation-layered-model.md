@@ -173,6 +173,15 @@ The result may now, in fact, look much darker than expected for some settings (e
 Darkening due to missing multi-scattered energy. Ideally white Lambert inner layer with refracted directions under various light settings.
 </p>
 
+In case of ideally diffuse (constant) inner layer, one can partially compensate the missing multi-scattered energy by omitting the compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$. This will put back into equation the energy which gets reflected back to the medium through [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR), but not the energy which undergoes partial reflection. This basically leads to the results of the "naïve refraction" approach:
+
+<p style="text-align: center">
+<img src="C:/Users/Ivo/Creativity/Programming/05%20PG3%20Training/ivokabel.github.io/images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
+Compensation of the missing in-scattered energy due to TIR for a ideally diffuse inner layer by omitting the solid angle (de-)compression compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$.
+</p>
+
+Unfortunately, this approach is not applicable in case of non-diffuse inner layers.
+
 *It's important to note, that we still use the single-point simplification here as was used in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.*
 
 *Mention Mitsuba's version? Even they struggled with it and still don't use the correct BSDF. Maybe after I try its approach practically and show the results...*
