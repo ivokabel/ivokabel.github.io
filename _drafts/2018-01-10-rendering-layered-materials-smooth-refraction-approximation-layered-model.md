@@ -380,9 +380,9 @@ To sample from blended PDF, first randomly pick one of the sampling sub-routines
 
 *[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance from light sampling. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
 
-## Conclusion/Results
+## Results
 
-I presented here a surface model for rendering layered materials built upon the ideas of the WWL paper while improving various aspects of the original model.
+*I presented here a surface model for rendering layered materials built upon the ideas of the WWL paper while improving various aspects of the original model.*
 
 Example images:
 
