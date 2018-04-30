@@ -8,7 +8,7 @@ This is a chapter of the blog post series [Rendering Layered Materials](renderin
 
 Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as *the original model or* the WWL model). This chapter contains: an overall explanation of my model, its evaluation and sampling process, and a few examples result images.
 
-## Overall Model Description
+## Overall model description
 
 At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model consistent with radiometry framework and Monte Carlo theory. Namely, the improvements are:
 
