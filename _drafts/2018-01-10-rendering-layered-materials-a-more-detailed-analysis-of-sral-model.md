@@ -4,7 +4,7 @@ title: "Rendering Layered Materials: A More Detailed SRAL Model Analysis"
 comments: true
 ---
 
-This is a chapter of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
 Here I explain...
 

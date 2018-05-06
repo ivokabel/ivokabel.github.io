@@ -4,7 +4,7 @@ title: "Rendering Layered Materials: Weidlich-Wilkie Layered Model"
 comments: true
 ---
 
-This is a chapter of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
 Here I present a (not that) brief explanation of the [original layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference).
 

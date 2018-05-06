@@ -4,9 +4,9 @@ title: "Rendering Layered Materials: Smooth Refraction Approximation Layered Mod
 comments: true
 ---
 
-This is a chapter of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
-Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as *the original model or* the WWL model). This chapter contains: an overall explanation of my model, its evaluation and sampling process, and a few examples result images.
+Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as *the original model or* the WWL model). This part contains: an overall explanation of my model, its evaluation and sampling process, and a few examples result images.
 
 ## Overall model description
 
