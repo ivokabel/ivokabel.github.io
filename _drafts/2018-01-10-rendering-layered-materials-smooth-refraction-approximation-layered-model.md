@@ -10,13 +10,13 @@ Here I present my approach to the layered surface material as an alternative to 
 
 ## Overall model description
 
-At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model consistent with radiometry framework and Monte Carlo theory. Namely, the improvements are:
+At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model consistent with radiometry and Monte Carlo integration framework. Namely, the improvements are:
 
 - Using **geometric normal** for refraction instead of micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
 - Properly designed and more efficient **sampling strategy**.
 
-The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (outer and inner), which I denote
+The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (1 -- outer and 2 -- inner), which I denote
 
 $$
 \begin{eqnarray*}
