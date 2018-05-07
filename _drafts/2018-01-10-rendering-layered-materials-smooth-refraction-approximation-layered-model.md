@@ -27,7 +27,7 @@ $$
 
 where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. A direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is the azimuth and $\theta$ is the inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
 
-The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two *components/sub-BSDFs* $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ representing the *contributions* of the respective layers:
+The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two sub-BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ representing the contributions of the respective layers:
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -324,7 +324,7 @@ given that weights $w_1$ and $w_2$ are normalized (their sum equals 1). The main
 On the outer layer, the light is either reflected from or refracted through the layers micro-facets. We will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
 
 $$
-w_{1} = F\left(\theta_{o}\right)
+I_{1} = F\left(\theta_{o}\right)
 $$
 
 #### Inner layer integral
@@ -362,7 +362,7 @@ Both missing components $T\left(\theta_{i}\right)$ and $a\left(\theta_{i}, \thet
 After putting everything together, the resulting approximation for the inner layer contribution integral is then
 
 $$
-w_{2} = 
+I_{2} = 
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{o}, \theta_{o}\right) \rho_{s2}
 $$
 
@@ -374,8 +374,8 @@ Now that we have the integral approximations $w_{1}$ and $w_{2}$, we obtain the 
 
 $$
 \begin{eqnarray}
-w_{1}^{\ast}&=&\frac{w_{1}}{w_{1} + w_{2}} \\
-w_{2}^{\ast}&=&\frac{w_{2}}{w_{1} + w_{2}}
+w_{1}&=&\frac{I_{1}}{I_{1} + I_{2}} \\
+w_{2}&=&\frac{I_{2}}{I_{1} + I_{2}}
 \end{eqnarray}
 $$
 
