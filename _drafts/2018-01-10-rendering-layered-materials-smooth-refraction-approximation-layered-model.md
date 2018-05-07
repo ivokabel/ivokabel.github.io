@@ -317,11 +317,11 @@ $$
 p = w_{1}p_{1} * w_{2}p_{2}
 $$
 
-The main question *then* is how to choose the weights to make the resulting PDF as proportional to $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
+given that weights $w_1$ and $w_2$ are normalized (their sum equals 1). The main question *then* is how to choose the weights to make the resulting PDF as proportional to $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
 
 #### Outer layer integral
 
-On the outer layer, the light is either reflected from or refracted through the layers micro-facets and we will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
+On the outer layer, the light is either reflected from or refracted through the layers micro-facets. We will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
 
 $$
 w_{1}^{\ast} = F\left(\theta_{o}\right)
@@ -370,7 +370,7 @@ Where $\eta_{1}^{2}$ and $\eta_{0}^{2}$ are refractive indices of the respective
 
 #### Complete sampling routine
 
-Now that we have the integrals approximations $w_{1}^{\ast}$ and $w_{2}^{\ast}$, we obtain the PDF weights by normalizing the approximations
+Now that we have the integral approximations $w_{1}^{\ast}$ and $w_{2}^{\ast}$, we obtain the PDF weights by normalizing the approximations
 
 $$
 \begin{eqnarray}
