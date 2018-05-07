@@ -6,17 +6,17 @@ comments: true
 
 This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
-Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as *the original model or* the WWL model). This part contains: an overall explanation of my model, its evaluation and sampling process, and a few examples result images.
+Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as the WWL model or just the original model). This part contains an overall explanation of my model, its evaluation and sampling process, and a few example result images.
 
 ## Overall model description
 
-At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model consistent with radiometry and Monte Carlo integration framework. Namely, the improvements are:
+At first sight, my layered model doesn't differ very much from the WWL model, but it contains important improvements, which solve several problems of the previous model and offers a rigorous formulation of the model built upon the radiometry and the Monte Carlo integration framework. Namely, the improvements are:
 
-- Using **geometric normal** for refraction instead of micro-facet's one.
+- Using **geometric normal** for refraction instead of the reflection micro-facet's one.
 - Adding the missing compensation of **solid angle (de-)compression** effects in both evaluation and sampling -- solves the energy conservation problem and incorrect sampling PDF leading to a biased Monte-Carlo estimator.
 - Properly designed and more efficient **sampling strategy**.
 
-The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function) (1 -- outer and 2 -- inner), which I denote
+The model has two main parameters -- two stand-alone layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), which I denote
 
 $$
 \begin{eqnarray*}
@@ -25,17 +25,15 @@ $$
 \end{eqnarray*}
 $$
 
-where $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. A direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is the azimuth and $\theta$ is the inclination, i.e. angle between the direction and the surface normal. For the sake of clarity, I will, from time to time, omit some of the parameters. Note that in the original paper those BSDFs were denoted without asterisk and with $r$ subscript to *signal* that they are just reflective [BRDFs](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDFs: $f_{r1}$ and $f_{r2}$.
+where index 1 means outer layer, index 2 means inner layer, $x$ is the surface point at which the model is evaluated, $\omega_{i}$ is the incident light direction, and $\omega_{o}$ is the outgoing light direction. For the sake of clarity, I will, from time to time, omit some of the parameters. Any direction $\omega$ can be expressed as a pair of angles $\left(\phi,\theta\right)$, where $\phi$ is the azimuth and $\theta$ is the inclination, i.e. angle between the direction and the surface normal. 
 
-The resulting model BSDF $f_{s}$ can be vaguely understood as a sum of two sub-BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ representing the contributions of the respective layers:
+The resulting model BSDF $f_{s}$ can be understood as a sum of two sub-BSDFs $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ representing the contributions of the respective layers, which I sometimes call **contribution BSDFs** or **layers' contributions**:
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-I sometimes call the functions $f_{s1}^{\ast}$ and $f_{s2}^{\ast}$ the **contribution BSDFs** or just **contributions**.
-
-The outer layer is expected to be a microfacet-based interface between two media with refractive indices: $\eta_0$ above the outer layer and $\eta_1$ between the outer and inner layer. There is no assumption on the medium below the inner layer.
+The outer layer is assumed to be a micro-facet-based interface between two media with refractive indices $\eta_0$ and $\eta_1$ respectively. The inner layer is assumed to be reflection only, i.e. without transmission component. There is no assumption on the medium below the inner layer.
 
 ### Refraction through the geometrical normal
 
