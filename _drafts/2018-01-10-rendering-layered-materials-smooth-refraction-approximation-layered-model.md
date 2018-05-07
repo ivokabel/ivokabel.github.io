@@ -57,7 +57,7 @@ $$
 
 ### Outer layer
 
-The contribution BSDF of the outer layer is trivial. It can be split into the reflection and refraction part. The light which gets refracted through the first layer into the model is accounted for in the inner layer component so we ignore it here and the renderer must make sure that it is not evaluated for directions below surface. Since the reflected light is unaffected by the rest of the model and the whole model takes only reflection directions into account, it can be evaluated directly by evaluating the outer layer BSDF $f_{s1}$ *without any modification*. Therefore:
+The contribution BSDF of the outer layer is rather trivial. The incident light is partially reflected and partially refracted. The light which gets refracted through the first layer is accounted for within the inner layer component so we ignore it here and the renderer must make sure that it is not evaluated for directions below surface. Since the reflected light is unaffected by the rest of the model and the whole model takes only reflection directions into account, it can be evaluated directly by evaluating the outer layer BSDF $f_{s1}$ without any modification:
 
 $$
 f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -70,11 +70,11 @@ Reflection contribution of a highly glossy micro-facet outer layer (Smith micro-
 
 ### Inner layer
 
-For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
+For the inner layer, the things are considerably more complicated because the light which reaches it undergoes refraction when passing the outer layer, gets attenuated by the medium between the layers, and gets refracted again when passing the model through the outer layer for the second time. Let's have a look at how do these mechanisms affect the inner layer contribution one after another.
 
 #### Naïve refraction
 
-Let's start with an inner layer (white Lambert) without any modifications, which will undergo the aforementioned modifications later on. BSDF is the original one:
+Let's start with an inner layer (Lambert in the example picture) without any modifications, which will undergo the aforementioned modifications later on:
 
 $$
 f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)
@@ -84,11 +84,9 @@ $$
 <img src="../images/SRAL/Blog_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
 Plain, ideally white Lambert without any modifications under various light settings.
 
-*TODO: Use 95% Lambert to see something geometry in the furnace test?*
-
 </p>
 
-The inner layer, in fact, *deals* with refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$ as can be seen in the *image [#RefrGeom]*. After applying  the modified directions, the inner layer contribution will look like this:
+The inner layer is evaluated for refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$ instead of the directions at the outer layer $\omega_{i}$ and $\omega_{o}$. After replacing the directions, the inner layer contribution will look like this:
 
 $$
 f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
@@ -96,12 +94,10 @@ $$
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
-Ideally white Lambert with refracted directions under various light settings. Since Lambert model is a constant BSDF, changing directions doesn't change the shape of the BSDF in the upper hemisphere; therefore, the behaviour is identical to the version with unmodified directions.
+Ideally white Lambert with refracted directions under various light settings. Since Lambert model is a constant BSDF, changing directions doesn't change the shape of the BSDF in the upper hemisphere; therefore, the behaviour is identical to the version with unmodified directions. Behaviour of non-constant inner layers with refracted parameters will be shown later.
 </p>
 
-*This seemingly doesn't change anything... lambert is constant -- no change in BSDF shape in the positive hemisphere...we stick with Lambert for simplicity...we'll get to different configurations later...*
-
-The light passing through the smooth interface gets attenuated according to the Fresnel equations, which attenuates the light at grazing angles:
+The light passing through the smooth interface gets attenuated according to the Fresnel equations:
 
 $$
 f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right)
@@ -111,12 +107,12 @@ Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel 
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
-Ideally white Lambert with refracted directions and Fresnel attenuation under various light settings.
+Ideally white Lambert with refracted directions and Fresnel attenuation under various light settings. Fresnel components affects the amount of transmitted light mostly at grazing angles.
 </p>
 
 #### Medium attenuation
 
-After refraction, we will add the effect of medium attenuation. In a non-scattering medium, the attenuation $a$ can be well modeled with the [Beer-Lambert-Bouguer law](https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law), exactly as it was done in the original paper:
+After refraction, we add the effect of medium attenuation. In a non-scattering medium, the attenuation $a$ can be well modeled with the [Beer-Lambert-Bouguer law](https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law), exactly as it was done in the original paper:
 
 $$
 a\left(\theta_{i}, \theta_{o}\right)  = e^{-\alpha\left(d\cdot\left(\frac{1}{\cos\theta_{i}^{\prime}}+\frac{1}{\cos\theta_{o}^{\prime}}\right)\right)}
@@ -128,20 +124,16 @@ $$
 f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
-To demonstrate the effect of medium attenuation I used a purely white diffuse Lambert surface model for the inner layer and a brown medium with decreasing inter-layer thicknesses. You can nicely see the effect of darkening and colour saturation when the light passed through different amounts of medium:
-
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_MediumAttenuation_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/Blog_MediumAttenuation_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/Blog_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>Ideally white Lambert layer with refracted directions, Fresnel attenuation and orange medium attenuation with varying medium thickness under various light settings.
-
-*TODO: Without Fresnel?*
+<img src="../images/SRAL/Blog_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>Ideally white Lambert layer with refracted directions, Fresnel attenuation and orange medium attenuation with several medium thicknesses under various light settings. You can nicely see the effect of darkening and colour saturation when the light passed through thicker layers.
 
 </p>
 
 #### Proper refraction
 
-Although everything looks pretty straightforward in the previous images, there is a problem of we use a non-constant BSDF for the inner layer:
+Although everything looks pretty straightforward in the previous images, a problem arises if we use a non-constant BSDF for the inner layer:
 
 <p style="text-align: center">
 
@@ -150,13 +142,13 @@ Broken energy conservation due to refracted directions: Glossy inner layer (GGX 
 
 </p>
 
-Although we used a physically-plausible energy-conserving model for the inner layer, the resulting inner layer model is much lighter than one would expect for thick medium. In the furnace test (constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by us neglecting the **compression and decompression of light** when crossing an interface between media with different indices of refraction.
+Although we used a physically-plausible energy-conserving model for the inner layer, the resulting inner layer model is in some scenarios much lighter than one would expect. In the furnace test (constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by ignoring the **compression and decompression of light** when crossing an interface between media with different indices of refraction.
 
-I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event.  For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) It basically says that the only thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
+I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) -- it basically says that the thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
 
 <p style="text-align: center">
 <img src="../images/SRAL/Blog_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
-Energy conservation fixed with solid angle compression compensation: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
+Energy conservation fixed with solid angle compression compensation $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 </p>
 
@@ -176,21 +168,17 @@ Compensation of the missing in-scattered energy due to TIR for a ideally diffuse
 
 Unfortunately, this approach is not applicable in case of non-diffuse inner layers.
 
-*It's important to note, that we still use the single-point simplification here as was used in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.*
-
-*Mention Mitsuba's version? Even they struggled with it and still don't use the correct BSDF. Maybe after I try its approach practically and show the results...*
-
 #### Inner layer formula
 
 If we put together all the components which affect the inner layer contribution, we'll get the final formula for the inner layer:
 
 $$
-f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} a\left(\theta_{i}, \theta_{o}\right)
+f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
 $$
 
 where $f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)$ is the stand-alone BSDF of the inner layer, $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation and $a$ is the medium attenuation coefficient.
 
-Just a side note: Since we are implicitly assume a rendering system which is not polarization aware, we don't have to worry about the order in which the coefficients are multiplied together. In a polarization-aware system, however, multiplication operations (representing light-matter interaction) would have to be dealt with much more care.
+Just a side note: Since we are implicitly assume a rendering system which is not polarization aware, we don't have to worry about the order in which the coefficients are multiplied together. In a polarization-aware system, however, multiplication operations (representing light-matter interaction) have to be dealt with much more care.
 
 ### Whole formula
 
@@ -208,7 +196,10 @@ The complete model for one type of configuration may look like this:
 <img src="../images/SRAL/Blog_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/Blog_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/Blog_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
-The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. *TODO: dark inner layer due to multi-scattering.*
+The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings.
+
+ *TODO: apply multi-scattering energy compensation.*
+
 </p>
 
 <p style="text-align: center">
