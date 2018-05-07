@@ -241,8 +241,9 @@
      inkscape:groupmode="layer"
      id="layer10"
      inkscape:label="_ Shape Gallery"
-     style="display:inline"
-     transform="translate(-1.4689788,-16.412693)">
+     style="display:none"
+     transform="translate(-1.4689788,-16.412693)"
+     sodipodi:insensitive="true">
     <path
        inkscape:connector-curvature="0"
        id="use4835"
