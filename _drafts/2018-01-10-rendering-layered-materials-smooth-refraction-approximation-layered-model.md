@@ -33,23 +33,19 @@ $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
-The outer layer is assumed to be a micro-facet-based interface between two media with refractive indices $\eta_0$ and $\eta_1$ respectively. The inner layer is assumed to be reflection only, i.e. without transmission component. There is no assumption on the medium below the inner layer.
+The outer layer is assumed to be a micro-facet-based interface between two media with refractive indices $\eta_0$ and $\eta_1$. The inner layer is assumed to be reflection only, i.e. without transmission component. There is no assumption on the medium below the inner layer.
 
 ### Refraction through the geometrical normal
 
-The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering behaviour of the medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the whole evaluation and sampling process. The difference of my model is that for computing refraction directions it uses the geometrical normal rather than the micro-facet's one.
-
-*It behaves as if we temporarily shrank the distribution of micro-facets into a Dirac pulse -- super highly specular material. The same amount of energy gets refracted, but in modified (degenerated) set of directions...*
+The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the evaluation and sampling process. For computing refractions, my model uses the geometrical normal rather than the micro-facet's one. The result is that it behaves as if the light refracted through a virtual ideally smooth surface instead of through the arbitrarily rough micro-facet outer layer. This way the same amount of energy gets refracted, but in a single direction instead of through a set of directions. Obviously, the higher the specularity of the outer surface is the better this approximation behaves.
 
 <p style="text-align: center">
 <img src="../images/SRAL/RefractionThroughGeomNormal.svg" alt="" width="500" />
 </p>
 
-It should be kept in mind that the new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which *the peak amount of energy flows*. *This makes it a better representative/estimate of the actual total (single-scattered) energy transferred via all refracted paths.* *(Comparisons needed!)*
+The new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which the peak amount of energy flows.
 
-It is also good to remember that both models neglect the energy which is reflected from the outer layer back into the medium (*multiple scattering*). *WWL model uses some kind of compensation!...*
-
-*Why should my approximation work?... The higher the specularity of the outer surface is the better the approximation behaves. For rougher surfaces the light is spreads over a wider interval of directions --> the Fresnel behaves differently (especially at grazing angles), the inner layer is lit from wider set of angles --> approximation starts to fail... But, at least the amount of transmitted energy should roughly approximate the actual transmission.*
+It is good to keep in mind that both models neglect the energy which is reflected from the inside of the outer layer back into the medium and reemerges on the surface after multiple scattering events between the layers. The WWL model uses some kind of compensation for the missing energy, but the paper doesn't explain this in detail.
 
 ## Evaluation
 
