@@ -16,7 +16,7 @@ One way of obtaining the correct form of a BSDF under a smooth refractive interf
 <img src="../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="500" />
 </p>
 
-where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the given BSDF, $\eta_0$, and $\eta_1$ are the refractive indices of media separated by the outer smooth layer, $N_g$ is the geometrical normal of the surface.
+where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the given BSDF, $\eta_0$ and $\eta_1$ are the refractive indices of media separated by the outer smooth layer, $N_g$ is the geometrical normal of the surface.
 
 In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
 
