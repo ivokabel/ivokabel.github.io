@@ -147,7 +147,7 @@ Although we used a physically-plausible energy-conserving model for the inner la
 I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) -- it basically says that the thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
 Energy conservation fixed with solid angle compression compensation $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 </p>
@@ -155,7 +155,7 @@ Energy conservation fixed with solid angle compression compensation $\frac{\eta_
 The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering nature of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerLambert_SolAngComp_512s.jpg" alt="" width="500" /><br/>
+<img src="../images/SRAL/BlogExplanation_InnerLambert_SolAngCompress_512s.jpg" alt="" width="500" /><br/>
 Darkening due to missing multi-scattered energy. Ideally white Lambert inner layer with refracted directions under various light settings.
 </p>
 
