@@ -196,9 +196,7 @@ The complete model for one type of configuration may look like this:
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
-The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings.
-
- *TODO: apply multi-scattering energy compensation.*
+The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. Compensation of the missing in-scattered energy due to TIR by omitting the solid angle (de-)compression compensation is applied.
 
 </p>
 

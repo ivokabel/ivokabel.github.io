@@ -135,7 +135,7 @@ And that's it, folks! You can see that our original approach, *in which we just 
 
 <p style="text-align: center">
 <img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_InnerGLossyMedium_SolAngComp_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../images/SRAL/BlogExplanation_InnerGLossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
 Without and with solid angle compression compensation applied: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 *TODO: ?more general settings (various roughnesses, without medium)?*
