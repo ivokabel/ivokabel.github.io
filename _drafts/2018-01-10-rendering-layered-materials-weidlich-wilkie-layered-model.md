@@ -88,7 +88,7 @@ $$
 p=w_{1}p_{1} + w_{2}p_{2}
 $$
 
-### My notes in sampling
+### My notes on sampling
 
 Not enough attention is paid to explaining how to correctly and efficiently generate samples. The sampling process randomly picks one of the layers according to probabilities equal to constants $w_i​$ and uses its PDF to generate the resulting direction. Since the sampling strategy should be as proportional to the whole BSDF as possible to get good importance sampling, we need to weight the individual sampling PDFs with the actual contributions of the respective BSDF components (layers). Therefore, using constant weights hardly leads to an optimal sampling strategy since it completely ignores both the Fresnel attenuation and the attenuation within the medium which are both direction dependent.
 
