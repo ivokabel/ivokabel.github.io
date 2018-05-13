@@ -170,7 +170,7 @@ Unfortunately, this approach is not applicable in case of non-diffuse inner laye
 
 #### Inner layer formula
 
-If we put together all the components which affect the inner layer contribution, we'll get the final formula for the inner layer:
+If we put together all the components which affect the inner layer contribution, we'll get the final formula for the inner layer contribution:
 
 $$
 f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
@@ -182,21 +182,21 @@ Just a side note: Since we are implicitly assume a rendering system which is not
 
 ### Whole formula
 
-Just to summarize, the complete BSDF formula containing contributions of both layers is
+To summarize, the complete BSDF formula containing contributions of both layers is
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{i}\rightarrow\omega_{o}\right) + f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}}
 $$
 
-where $f_{s1}$ and $f_{s2}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see section "Medium attenuation") and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle compression compensation. It's important to notice that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than BSDF, because it is properly defined only for directions from the upper hemisphere.
+where $f_{s1}$ and $f_{s2}$ are the stand-alone outer and inner layer [BSDFs](https://en.wikipedia.org/wiki/Bidirectional_scattering_distribution_function), $T \left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see section "Medium attenuation" for details) and $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$ is the projected solid angle (de-)compression compensation. It's important to note that the formula is, in fact, just a [BRDF](https://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function) rather than a BSDF, because it is properly defined only for directions from the upper hemisphere.
 
-The complete model for one type of configuration may look like this:
+The complete model for glossy outer layer may look like this (more examples at the end of the post):
 
 <p style="text-align: center">
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
-The whole formula using highly glossy outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. Compensation of the missing in-scattered energy due to TIR by omitting the solid angle (de-)compression compensation is applied.
+The whole formula using almost specular outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. Compensation of the missing in-scattered energy due to TIR by omitting the solid angle (de-)compression compensation is applied.
 
 </p>
 
@@ -204,7 +204,7 @@ The whole formula using highly glossy outer layer, ideally white Lambert inner l
 <img src="../images/SRAL/BlogExplanation_WholeGlossy_EM1_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeGlossy_EM7_512s.jpg" alt="" width="700" /><br/>
 <img src="../images/SRAL/BlogExplanation_WholeGlossy_EM10_512s.jpg" alt="" width="700" /><br/>
-The whole formula using highly glossy outer layer, glossy conductor inner layer and orange medium between them with varying medium thickness under various light settings.
+The whole formula using almost specular outer layer, glossy conductor inner layer and orange medium between them with varying medium thickness under various light settings.
 </p>
 
 ## Sampling
