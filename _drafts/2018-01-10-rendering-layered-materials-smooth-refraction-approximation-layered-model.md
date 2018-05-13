@@ -209,15 +209,15 @@ The whole formula using almost specular outer layer, glossy conductor inner laye
 
 ## Sampling
 
-In a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_integration)-based (MC) rendering system (e.g. path tracing) a BSDF model needs to provide not only an evaluation formula, but also a direction *sampling strategy* with evaluation of its [PDF](https://en.wikipedia.org/wiki/Probability_density_function). Since the sampling strategy can be partially described by its PDF, it is often sufficient to use the symbol of the PDF to denote the whole strategy (e.g. $p$).
+In a [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_integration)-based (MC) rendering system (e.g. path tracing) a BSDF model needs to provide not only its evaluation formula, but also a direction sampling strategy with evaluation of its [PDF](https://en.wikipedia.org/wiki/Probability_density_function). To denote a sampling strategy it is often sufficient to use the symbol of its PDF (e.g. $p$).
 
-In our layered model we assume that the stand-alone *outer and inner layer* BSDFs $f_{s1}$ and $f_{s2}$ provide their own sampling strategies $p_1$ and $p_2$ respectively, which we will use to build a sampling strategy $p$ for the whole model. Since our BSDF is a simple sum of two slightly modified BSDFs, we can build a reasonably efficient overall sampling strategy $p$ by blending two slightly modified strategies $p_1$ and $p_2$, given that they are reasonably efficient on their own:
+In our layered model we assume that the stand-alone outer and inner layer BSDFs $f_{s1}$ and $f_{s2}$ provide their own reasonably efficient sampling strategies $p_1$ and $p_2$ respectively, which we will use to build a sampling strategy for the whole model. Since our BSDF is a simple sum of two slightly modified BSDFs, we can build a reasonably efficient overall sampling strategy $p$ by simple blending of their slightly modified strategies:
 
 $$
 p\left(\omega_{i},\omega_{o}\right) = w_{1}p_{1}^{\ast}\left(\omega_{i},\omega_{o}\right) + w_{2} p_{2}^{\ast}\left(\omega_{i},\omega_{o}\right)
 $$
 
-where $p_1^{\ast}$ and $p_2^{\ast}$ are the sampling strategies of the respective BSDF layers contributions (modified strategies $p_1$ and $p_2$), $\omega_{i}$ is the (sampled) direction of incident light, $\omega_{o}$ is the (fixed) outgoing light direction and $w_1$ and $w_2$ are the blending coefficients.
+where $p_1^{\ast}$ and $p_2^{\ast}$ are modified sampling strategies of the respective BSDF layers contributions, $\omega_{i}$ is the (sampled) direction of incident light, $\omega_{o}$ is the (fixed) outgoing light direction and $w_1$ and $w_2$ are the blending coefficients.
 
 First, we'll have a look at separate sampling strategies $p_1^{\ast}$ and $p_2^{\ast}$, then we'll combine them together to obtain $p$.
 
