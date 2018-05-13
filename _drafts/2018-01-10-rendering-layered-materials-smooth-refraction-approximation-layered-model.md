@@ -217,7 +217,7 @@ $$
 p\left(\omega_{i},\omega_{o}\right) = w_{1}p_{1}^{\ast}\left(\omega_{i},\omega_{o}\right) + w_{2} p_{2}^{\ast}\left(\omega_{i},\omega_{o}\right)
 $$
 
-where $p_1^{\ast}$ and $p_2^{\ast}$ are modified sampling strategies of the respective BSDF layers contributions, $\omega_{i}$ is the (sampled) direction of incident light, $\omega_{o}$ is the (fixed) outgoing light direction and $w_1$ and $w_2$ are the blending coefficients.
+where $p_1^{\ast}$ and $p_2^{\ast}$ are modified sampling strategies of the respective BSDF layers contributions, $\omega_{i}$ is the (sampled) direction of incident light, $\omega_{o}$ is the (fixed) outgoing light direction and $w_1$ and $w_2$ are some blending coefficients.
 
 First, we'll have a look at separate sampling strategies $p_1^{\ast}$ and $p_2^{\ast}$, then we'll combine them together to obtain $p$.
 
@@ -237,13 +237,13 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 <img src="../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="500" /><br/>
 
-Sampling the inner layer contribution component.
+Sampling geometry for the inner layer contribution component, where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the inner layer BSDF.
 
 </p>
 
-Sampling the inner layer component is not hard either, we just have to feed the original strategy of the inner stand-alone BSDF with the refracted version of the outgoing direction and refract the generated incoming direction through the virtual smooth interface back into the outside world. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
+Sampling the inner layer component is not hard either, although a little bit tricky. We have to feed the original strategy of the inner stand-alone BSDF with the refracted version of the outgoing direction and refract the generated incoming direction through the virtual smooth interface back into the outside world. This approach will modify the shape of the original sampling PDF in the same way we modified the shape of the original stand-alone BSDF.
 
-It is possible that the generated direction  is refracted back into the model due to total internal reflection (TIR). The resulting sample in such case is still valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events.
+It is possible that the generated direction is refracted back into the model due to total internal reflection (TIR). The resulting sample in such case is valid, it must not be discarded and its contribution is zero because our model neglects energy which undergoes multiple scattering events.
 
 Now that we have constructed the sampling routine, we also need to evaluate its PDF. At first sight it seems that we just have to evaluate the original PDF using the refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, analogically to the way we modified the original sampling strategy
 
@@ -251,7 +251,7 @@ $$
 p_2^{\ast}\left(\omega_{i}, \omega_{o}\right) = p_2\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right)
 $$
 
-If we feed a MC renderer with such PDF, the result will look like this:
+However, if we feed a MC renderer with such PDF, the result will look like this:
 
 <p style="text-align: center">
 
@@ -259,7 +259,7 @@ If we feed a MC renderer with such PDF, the result will look like this:
 Too dark inner layer problem: Glossy conductor inner layer with refracted direction and Fresnel attenuation under various light settings.
 </p>
 
-As you can see, the result is much darker than it should be. *It's because our PDF is computed incorrectly!* The reason is that the non-uniform change of directions due to refraction changes the solid angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
+As you can see, the result is much darker than it should be. The reason is that the change of directions due to refraction also changes the solid angular density of directional samples. Since the sampling PDF expresses the density of generated samples with respect to the solid angle measure, we need to compensate the original PDF accordingly to get the correct value.
 $$
 p_2^{\ast}\left(\omega_{i}, \omega_{o}\right) = p_2\left(\omega_{i}^{\prime}, \omega_{o}^{\prime}\right) \frac{\eta_{0}^2 \cos\theta_{i}}{\eta_{1}^2 \cos\theta^{\prime}_{i}}
 $$
@@ -274,15 +274,13 @@ Too dark inner layer problem fixed: Glossy conductor inner layer with refracted 
 
 ### Sampling both layers
 
-*Naïve approach? One could possibly use some ad-hoc/fixed weighting approach, but to obtain better result, we need to be more sophisticated about it....*
-
-To obtain an efficient MC estimator of the *scattering/rendering* integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. i.e. scaled by a factor to make its integral over the whole sphere equal 1. The integrand in the practically used form is
+To obtain an efficient MC estimator of the rendering integral, the sampling PDF has to be as proportional to the integrand as possible. Ideally, the sampling PDF should be the normalized version of the integrand. i.e. scaled by a factor to make its integral over the whole sphere equal 1. The integrand in the practically used form is
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)L_{i}\left(\omega_{i}\right)\cos\theta_{i}
 $$
 
-However, because we usually don't know the distribution of the incident radiance, the sampling routine is usually trying to mimic at least the product of the BSDF and the cosine factor.
+However, because we usually don't know the distribution of the incident radiance, the sampling routine is usually trying to mimic at least the product of the BSDF and the cosine factor
 
 $$
 f_{s}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}
@@ -294,7 +292,7 @@ $$
 f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i} + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i}
 $$
 
-It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1^{\ast}$ and $p_2^{\ast}$ just by blending them together. If we can sample and evaluate both $p_1^{\ast}$ and $p_2^{\ast}$, it is easy to sample and evaluate a weighted average of the two
+It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1^{\ast}​$ and $p_2^{\ast}​$ just by blending them together. If we can sample and evaluate both $p_1^{\ast}​$ and $p_2^{\ast}​$, it is easy to sample and evaluate a weighted average of the two
 
 $$
 p = w_{1}p_{1}^{\ast} * w_{2}p_{2}^{\ast}
