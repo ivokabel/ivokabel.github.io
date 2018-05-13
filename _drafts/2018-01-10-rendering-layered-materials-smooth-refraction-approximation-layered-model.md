@@ -292,17 +292,18 @@ $$
 f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i} + f_{s2}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) \cos\theta_{i}
 $$
 
-It would not be *very* reasonable to try to derive a sampling strategy directly for the sum formula because the components are general functions which can be hard to sample even as stand-alone functions and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1^{\ast}​$ and $p_2^{\ast}​$ just by blending them together. If we can sample and evaluate both $p_1^{\ast}​$ and $p_2^{\ast}​$, it is easy to sample and evaluate a weighted average of the two
+It would not be reasonable to try to derive a sampling strategy directly for the sum formula because its components are general functions which can be hard to sample even separately and which we have little information about anyway. We will instead build the overall sampling strategy on top of the already existing strategies $p_1^{\ast}$ and $p_2^{\ast}$ by blending them together.
 
+If we can sample and evaluate both $p_1^{\ast}$ and $p_2^{\ast}$, it is easy to sample and evaluate a weighted average of the two
 $$
 p = w_{1}p_{1}^{\ast} * w_{2}p_{2}^{\ast}
 $$
 
-given that weights $w_1$ and $w_2$ are normalized (their sum equals 1). The main question *then* is how to choose the weights to make the resulting PDF as proportional to whole $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
+given that weights $w_1$ and $w_2$ are normalized (their sum equals 1). The question is how to choose the weights to make the resulting PDF as proportional to whole $f_{s}$ as possible. Ideally, the weights should be proportional to the integrals of respective components and the overall strategy would then be as good as the partial ones. The problem is that the integrals are in general hard to evaluate precisely so we have to resort to an approximation.
 
 #### Outer layer integral
 
-On the outer layer, the light is either reflected from or refracted through the layers micro-facets. We will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
+On the outer layer, the light is either reflected from or refracted through the layer's micro-facets. We will approximate the amount of reflected light just by the Fresnel reflection coefficient of a smooth interface:
 
 $$
 I_{1} = F\left(\theta_{o}\right)
@@ -310,19 +311,19 @@ $$
 
 #### Inner layer integral
 
-Let's now recall the inner layer contribution
+Let's recall the inner layer contribution
 
 $$
 f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\theta_{i}\right) T\left(\theta_{o}\right) \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right)
 $$
 
-Let's now approximate its integral
+therefore, we need to approximate its integral
 
 $$
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T\left(\theta_{o}\right) \int_{\mathcal{H}_{+}^{2}} {T\left(\theta_{i}\right) a\left(\theta_{i}, \theta_{o}\right) f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}}
 $$
 
-Note that the components independent from $\omega_{i}$ were moved outside the integral and we integrate only over the upper hemisphere $\mathcal{H}_{+}^{2}$ rather than over the whole sphere $\mathcal{S}^{2}$ because there's no transmission through the inner layer allowed.
+Note that integral components independent from $\omega_{i}$ were moved outside the integral and we integrate only over the upper hemisphere $\mathcal{H}_{+}^{2}$ rather than over the whole sphere $\mathcal{S}^{2}$ because there's no transmission through the inner layer allowed.
 
 While the components outside the integral are easy to evaluate analytically, the integral part is more complicated and has to be approximated. We will start with the partial integral
 
@@ -330,24 +331,24 @@ $$
 \int_{\mathcal{H}_{+}^{2}} f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) \cos\theta_{i} \mathrm{d}\omega_{i}
 $$
 
-We assume that the stand-alone BSDF $f_s$ can compute their reflectance over the upper hemisphere
+We assume that the stand-alone BSDF $f_s$ can compute its reflectance over the upper hemisphere
 
 $$
 \rho_{s2} = \int_{\mathcal{H}_{+}^{2}} f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)\cos\theta_{i}\mathrm{d}\omega_{i}
 $$
 
-and we will use it as an approximation of the partial integral. This is rather inaccurate because $\rho_{s2}$ uses the original directions $\omega_{i}$ and $\omega_{o}$ instead of their refracted versions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$; therefore, the shape of the integrand is not stretched out and also contains the parts which are cut away by the [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) in our model, which can lead to substantial error especially at grazing angles. However, this approximation contains -- at least partially -- the characteristics of the inner material and should be better than ignoring it completely.
+and we will use it as a base approximation of the partial integral. This is rather inaccurate because $\rho_{s2}$ uses the original directions $\omega_{i}$ and $\omega_{o}$ instead of their refracted versions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$; therefore, the shape of the integrand is not stretched out and also contains the parts which are cut away by the [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) in our model, which can lead to substantial error especially at grazing angles. However, this approximation contains -- at least partially -- the characteristics of the inner material and should be better than ignoring it completely.
 
 Both missing components $T\left(\theta_{i}\right)$ and $a\left(\theta_{i}, \theta_{o}\right)$ change the shape of the integrand and have to be taken into account, but their effect is hard to solve analytically. One way to approximate their overall effect is to evaluate them over the mirror reflection path ($\theta_{i} = \theta_{o}$) -- analogically to what we did in evaluating the sub-surface scattering contribution of the whole model -- and pretend they are constant over the whole hemisphere.
 
-After putting everything together, the resulting approximation for the inner layer contribution integral is then
+After putting everything together, the resulting approximation for the inner layer contribution integral is
 
 $$
 I_{2} = 
 \frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{o}, \theta_{o}\right) \rho_{s2}
 $$
 
-Where $\eta_{1}^{2}$ and $\eta_{0}^{2}$ are refractive indices of the respective media, $T\left(\theta_{o}\right)$ is the Fresnel transmission coefficient, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see the section "Medium attenuation"), and $\rho_{s2}$ is the reflectance of the stand-alone inner layer BSDF.
+Where $\eta_{0}^{2}$ and $\eta_{1}^{2}$ are refractive indices of the respective media, $T\left(\theta_{o}\right)$ is the Fresnel transmission coefficient, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see the section "Medium attenuation" for more details), and $\rho_{s2}$ is the reflectance of the stand-alone inner layer BSDF.
 
 #### Complete sampling routine
 
@@ -366,13 +367,11 @@ $$
 p = w_{1}p_{1}^{\ast} * w_{2}p_{2}^{\ast}
 $$
 
-To sample from blended PDF, first randomly pick one of the sampling sub-routines $p_1^{\ast}$ and $p_2^{\ast}$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
-
-*[image: Sampling performance: Low sample rate. Just furnace test to isolate the BSDF sampling performance from light sampling. Strategies: fixed ratio?, Fresnel ratio, my approach.]*
+To sample from blended PDF, we have to first randomly pick one of the sampling sub-routines $p_1^{\ast}$ and $p_2^{\ast}$ with probabilities equal to $w_1$ and $w_2$ respectively and then draw sample from the selected sub-routine. To evaluate the probability density of the sample, evaluate the whole PDF $p$.
 
 ## Results
 
-Example images of different types configurations (with naming as in the original paper):
+Example images of different types configurations (with names from the original paper):
 
 <p style="text-align: center">
 <img src="../images/SRAL/BlogGallery_LambertOrangeBoostedSmooth_512s.jpg" alt="" width="500" /><br/>
