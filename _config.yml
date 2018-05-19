@@ -3,3 +3,4 @@ plugins:
   - jekyll-seo-tag
 disqus:
   shortname: ivokabel
+google_analytics: UA-119530039-1
