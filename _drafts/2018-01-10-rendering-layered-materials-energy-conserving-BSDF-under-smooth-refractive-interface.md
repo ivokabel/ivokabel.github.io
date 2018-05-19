@@ -77,13 +77,13 @@ $$
 
 ## BSDF under a smooth refractive interface
 
-Using the general definition of BSDF, we'll now derive the proper formula for a layer under a smooth Fresnel surface. For that we will need to prepare 4 prerequisite formulae, which we will then use to build the final BSDF formula.
+Using the general definition of BSDF, we'll now derive the formula for a BSDF under a smooth Fresnel surface. For that we will need to prepare 4 prerequisite formulae, which we will then use to build the final BSDF formula.
 
 <p style="text-align: center">
 <img src="../images/SRAL/RefrBsdfGeomSolidAngles.svg" alt="" width="500" />
 </p>
 
-First, let's see what happens to the incoming radiance when it passes a smooth interface between two media with different indices of refraction
+First, let's see what happens to the incoming radiance when it passes a smooth interface between medium 0 and 1 with possibly different indices of refraction
 $$
 L_{i}\left(\omega_{i}^{\prime}\right) = L_{i}\left(\omega_{i}\right) \frac{\eta_1^2}{\eta_0^2} T\left(\theta_i\right)
 $$
@@ -110,15 +110,13 @@ $$
 
 where $\omega_t$ is the refracted direction of $\omega_i$.
 
-SPOILER ALERT: this relationship contains the missing component of our new BSDF formula ;-)
-
-The fourth and the last prerequisite is a little technical and I will not go into detail of this one. The point is that the projected solid angle measure of the refracted cone equals the cone of light reaching the inner layer given that the both layers are parallel *to each other*:
+The fourth and the last prerequisite is a little technical and I will not go into detail of this one. The point is that the projected solid angle measure of the refracted cone equals the cone of light reaching the inner layer, given that the both layers are parallel to each other:
 
 $$
 \mathrm{d}\sigma^{\bot} \left({\omega}_i^\prime\right) = \mathrm{d}\sigma^{\bot} \left({\omega}_t\right)
 $$
 
-Now we finally have all the necessary pieces to build the BSDF for the a layer under a smooth Fresnel surface. Let's *put/substitute* them into the plain definition of BSDF, simplify it and separate the BSDF of the stand-alone inner layer BSDF to see what compensation factors have to be applied to get the correct formula:
+Now we finally have all the necessary pieces to build the BSDF for the a layer under a smooth Fresnel surface. Let's put them into the plain definition of BSDF, simplify it and separate the stand-alone inner layer BSDF to see what compensation factors have to be applied to get the correct formula:
 
 $$
 \begin{eqnarray*}
@@ -129,17 +127,4 @@ f_{s}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right)&=&\frac{\mathrm{d}L_{o}
 \end{eqnarray*}
 $$
 
-And that's it, folks! You can see that our original approach, *in which we just used the refracted direction to evaluate the inner layer model along with attenuating the result with Fresnel transmission coefficients*, was almost *correct*. What we were missing was the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference as you can see in the following images:
-
-<p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_InnerGLossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
-Without and with solid angle compression compensation applied: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
-
-*TODO: ?more general settings (various roughnesses, without medium)?*
-
-</p>
-
-It's important to note, that we use single-point simplification here as *was used* in the original WWL paper -- i.e. we assume the incoming and outgoing light to pass through the same point on the outer layer.
-
-*Mention Mitsuba's version? Even they struggled with it and still don't use the correct BSDF. Maybe after I try its approach practically and show the results...*
+Therefore, the only compensation to the inner layer BSDF we need to do is feeding it with refracted directions  $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$, and multiplying it with the Fresnel transmission coefficients a the solid angle (de-)compression compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$.
