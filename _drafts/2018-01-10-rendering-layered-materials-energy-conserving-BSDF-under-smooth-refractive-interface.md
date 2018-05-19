@@ -24,37 +24,33 @@ In other words, we want to express how the layer behaves to the rendered which d
 
 ## Radiometric quantities
 
-To handle the problem properly we need to *go down/grasp it through* to the fundamental *concepts/theory* upon which the model is built. *My explanation assumes knowledge of mathematical concepts like derivative, measure, solid angle, etc.*
+To handle the problem properly we can grasp it through to the fundamental concepts upon which the model is built. First, we will define a few radiometric quantities needed to define BSDF. There are several ways of doing that, but I will follow the measure-theoretic radiometry way, which defines its quantities as ratios of measures and is explained in more detail for example in the third chapter of the [Eric Veach's dissertation thesis](http://graphics.stanford.edu/papers/veach_thesis/). This approach uses the so-called Radon-Nikodym derivative, which expresses density of one measure with respect to another one. For example the Radon-Nikodym derivative of measure $Q$ with respect to measure $\rho$ is denoted $\frac{\mathrm{d}Q}{\mathrm{d}\rho}$ (similarly to the "normal" derivative).
 
-First, we need to define a few radiometric quantities, which the BSDF theory builds upon. There are several ways of doing that, but I will follow the measure-theoretic radiometry way, which defines its quantities as ratios of measures and is explained in more detail for example in the third chapter of the [Eric Veach's dissertation thesis](http://graphics.stanford.edu/papers/veach_thesis/). This approach uses the so-called Radon-Nikodym derivative, which expresses density of one measure with respect to another one. For measures $Q$ and $\rho$ the corresponding Radon-Nikodym derivative is denoted $\frac{\mathrm{d}Q}{\mathrm{d}\rho}$ (similarly to the "normal" derivative). In the measure-theoretic radiometry case, we usually express the density of electro-magnetic energy measure (amount of photons, loosely speaking) with respect to some space and/or time measure.
-
-*...cohesion: energy measure == energy...*
-
-The most basic/fundamental radiometric quantity is *radiant energy*:
+In the measure-theoretic radiometry case, we usually express the density of electro-magnetic energy measure with respect to some space and/or time measure. The electro-magnetic energy measure directly defines the most basic radiometric quantity, the **radiant energy**
 
 $$
 Q \quad \left[J\right]
 $$
 
-measured in Joules, which can be understood as the amount of energy of photons in a given time set and space. For the density of energy per unit of time, there is *radiant flux* or *radiant power*:
+which can be understood as the amount of energy of photons in a given sub-set of space and time. The density of radiant energy per unit of time is **radiant flux** or **radiant power**
 
 $$
 \Phi\left(t\right) = \frac{\mathrm{d}Q\left(t\right)}{\mathrm{d}t} \quad \left[Js^{-1}=W\right]
 $$
 
-where $t$ is the time parameter and also the time measure. In computer graphics we are very often interested in "amount of light" which arrives at, gets scattered or is emitted from a certain surface point $x$. This is *expressed* with density of radiant power per unit of surface area and is called *irradiance* for incident radiation and *radiant exitance* or *radiosity* for scattered and emitted radiation:
+where $t$ is the time parameter and also the time measure. In computer graphics we are very often interested in "amount of light" which arrives at, gets scattered or is emitted from a certain surface point $x$. This can be expressed as density of radiant power per unit of surface area and is called **irradiance** for incident radiation and **radiant exitance** or **radiosity** for scattered and emitted radiation
 
 $$
 E\left(x\right) = \frac{\mathrm{d}\Phi\left(x\right)}{\mathrm{d}A\left(x\right)} \quad \left[Wm^{-2}\right]
 $$
 
-where $A$ is the surface area measure. While irradiance measures energy density from all directions, we often need to measure the amount of light entering or leaving at a point of surface in a single direction. This is what quantity called *radiance* is for. Formally, it is expressed as the density of radiant power per unit. There are several equivalent formulations for radiance, but the most practical one for our purposes is
+where $A$ is the surface area measure. While irradiance measures density of energy incoming to a point of surface from all directions, we often need to measure the amount of light entering or leaving at a point in a single direction. This is what quantity called **radiance** is for. Formally, it is expressed as the density of radiant power per unit solid angle and unit surface area of a surface perpendicular to the direction. There are several equivalent formulations for radiance, but the most practical for our purposes is
 
 $$
 L\left(x,\omega\right) = \frac{\mathrm{d}^{2}\Phi\left(x,\omega\right)}{\mathrm{d}A\left(x\right) \mathrm{d}\sigma^{\bot}\left(\omega\right)} \quad \left[Wm^{-2}sr^{-1}\right]
 $$
 
-Note that this definition uses *projected solid angle measure* $\sigma^{\bot}$ rather than "normal" solid angle measure $\sigma$ in order to make the quantity independent from relative position of the light direction and the the surface normal. Basically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the loss of area density when direction $\omega$ *gets further* from the normal.
+Note that this definition uses projected solid angle measure $\sigma^{\bot}$ rather than "normal" solid angle measure $\sigma$ in order to make the quantity independent from relative position of the light direction $\omega$ and the surface normal. Practically, it just adds a simple cosine factor $\cos\left(\theta\right)$ to the solid angle measure $\sigma$, which, in this case, compensates the reduction of area density when direction $\omega$ inclines away from the normal.
 
 ## BSDF definition
 
