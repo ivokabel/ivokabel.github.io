@@ -122,7 +122,7 @@
     </marker>
     <inkscape:path-effect
        effect="mirror_symmetry"
-       start_point="156.05287,94.592158"
+       start_point="156.05287,94.592159"
        end_point="128.77899,132.16964"
        center_point="142.41593,113.3809"
        id="path-effect1314"
@@ -409,10 +409,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5373281"
-     inkscape:cx="475.50032"
+     inkscape:cx="455.66071"
      inkscape:cy="263.59149"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer17"
+     inkscape:current-layer="layer14"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1020"
@@ -582,7 +582,7 @@
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
        id="path1168"
-       d="m 128.77899,132.16964 c 0.71779,-33.922555 15.18439,-46.34671 27.27388,-37.577484 12.08439,8.776264 4.75576,26.381194 -27.27388,37.577484"
+       d="m 128.77899,132.16964 c 0.71779,-33.922556 15.18439,-46.346711 27.27388,-37.577483 12.08439,8.776263 4.75576,26.381193 -27.27388,37.577483"
        style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;stroke:#e9afaf;stroke-width:0.60000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cc"
@@ -1021,8 +1021,8 @@
     <g
        inkscape:groupmode="layer"
        id="layer15"
-       inkscape:label="Radiances and Solid Angles"
-       style="display:inline">
+       inkscape:label="Radiances"
+       style="display:none">
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1119,17 +1119,17 @@
        inkscape:groupmode="layer"
        id="layer14"
        inkscape:label="Plain Names"
-       style="display:none">
+       style="display:inline">
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="55.536583"
-         y="42.496384"
+         x="69.824089"
+         y="40.908882"
          id="text13048"><tspan
            sodipodi:role="line"
            id="tspan13046"
-           x="55.536583"
-           y="42.496384"
+           x="69.824089"
+           y="40.908882"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            dy="0"
            dx="0">ω<tspan
@@ -1152,34 +1152,36 @@
    id="tspan13050">i</tspan></tspan></text>
       <text
          id="text13066"
-         y="114.79036"
-         x="106.16993"
+         y="125.37369"
+         x="113.04909"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            dx="0"
            dy="0"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
-           y="114.79036"
-           x="106.16993"
+           y="125.37369"
+           x="113.04909"
            id="tspan13064"
            sodipodi:role="line">ω'<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan13062">o</tspan></tspan></text>
+   id="tspan13062"
+   dx="-2">o</tspan></tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="178.36438"
-         y="114.79036"
+         x="173.07271"
+         y="125.37369"
          id="text13072"><tspan
            sodipodi:role="line"
            id="tspan13070"
-           x="178.36438"
-           y="114.79036"
+           x="173.07271"
+           y="125.37369"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;stroke-width:0.26458332px"
            dy="0"
            dx="0">ω'<tspan
    id="tspan13068"
-   style="font-size:64.99999762%;baseline-shift:sub">i</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:sub"
+   dx="-2">i</tspan></tspan></text>
     </g>
     <g
        inkscape:groupmode="layer"

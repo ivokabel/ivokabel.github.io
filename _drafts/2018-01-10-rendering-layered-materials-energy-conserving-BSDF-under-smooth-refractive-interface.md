@@ -6,21 +6,21 @@ comments: true
 
 This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
 
-Here I explain how to obtain an energy-conserving BSDF for a given BSDF seen and illuminated through a smooth refractive interface. The model uses the single-scattering-event simplification, which means that only light paths which bounce from the inner layer exactly once are taken into account and light paths which get reflected multiple times between the smooth interface and the given BSDF are neglected. The model also uses the single-point simplification, which assumes that the point through which the light ray enters the outer material interface is the same as the one through which the light ray exists.
+Here I explain how to obtain an energy-conserving BSDF for a given inner BSDF seen and illuminated through an outer smooth refractive interface. The model uses the single-scattering-event simplification, which means that only light paths which bounce from the inner layer exactly once are taken into account and light paths which get reflected multiple times between the smooth interface and the given BSDF are neglected. The model also uses the single-point simplification, which assumes that the point through which the light ray enters the outer material interface is the same as the one through which the light ray exists.
 
 In this part I will first define a few basic radiometric quantities and BSDF and then I will derive the BSDF for a model under a smooth refractive interface. For the sake of clarity, this explanation neglects the reflection contribution of the smooth interface as it is trivial to add to the resulting model.
 
 ## Main idea
 
-One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than *as a function* of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
+One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than as a function of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
 <p style="text-align: center">
 <img src="../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="500" />
 </p>
 
-where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the given BSDF, $\eta_0$ and $\eta_1$ are the refractive indices of media separated by the outer smooth layer, $N_g$ is the geometrical normal of the surface.
+where $f_{s1}$ is the outer smooth interface, $f_{s2}$ is the inner BSDF, $\eta_0$ and $\eta_1$ are the refractive indices of media separated by the outer smooth interface, and $N_g$ is the geometrical normal of the surface.
 
-In other words: we want to see how the layer behaves to the rendered (e.g path-tracer) which doesn't know about the internal mechanics of the model (refractions, reflections, attenuations, etc.) and regards the evaluated BSDF as a black box.
+In other words, we want to express how the layer behaves to the rendered which doesn't know about the internal mechanics of the model and regards it as a black box.
 
 ## Radiometric quantities
 
