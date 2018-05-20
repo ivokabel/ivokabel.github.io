@@ -16,9 +16,9 @@ I decided to restrict the model to just two layers, instead of the original pape
 
 Since the amount of resulting text grew fairly large, I decided to split it into several parts:
 
-- [Weidlich-Wilkie Layered Model](2018/05/16/rendering-layered-materials-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model.
-- [Smooth Refraction Approximation Layered Model](2018/05/17/rendering-layered-materials-smooth-refraction-approximation-layered-model.html), where I explain my own approach to layering.
-- [Energy Conserving BSDF Under a Smooth Refractive Interface](2018/05/18/rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html), where I derive the energy-conserving form of a BSDF seen and illuminated through a smooth refractive interface needed in the previous part.
+- [Weidlich-Wilkie Layered Model](/2018/05/16/rendering-layered-materials-weidlich-wilkie-layered-model.html), where I explain the original Weidlich-Wilkie model.
+- [Smooth Refraction Approximation Layered Model](/2018/05/17/rendering-layered-materials-smooth-refraction-approximation-layered-model.html), where I explain my own approach to layering.
+- [Energy Conserving BSDF Under a Smooth Refractive Interface](/2018/05/18/rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html), where I derive the energy-conserving form of a BSDF seen and illuminated through a smooth refractive interface needed in the previous part.
 
 <!-- - A More Detailed SRAL Model Analysis, ...-->
 

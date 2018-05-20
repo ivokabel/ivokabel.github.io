@@ -4,7 +4,7 @@ title: "Rendering Layered Materials: Energy Conserving BSDF Under a Smooth Refra
 comments: true
 ---
 
-This is a part of the blog post series [Rendering Layered Materials](2018/05/15/rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](/2018/05/15/rendering-layered-materials.html).
 
 Here I explain how to obtain an energy-conserving BSDF for a given inner BSDF seen and illuminated through an outer smooth refractive interface. The model uses the single-scattering-event simplification, which means that only light paths which bounce from the inner layer exactly once are taken into account and light paths which get reflected multiple times between the smooth interface and the given BSDF are neglected. The model also uses the single-point simplification, which assumes that the point through which the light ray enters the outer material interface is the same as the one through which the light ray exists.
 

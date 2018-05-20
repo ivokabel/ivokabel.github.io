@@ -4,7 +4,7 @@ title: "Rendering Layered Materials: Weidlich-Wilkie Layered Model"
 comments: true
 ---
 
-This is a part of the blog post series [Rendering Layered Materials](2018/05/15/rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](/2018/05/15/rendering-layered-materials.html).
 
 Here I present a (hopefully) brief explanation of the [original layered model](https://www.cg.tuwien.ac.at/research/publications/2007/weidlich_2007_almfs/) by Andrea Weidlich and Alexander Wilkie, published in 2007 at the Graphite conference (predecessor of the SIGGRAPH Asia conference). In my explanation I will restrict to just two layers, instead of the paper's general approach allowing arbitrary amount of layers.
 
