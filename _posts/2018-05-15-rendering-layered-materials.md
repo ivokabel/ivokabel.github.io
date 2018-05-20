@@ -4,7 +4,9 @@ title: "Rendering Layered Materials"
 comments: true
 ---
 
+<p style="text-align: center">
 <img src="../../../images/SRAL/BlogTeaser_512s.jpg" alt="" width="700" />
+</p>
 
 I decided to implement a multi-layered material model (BSDF) in my pet renderer since layering offers much more expressivity than basic models (e.g. Fresnel, micro-facets, or Lambert) and because it is one of the rendering-related technologies I wanted to learn.
 
