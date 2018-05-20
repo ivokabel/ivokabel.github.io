@@ -18,4 +18,4 @@ Since the amount of resulting text grew fairly large, I decided to split it into
 
 <!-- - A More Detailed SRAL Model Analysis, ...-->
 
-<img src="../images/SRAL/BlogTeaser_8s.jpg" alt="" width="700" />
+<img src="../images/SRAL/BlogTeaser_512s.jpg" alt="" width="700" />
