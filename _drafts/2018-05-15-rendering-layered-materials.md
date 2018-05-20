@@ -17,3 +17,5 @@ Since the amount of resulting text grew fairly large, I decided to split it into
 - [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html), where I derive the energy-conserving form of a BSDF seen and illuminated through a smooth refractive interface needed in the previous part.
 
 <!-- - A More Detailed SRAL Model Analysis, ...-->
+
+<img src="../images/SRAL/BlogTeaser_8s.jpg" alt="" width="700" />
