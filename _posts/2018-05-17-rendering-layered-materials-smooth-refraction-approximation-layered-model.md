@@ -4,7 +4,7 @@ title: "Rendering Layered Materials: Smooth Refraction Approximation Layered Mod
 comments: true
 ---
 
-This is a part of the blog post series [Rendering Layered Materials](rendering-layered-materials.html).
+This is a part of the blog post series [Rendering Layered Materials](2018/05/15/rendering-layered-materials.html).
 
 Here I present my approach to the layered surface material as an alternative to the [layered model by Andrea Weidlich and Alexander Wilkie](rendering-layered-materials-weidlich-wilkie-layered-model.html) from 2007 (which I refer to as the WWL model or just the original model). This part contains an overall explanation of my model, its evaluation and sampling process, and a few example result images.
 
@@ -144,7 +144,7 @@ Broken energy conservation due to refracted directions: Glossy inner layer (GGX 
 
 Although we used a physically-plausible energy-conserving model for the inner layer, the resulting inner layer model is in some scenarios much lighter than one would expect. In the furnace test (constant white light configuration) we can clearly see that it reflects more energy than it receives from the environment which is a sign of an energy conservation problem. I spent a non-trivial amount of time to crack this problem, but I won in the end and I gained some important computer graphics knowledge on this way. Long story short: the problem is caused by ignoring the **compression and decompression of light** when crossing an interface between media with different indices of refraction.
 
-I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) -- it basically says that the thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
+I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](2018/05/18/rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) -- it basically says that the thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
