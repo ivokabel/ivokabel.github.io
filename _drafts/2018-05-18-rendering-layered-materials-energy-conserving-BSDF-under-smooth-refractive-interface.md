@@ -17,7 +17,7 @@ The radiometry and BSDF explanation is heavily inspired by the legendary [Eric V
 One way of obtaining the correct form of a BSDF under a smooth refractive interface its to re-formulate the inner layer BSDF as a function of (non-refracted) incoming and outgoing directions of the whole model $\omega_{i}$ and $\omega_{o}$ rather than as a function of refracted directions $\omega_{i}^{\prime}$ and $\omega_{o}^{\prime}$:
 
 <p style="text-align: center">
-<img src="../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="500" />
+<img src="../../../images/SRAL/RefrBsdfGeomAngles.svg" alt="" width="500" />
 </p>
 
 where $f_{s1}$ is the outer smooth interface, $f_{s2}$ is the inner BSDF, $\eta_0$ and $\eta_1$ are the refractive indices of media separated by the outer smooth interface, and $N_g$ is the geometrical normal of the surface.
@@ -59,7 +59,7 @@ Note that this definition uses projected solid angle measure $\sigma^{\bot}$ rat
 Now that we have defined the needed radiometry quantities, we can finally define the bidirectional scattering density function (BSDF), a formal description of the light-scattering properties of a surface point. It expresses how the light outgoing from a point $x$ on a surface in a particular direction $\omega_o$ is dependent on the light incoming to the point from a particular direction $\omega_i$. The surface point $x$ will be omitted from the notation in the following text for clarity.
 
 <p style="text-align: center">
-   <img src="../images/BRDF definition geometry.svg" alt="" width="400" /><br/>
+   <img src="../../../images/BRDF definition geometry.svg" alt="" width="400" /><br/>
    BSDF geometry.
 </p>
 
@@ -80,7 +80,7 @@ $$
 Using the general definition of BSDF, we'll now derive the formula for a BSDF under a smooth Fresnel surface. For that we will need to prepare 4 prerequisite formulae, which we will then use to build the final BSDF formula.
 
 <p style="text-align: center">
-<img src="../images/SRAL/RefrBsdfGeomSolidAngles.svg" alt="" width="500" />
+<img src="../../../images/SRAL/RefrBsdfGeomSolidAngles.svg" alt="" width="500" />
 </p>
 
 First, let's see what happens to the incoming radiance when it passes a smooth interface between medium 0 and 1 with possibly different indices of refraction

@@ -40,7 +40,7 @@ The outer layer is assumed to be a micro-facet-based interface between two media
 The new model still assumes single-point simplifications of both evaluation and sampling used in the original model, as well as non-scattering medium between layers. However, unlike the WWL model, it doesn't make any assumption about the relative size of micro-facets and layers, which served as a justification for using the reflection-defined micro-facet normal during the evaluation and sampling process. For computing refractions, my model uses the geometrical normal rather than the micro-facet's one. The result is that it behaves as if the light refracted through a virtual ideally smooth surface instead of through the arbitrarily rough micro-facet outer layer. This way the same amount of energy gets refracted, but in a single direction instead of through a set of directions. Obviously, the higher the specularity of the outer surface is the better this approximation behaves.
 
 <p style="text-align: center">
-<img src="../images/SRAL/RefractionThroughGeomNormal.svg" alt="" width="500" />
+<img src="../../../images/SRAL/RefractionThroughGeomNormal.svg" alt="" width="500" />
 </p>
 
 The new model still estimates the whole sub-surface light transport with just one light path and a single scattering event, but the used refraction directions define a path, which is more likely the one through which the peak amount of energy flows.
@@ -64,7 +64,7 @@ f_{s1}^{\ast}\left(\omega_{i}\rightarrow\omega_{o}\right) = f_{s1}\left(\omega_{
 $$
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_OuterOnly_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_OuterOnly_512s.jpg" alt="" width="500" /><br/>
 Reflection contribution of a highly glossy micro-facet outer layer (Smith micro-surface profile, GGX distribution with roughness 0.01, air-glass interface) under various light settings (constant light, large light source, small light source).
 </p>
 
@@ -81,7 +81,7 @@ f_{s2}\left(\omega_{i}\rightarrow\omega_{o}\right)
 $$
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerOnly_NoModif_512s.jpg" alt="" width="500" /><br/>
 Plain, ideally white Lambert without any modifications under various light settings.
 
 </p>
@@ -93,7 +93,7 @@ f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right)
 $$
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_512s.jpg" alt="" width="500" /><br/>
 Ideally white Lambert with refracted directions under various light settings. Since Lambert model is a constant BSDF, changing directions doesn't change the shape of the BSDF in the upper hemisphere; therefore, the behaviour is identical to the version with unmodified directions. Behaviour of non-constant inner layers with refracted parameters will be shown later.
 </p>
 
@@ -106,7 +106,7 @@ $$
 Where $T\left(\theta_{i}\right)$ and $T\left(\theta_{o}\right)$ are the Fresnel transmission coefficients.
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
 Ideally white Lambert with refracted directions and Fresnel attenuation under various light settings. Fresnel components affects the amount of transmitted light mostly at grazing angles.
 </p>
 
@@ -125,9 +125,9 @@ f_{s2}\left(\omega_{i}^{\prime}\rightarrow\omega_{o}^{\prime}\right) T\left(\the
 $$
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_MediumAttenuation_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_MediumAttenuation_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>Ideally white Lambert layer with refracted directions, Fresnel attenuation and orange medium attenuation with several medium thicknesses under various light settings. You can nicely see the effect of darkening and colour saturation when the light passed through thicker layers.
+<img src="../../../images/SRAL/BlogExplanation_MediumAttenuation_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_MediumAttenuation_EM7_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_MediumAttenuation_EM10_512s.jpg" alt="" width="700" /><br/>Ideally white Lambert layer with refracted directions, Fresnel attenuation and orange medium attenuation with several medium thicknesses under various light settings. You can nicely see the effect of darkening and colour saturation when the light passed through thicker layers.
 
 </p>
 
@@ -137,7 +137,7 @@ Although everything looks pretty straightforward in the previous images, a probl
 
 <p style="text-align: center">
 
-<img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngProblem_EM1_512s.jpg" alt="" width="700" /><br/>
 Broken energy conservation due to refracted directions: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 </p>
@@ -147,7 +147,7 @@ Although we used a physically-plausible energy-conserving model for the inner la
 I derived a correct energy-conserving BSDF under a smooth refractive interface with a single scattering event. For that I dug deeper into the theory of BDSFs in another post called [Energy Conserving BSDF Under a Smooth Refractive Interface](rendering-layered-materials-energy-conserving-BSDF-under-smooth-refractive-interface.html). If you are not feeling nerdy enough, just ignore it :-) -- it basically says that the thing our original naïve refraction approach is missing is the (relatively trivial) compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$, which, however, makes the difference:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerGlossyMedium_SolAngCompress_EM1_512s.jpg" alt="" width="700" /><br/>
 Energy conservation fixed with solid angle compression compensation $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$: Glossy inner layer (GGX roughness 0.1) with refracted directions, Fresnel attenuation under orange medium with varying medium thickness under constant lighting.
 
 </p>
@@ -155,14 +155,14 @@ Energy conservation fixed with solid angle compression compensation $\frac{\eta_
 The result may now, in fact, look much darker than expected for some settings (especially for highly diffuse models like Lambert), but it is caused by the single scattering nature of our model, which neglects the energy which is reflected from the outer layer from the inside back to the medium:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerLambert_SolAngCompress_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerLambert_SolAngCompress_512s.jpg" alt="" width="500" /><br/>
 Darkening due to missing multi-scattered energy. Ideally white Lambert inner layer with refracted directions under various light settings.
 </p>
 
 In case of ideally diffuse (constant) inner layer, one can partially compensate the missing multi-scattered energy by omitting the compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$. This will put back into equation the energy which gets reflected back to the medium through [total internal reflection](https://en.wikipedia.org/wiki/Total_internal_reflection) (TIR), but not the energy which undergoes partial reflection. This basically leads to the results of the "naïve refraction" approach:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerOnly_NaiveRefr_Fresnel_512s.jpg" alt="" width="500" /><br/>
 Compensation of the missing in-scattered energy due to TIR for a ideally diffuse inner layer by omitting the solid angle (de-)compression compensation factor $\frac{\eta_{0}^{2}}{\eta_{1}^{2}}$.
 </p>
 
@@ -193,17 +193,17 @@ where $f_{s1}$ and $f_{s2}$ are the stand-alone outer and inner layer [BSDFs](ht
 The complete model for glossy outer layer may look like this (more examples at the end of the post):
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeLambert_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeLambert_EM7_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeLambert_EM10_512s.jpg" alt="" width="700" /><br/>
 The whole formula using almost specular outer layer, ideally white Lambert inner layer and orange medium between them with varying medium thickness under various light settings. Compensation of the missing in-scattered energy due to TIR by omitting the solid angle (de-)compression compensation is applied.
 
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_WholeGlossy_EM1_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_WholeGlossy_EM7_512s.jpg" alt="" width="700" /><br/>
-<img src="../images/SRAL/BlogExplanation_WholeGlossy_EM10_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeGlossy_EM1_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeGlossy_EM7_512s.jpg" alt="" width="700" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_WholeGlossy_EM10_512s.jpg" alt="" width="700" /><br/>
 The whole formula using almost specular outer layer, glossy conductor inner layer and orange medium between them with varying medium thickness under various light settings.
 </p>
 
@@ -235,7 +235,7 @@ The renderer just has to instruct the sampling routine to draw samples only from
 
 <p style="text-align: center">
 
-<img src="../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/RefrBsdfGeomSampling.svg" alt="" width="500" /><br/>
 
 Sampling geometry for the inner layer contribution component, where  $f_{s1}$ is the smooth interface, $f_{s2}$ is the inner layer BSDF.
 
@@ -255,7 +255,7 @@ However, if we feed a MC renderer with such PDF, the result will look like this:
 
 <p style="text-align: center">
 
-<img src="../images/SRAL/BlogExplanation_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerGlossy_PdfDarkening_512s.jpg" alt="" width="500" /><br/>
 Too dark inner layer problem: Glossy conductor inner layer with refracted direction and Fresnel attenuation under various light settings.
 </p>
 
@@ -267,7 +267,7 @@ $$
 This compensation factor is closely related to what happens to radiance when it gets refracted through a smooth interface between two media with different refractive indices. Its application will finally yield the correct PDF values resulting in an unbiased Monte Carlo estimator leading to the correct rendering output:
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogExplanation_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogExplanation_InnerGlossy_PdfDarkeningFixed_512s.jpg" alt="" width="500" /><br/>
 Too dark inner layer problem fixed: Glossy conductor inner layer with refracted direction and Fresnel attenuation under various light settings.
 
 </p>
@@ -374,32 +374,32 @@ To sample from blended PDF, we have to first randomly pick one of the sampling s
 Example images of different types configurations (with names from the original paper):
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_LambertOrangeBoostedSmooth_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_LambertOrangeBoostedSmooth_512s.jpg" alt="" width="500" /><br/>
 Glossy Paint: Orange Lambert inner layer, clear medium, and smooth outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_LambertOrangeBoostedGlossy_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_LambertOrangeBoostedGlossy_512s.jpg" alt="" width="500" /><br/>
 Frosted Paint: Orange Lambert inner layer, clear medium, glossy outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_SmoothMediumSmooth_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_SmoothMediumSmooth_512s.jpg" alt="" width="500" /><br/>
 Metal Foil: Smooth inner layer, coloured medium, smooth outer layer.
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_GlossyMediumSmooth_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_GlossyMediumSmooth_512s.jpg" alt="" width="500" /><br/>
 Metallic Paint: Glossy inner layer, coloured medium, smooth outer layer.
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_LambertWhiteBoostedMediumSmooth_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_LambertWhiteBoostedMediumSmooth_512s.jpg" alt="" width="500" /><br/>
 Tinted Glazing: White Lambert inner layer, coloured medium, smooth outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
-<img src="../images/SRAL/BlogGallery_GlossyMediumGlossy_512s.jpg" alt="" width="500" /><br/>
+<img src="../../../images/SRAL/BlogGallery_GlossyMediumGlossy_512s.jpg" alt="" width="500" /><br/>
 Frosted Metal: Glossy inner layer, coloured medium, glossy outer layer.
 </p>
 
