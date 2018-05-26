@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rendering Layered Materials: Smooth Refraction Approximation Layered Model (SRAL)"
+title: "Smooth Refraction Approximation Layered Model (SRAL)"
 comments: true
 ---
 

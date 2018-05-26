@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rendering Layered Materials: Weidlich-Wilkie Layered Model"
+title: "Weidlich-Wilkie Layered Model"
 comments: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rendering Layered Materials: Energy Conserving BSDF Under a Smooth Refractive Interface"
+title: "Energy Conserving BSDF Under a Smooth Refractive Interface"
 comments: true
 ---
 
