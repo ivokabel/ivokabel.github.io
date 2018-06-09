@@ -1,5 +1,4 @@
 ---
-title: Ivo's Graphics Blog
 layout: home
 ---
 
