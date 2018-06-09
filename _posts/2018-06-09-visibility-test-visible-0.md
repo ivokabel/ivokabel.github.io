@@ -1,7 +1,7 @@
 ---
-title: Visibility Test -- visible: 0
+title: Visibility Test (visible 0)
 layout: post
 visible: 0
 ---
 
-...
+Visibility Test
