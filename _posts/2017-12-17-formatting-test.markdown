@@ -1,6 +1,7 @@
 ---
 title: Formatting Test
 layout: post
+published: false
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sit amet nisl nec volutpat. Nam vel scelerisque ligula. Quisque et erat ac velit finibus ullamcorper ut scelerisque magna. Vivamus id est non metus feugiat viverra at vitae purus. Quisque nec aliquet mauris. Proin auctor vulputate risus. Proin a viverra augue, eget hendrerit nisl. Aenean vitae ex ac est dapibus posuere sed ac eros. Sed vitae ornare quam.
