@@ -1,4 +1,6 @@
 theme: minima
+title: Ivo's Graphics Blog
+description: My personal blog (mostly about computer graphics).
 plugins:
   - jekyll-seo-tag
 disqus:
