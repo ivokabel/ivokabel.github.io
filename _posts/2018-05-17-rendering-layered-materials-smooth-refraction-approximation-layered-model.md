@@ -345,7 +345,7 @@ After putting everything together, the resulting approximation for the inner lay
 
 $$
 I_{2} = 
-\frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{o}, \theta_{o}\right) \rho_{s2}
+\frac{\eta_{0}^{2}}{\eta_{1}^{2}} T^2\left(\theta_{o}\right) a\left(\theta_{i}, \theta_{o}\right) \rho_{s2}
 $$
 
 Where $\eta_{0}^{2}$ and $\eta_{1}^{2}$ are refractive indices of the respective media, $T\left(\theta_{o}\right)$ is the Fresnel transmission coefficient, $a\left(\theta_{i}, \theta_{o}\right)$ is the medium attenuation (see the section "Medium attenuation" for more details), and $\rho_{s2}$ is the reflectance of the stand-alone inner layer BSDF.
