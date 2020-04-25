@@ -375,31 +375,31 @@ Example images of different types configurations (with names from the original p
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_LambertOrangeBoostedSmooth_512s.jpg" alt="" width="500" /><br/>
-Glossy Paint: Orange Lambert inner layer, clear medium, and smooth outer layer. Compensation of missing TIR is applied.
+**Glossy Paint:** Orange Lambert inner layer, clear medium, and smooth outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_LambertOrangeBoostedGlossy_512s.jpg" alt="" width="500" /><br/>
-Frosted Paint: Orange Lambert inner layer, clear medium, glossy outer layer. Compensation of missing TIR is applied.
+**Frosted Paint:** Orange Lambert inner layer, clear medium, glossy outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_SmoothMediumSmooth_512s.jpg" alt="" width="500" /><br/>
-Metal Foil: Smooth inner layer, coloured medium, smooth outer layer.
+**Metal Foil:** Smooth inner layer, coloured medium, smooth outer layer.
 </p>
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_GlossyMediumSmooth_512s.jpg" alt="" width="500" /><br/>
-Metallic Paint: Glossy inner layer, coloured medium, smooth outer layer.
+**Metallic Paint:** Glossy inner layer, coloured medium, smooth outer layer.
 </p>
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_LambertWhiteBoostedMediumSmooth_512s.jpg" alt="" width="500" /><br/>
-Tinted Glazing: White Lambert inner layer, coloured medium, smooth outer layer. Compensation of missing TIR is applied.
+**Tinted Glazing:** White Lambert inner layer, coloured medium, smooth outer layer. Compensation of missing TIR is applied.
 </p>
 
 <p style="text-align: center">
 <img src="../../../images/SRAL/BlogGallery_GlossyMediumGlossy_512s.jpg" alt="" width="500" /><br/>
-Frosted Metal: Glossy inner layer, coloured medium, glossy outer layer.
+**Frosted Metal:** Glossy inner layer, coloured medium, glossy outer layer.
 </p>
 
